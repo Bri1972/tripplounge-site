@@ -834,9 +834,9 @@
                 <label for="cabin-count">How many cabins would you like to reserve?</label>
                 <select id="cabin-count" name="cabin-count" required>
                   <option value="">Select an option</option>
-                  <option>1 cabin (1 guests)</option>
-                  <option>1 cabins (2 guests)</option>
-                  <option>1 cabins (3+ guests)</option>
+                  <option>1 cabin (solo)</option>
+                  <option>1 cabin (2 guests)</option>
+                  <option>1 cabin (3+ guests)</option>
                  <option>Multiple cabins (4+ guests)</option>
                   <option>I'm not sure yet</option>
                 </select>
@@ -846,14 +846,19 @@
                 OPTIONAL: Celebration field — great for themed trips.
                 Remove this entire block if not relevant.
               -->
-              <option>🎂 Birthday Celebration</option>
-<option>💃 Girls Trip</option>
-<option>💑 Anniversary</option>
-<option>🥂 Honeymoon</option>
-<option>🌊 Bachelorette Trip</option>
-<option>✨ Just outside / good vibes only</option>
-<option>✨ Something else</option>
-
+             <div class="form-group form-group--full">
+  <label for="celebration">What are you celebrating on this trip?</label>
+  <select id="celebration" name="celebration">
+    <option value="">Select an option (optional)</option>
+    <option>🎂 Birthday Celebration</option>
+    <option>💃 Girls Trip</option>
+    <option>💑 Anniversary</option>
+    <option>🥂 Honeymoon</option>
+    <option>🌊 Bachelorette Trip</option>
+    <option>✨ Just outside / good vibes only</option>
+    <option>✨ Something else</option>
+  </select>
+</div>
               <div class="form-group form-group--full">
                 <label for="readiness">Are you ready to secure your cabin?</label>
                 <select id="readiness" name="readiness">
