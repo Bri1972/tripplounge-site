@@ -484,7 +484,7 @@
   </div>
 
   <div id="form-wrap">
-  <form id="intake-form" action="https://formspree.io/f/mvzlwelp" method="POST" enctype="multipart/form-data">
+  <form id="intake-form" action="https://formspree.io/f/mvzlwelp" method="POST">
 
     <!-- 01 BASIC INFORMATION -->
     <div class="form-section">
@@ -526,12 +526,8 @@
       </div>
 
       <div class="field-group">
-        <label class="field-label">Upload Your Logo</label>
-        <div class="field-upload">
-          <input type="file" name="logo" accept="image/*,.pdf,.svg">
-          <div class="upload-label">Click to upload your logo</div>
-          <div class="upload-sub">PNG, JPG, SVG or PDF · Max 10MB</div>
-        </div>
+        <label class="field-label" for="logo_link">Logo File Link</label>
+        <input class="field-input" type="url" id="logo_link" name="logo_link" placeholder="Paste a link to your logo — Google Drive, Dropbox, or your website">
       </div>
     </div>
 
@@ -600,12 +596,8 @@
       </div>
 
       <div class="field-group">
-        <label class="field-label">Upload Cruise Itinerary or Flyer</label>
-        <div class="field-upload">
-          <input type="file" name="itinerary_file" accept="image/*,.pdf">
-          <div class="upload-label">Click to upload itinerary or flyer</div>
-          <div class="upload-sub">PNG, JPG or PDF · Max 10MB</div>
-        </div>
+        <label class="field-label" for="itinerary_link">Cruise Itinerary or Flyer Link</label>
+        <input class="field-input" type="url" id="itinerary_link" name="itinerary_link" placeholder="Paste your cruise itinerary text, or share a link to your flyer — Google Drive or Dropbox works great">
       </div>
     </div>
 
@@ -745,12 +737,8 @@
       </div>
 
       <div class="field-group">
-        <label class="field-label">Upload Additional Photos (Optional)</label>
-        <div class="field-upload">
-          <input type="file" name="photos" accept="image/*" multiple>
-          <div class="upload-label">Click to upload photos</div>
-          <div class="upload-sub">PNG or JPG · Multiple files allowed · Max 10MB each</div>
-        </div>
+        <label class="field-label" for="photos_link">Additional Photos Link (Optional)</label>
+        <input class="field-input" type="url" id="photos_link" name="photos_link" placeholder="Paste a link to a folder with your trip photos — Google Drive or Dropbox">
       </div>
     </div>
 
