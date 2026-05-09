@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{trip_name}} | Trip Page</title>
+  <meta name="description" content="{{trip_name}} — {{cruise_line}} sailing {{sailing_dates}}. Departing {{departure_port}}.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #f9f6f0;
+      --color-surface: #fdfaf5;
+      --color-surface-2: #fff8ee;
+      --color-surface-offset: #f2ece0;
+      --color-surface-navy: #13213a;
+      --color-surface-navy-2: #0e1a2f;
+      --color-divider: #e0d8cb;
+      --color-border: #d8cfc0;
+      --color-text: #1a1611;
+      --color-text-muted: #6b6257;
+      --color-text-faint: #b0a898;
+      --color-text-inverse: #fdf9f2;
+      --color-gold: #b8924a;
+      --color-gold-hover: #9e7a38;
+      --color-gold-light: #f0e4cc;
+      --color-gold-border: rgba(184,146,74,0.35);
+      --color-navy: #13213a;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-full: 9999px;
+      --transition: 200ms cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow-sm: 0 1px 3px rgba(26,19,10,0.07);
+      --shadow-md: 0 4px 16px rgba(26,19,10,0.09);
+      --shadow-lg: 0 12px 40px rgba(26,19,10,0.12);
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.82rem + 0.28vw, 1rem);
+      --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.6vw, 1.4rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.3rem + 2.5vw, 3.5rem);
+      --text-hero: clamp(2.8rem, 1.5rem + 5vw, 5.5rem);
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+      --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem;
+      --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem;
+      --space-16: 4rem; --space-20: 5rem; --space-24: 6rem;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Jost', 'Helvetica Neue', sans-serif;
+      --content-narrow: 640px;
+      --content-default: 920px;
+      --content-wide: 1160px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-size: var(--text-base);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      width: 100%;
+      max-width: var(--content-default);
+      margin-inline: auto;
+      padding-inline: var(--space-6);
+    }
+    .container--narrow { max-width: var(--content-narrow); }
+    .container--wide { max-width: var(--content-wide); }
+    /* Skip link */
+    .skip-link {
+      position: absolute; top: -100%; left: var(--space-4);
+      background: var(--color-gold); color: #fff;
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm); text-decoration: none;
+      z-index: 9999;
+    }
+    .skip-link:focus { top: var(--space-4); }
+    /* Header */
+    .site-header {
+      background: none;
+      border-bottom: 1px solid var(--color-divider);
+      padding-block: var(--space-6);
+      text-align: center;
+    }
+    .site-header__brand {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--color-text-navy);
+      text-decoration: none;
+      display: block;
+    }
+    .site-header__brand span { color: var(--color-gold); font-weight: 300; }
+    .site-header__tagline {
+      font-size: var(--text-xs);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-top: var(--space-1);
+    }
+    /* Gold rule */
+    .gold-rule {
+      width: 48px; height: 1px;
+      background: var(--color-gold);
+      margin-block: var(--space-6);
+    }
+    .gold-rule--center { margin-inline: auto; }
+    /* Section label */
+    .section-label {
+      font-size: var(--text-xs);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      font-weight: 500;
+      margin-bottom: var(--space-3);
+    }
+    /* Buttons */
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--color-gold);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: var(--space-4) var(--space-8);
+      border-radius: var(--radius-full);
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .btn-gold:hover { background: var(--color-gold-hover); transform: translateY(-1px); }
+    .btn-gold:active { transform: translateY(0); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: transparent;
+      color: var(--color-gold);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: var(--space-4) var(--space-8);
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-gold-border);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .btn-outline:hover {
+      background: var(--color-gold-light);
+      border-color: var(--color-gold);
+    }
+    /* Sections */
+    .section { padding-block: var(--space-20); }
+    .section--cream { background: var(--color-bg); }
+    .section--warm { background: var(--color-surface-2); }
+    .section--navy {
+      background: var(--color-surface-navy);
+      color: var(--color-text-inverse);
+    }
+    .section--offset { background: var(--color-surface-offset); }
+    .section__heading {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--color-text-navy);
+      margin-bottom: var(--space-6);
+    }
+    .section__heading--center { text-align: center; }
+    .section__heading--inverse { color: var(--color-text-inverse); }
+    .section__heading em { font-style: italic; color: var(--color-gold); }
+    .section__subheading {
+      font-size: var(--text-lg);
+      font-family: var(--font-display);
+      font-weight: 400;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-4);
+    }
+    /* Hero */
+    .hero {
+      background: url('{{hero_image}}') center/cover no-repeat;
+      min-height: 700px;
+      height: min(82vh, 700px);
+    }
+    /* Highlight strip */
+    .highlight-strip {
+      background: var(--color-gold);
+      padding-block: var(--space-5);
+      text-align: center;
+    }
+    .highlight-strip p {
+      font-size: var(--text-sm);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: 500;
+    }
+    /* Trip overview cards */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-6);
+      margin-top: var(--space-10);
+    }
+    .overview-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-divider);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      text-align: center;
+    }
+    .overview-card__icon {
+      font-size: 1.5rem;
+      margin-bottom: var(--space-3);
+      display: block;
+    }
+    .overview-card__label {
+      font-size: var(--text-xs);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2);
+    }
+    .overview-card__value {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 500;
+      color: var(--color-text-navy);
+      line-height: 1.3;
+    }
+    /* Destinations */
+    .destinations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-10);
+    }
+    .destination-card {
+      background: var(--color-surface-navy);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6) var(--space-5);
+      color: var(--color-text-inverse);
+      position: relative;
+      overflow: hidden;
+    }
+    .destination-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--color-gold);
+    }
+    .destination-card__day {
+      font-size: var(--text-xs);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: var(--space-2);
+    }
+    .destination-card__name {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: var(--space-2);
+    }
+    .destination-card__detail {
+      font-size: var(--text-xs);
+      color: rgba(253,249,242,0.6);
+      line-height: 1.5;
+    }
+    /* Itinerary */
+    .itinerary-list {
+      margin-top: var(--space-10);
+      border: 1px solid var(--color-divider);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .itinerary-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: var(--space-6);
+      padding: var(--space-5) var(--space-6);
+      border-bottom: 1px solid var(--color-divider);
+      background: var(--color-surface);
+      align-items: center;
+    }
+    .itinerary-item:last-child { border-bottom: none; }
+    .itinerary-item:nth-child(even) { background: var(--color-surface-2); }
+    .itinerary-item__day {
+      font-size: var(--text-xs);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      font-weight: 500;
+    }
+    .itinerary-item__date {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+    .itinerary-item__port {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 500;
+      color: var(--color-text-navy);
+      line-height: 1.2;
+    }
+    .itinerary-item__times {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin-top: var(--space-1);
+    }
+    .itinerary-item--sea .itinerary-item__port {
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+    /* Cabin / pricing */
+    .cabin-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+      align-items: start;
+      margin-top: var(--space-10);
+    }
+    @media (max-width: 680px) { .cabin-wrap { grid-template-columns: 1fr; } }
+    .cabin-card {
+      background: var(--color-surface-navy);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      color: var(--color-text-inverse);
+      position: relative;
+      overflow: hidden;
+    }
+    .cabin-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--color-gold);
+    }
+    .cabin-card__label {
+      font-size: var(--text-xs);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: var(--space-3);
+    }
+    .cabin-card__name {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 400;
+      margin-bottom: var(--space-4);
+      line-height: 1.2;
+    }
+    .cabin-card__desc {
+      font-size: var(--text-sm);
+      color: rgba(253,249,242,0.7);
+      line-height: 1.7;
+      margin-bottom: var(--space-6);
+    }
+    .cabin-card__price-wrap {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: var(--space-5);
+    }
+    .cabin-card__price-main {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 400;
+      color: var(--color-gold);
+      line-height: 1;
+    }
+    .cabin-card__price-sub {
+      font-size: var(--text-xs);
+      color: rgba(253,249,242,0.5);
+      margin-top: var(--space-1);
+      letter-spacing: 0.05em;
+    }
+    .cabin-card__price-pp {
+      font-size: var(--text-lg);
+      color: rgba(253,249,242,0.8);
+      font-family: var(--font-display);
+      margin-top: var(--space-3);
+    }
+    .payment-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-divider);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+    }
+    .payment-card__heading {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 400;
+      color: var(--color-text-navy);
+      margin-bottom: var(--space-6);
+    }
+    .payment-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .payment-list li {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--color-divider);
+    }
+    .payment-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .payment-list__label {
+      font-size: var(--text-xs);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+    .payment-list__value {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 500;
+      color: var(--color-text-navy);
+    }
+    .payment-list__note {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+    }
+    /* Included / not included */
+    .included-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+      margin-top: var(--space-10);
+    }
+    @media (max-width: 580px) { .included-grid { grid-template-columns: 1fr; } }
+    .included-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-divider);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+    }
+    .included-card__heading {
+      font-size: var(--text-xs);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--color-divider);
+    }
+    .included-card__heading--yes { color: var(--color-gold); }
+    .included-card__heading--no { color: var(--color-text-muted); }
+    .included-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .included-card li {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      line-height: 1.5;
+    }
+    .included-card li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+    .included-card--yes li::before { background: var(--color-gold); }
+    .included-card--no li::before { background: var(--color-text-faint); }
+    /* How to book */
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+      margin-top: var(--space-10);
+      counter-reset: steps;
+    }
+    .step-item {
+      display: flex;
+      gap: var(--space-6);
+      align-items: flex-start;
+      counter-increment: steps;
+    }
+    .step-item__num {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      border-radius: 50%;
+      background: var(--color-gold-light);
+      border: 1px solid var(--color-gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 500;
+      color: var(--color-gold);
+    }
+    .step-item__body strong {
+      display: block;
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-text-navy);
+      margin-bottom: var(--space-1);
+    }
+    .step-item__body p {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+    /* Final CTA */
+    .cta-section {
+      background: var(--color-surface-navy);
+      padding-block: var(--space-24);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(184,146,74,0.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cta-section__heading {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 300;
+      color: var(--color-text-inverse);
+      margin-bottom: var(--space-4);
+      line-height: 1.2;
+    }
+    .cta-section__heading em { font-style: italic; color: var(--color-gold); }
+    .cta-section__sub {
+      font-size: var(--text-sm);
+      color: rgba(253,249,242,0.6);
+      margin-bottom: var(--space-10);
+      letter-spacing: 0.05em;
+    }
+    /* Form */
+    .section--form { background: var(--color-bg); }
+    .form-wrap { max-width: 680px; margin-inline: auto; }
+    .form-intro {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+    .form-intro p {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      line-height: 1.7;
+    }
+    .form-intro p + p { margin-top: var(--space-3); }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-5);
+    }
+    @media (max-width: 560px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: var(--space-2); }
+    .form-group--full { grid-column: 1 / -1; }
+    label {
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+    input, select, textarea {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-4) var(--space-5);
+      width: 100%;
+      outline: none;
+      transition: border-color var(--transition);
+      appearance: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--color-gold);
+      box-shadow: 0 0 0 3px rgba(184,146,74,0.1);
+    }
+    textarea { min-height: 120px; resize: vertical; line-height: 1.6; }
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6257' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--space-4) center;
+      padding-right: var(--space-10);
+      cursor: pointer;
+    }
+    .form-submit {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+    }
+    .form-submit p {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      text-align: center;
+    }
+    /* Footer */
+    .site-footer {
+      background: var(--color-surface-navy-2, #0e1a2f);
+      color: rgba(253,249,242,0.5);
+      text-align: center;
+      padding-block: var(--space-8);
+      font-size: var(--text-xs);
+      letter-spacing: 0.05em;
+    }
+    .site-footer a {
+      color: var(--color-gold);
+      text-decoration: none;
+    }
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    /* Responsive */
+    @media (max-width: 680px) {
+      .container { padding-inline: var(--space-4); }
+      .site-header { padding-block: var(--space-4); }
+      .site-header__brand { font-size: clamp(1.9rem, 8vw, 2.6rem); }
+      .site-header__tagline { letter-spacing: 0.14em; }
+      .hero {
+        min-height: 420px;
+        height: min(62vh, 520px);
+        background-position: center top;
+      }
+      .highlight-strip { padding-block: var(--space-4); }
+      .highlight-strip p { font-size: 0.72rem; letter-spacing: 0.1em; padding-inline: var(--space-4); }
+      .section { padding-block: var(--space-12); }
+      .section__heading { margin-bottom: var(--space-4); }
+      .overview-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+      .destinations-grid { grid-template-columns: 1fr; }
+      .itinerary-item { grid-template-columns: 1fr; gap: var(--space-2); padding: var(--space-4); }
+      .cabin-card, .payment-card, .included-card { padding: var(--space-6); }
+      .step-item { gap: var(--space-4); }
+      .step-item__num { width: 40px; height: 40px; min-width: 40px; }
+      .btn-gold, .btn-outline { width: 100%; justify-content: center; padding: var(--space-4) var(--space-5); }
+      .form-wrap { max-width: 100%; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group--full { grid-column: auto; }
+    }
+    @media (max-width: 420px) {
+      .hero { min-height: 360px; height: min(56vh, 440px); }
+      .section { padding-block: var(--space-10); }
+      .cta-section { padding-block: var(--space-16); }
+    }
+  </style>
+</head>
+<body>
+  <a href="#inquiry-form" class="skip-link">Skip to booking form</a>
+  <header class="site-header" role="banner">
+    <a href="{{advisor_website}}" class="site-header__brand" aria-label="Agency home">
+      {{agency_name}}
+    </a>
+    <p class="site-header__tagline">PRESENTS</p>
+  </header>
+  <main id="main-content">
+    <!-- HERO -->
+    <section class="hero" aria-label="{{trip_name}} hero image"></section>
+    <!-- HIGHLIGHT STRIP -->
+    <div class="highlight-strip" role="note">
+      <p>Cabins are limited and secured on a first come, first served basis. Deposit due within 24 hours of booking.</p>
+    </div>
+    <!-- TRIP OVERVIEW -->
+    <section class="section section--cream" aria-labelledby="overview-heading">
+      <div class="container">
+        <p class="section-label reveal" style="text-align:center;">The Trip</p>
+        <h2 class="section__heading section__heading--center reveal" id="overview-heading">
+          {{trip_headline}}
+        </h2>
+        <div class="gold-rule gold-rule--center reveal"></div>
+        <div class="overview-grid reveal">
+          <div class="overview-card">
+            <span class="overview-card__icon">🚢</span>
+            <p class="overview-card__label">Cruise Line</p>
+            <p class="overview-card__value">{{cruise_line}}</p>
+          </div>
+          <div class="overview-card">
+            <span class="overview-card__icon">📅</span>
+            <p class="overview-card__label">Travel Dates</p>
+            <p class="overview-card__value">{{sailing_dates}}</p>
+          </div>
+          <div class="overview-card">
+            <span class="overview-card__icon">⚓</span>
+            <p class="overview-card__label">Departure Port</p>
+            <p class="overview-card__value">{{departure_port}}</p>
+          </div>
+          <div class="overview-card">
+            <span class="overview-card__icon">🌊</span>
+            <p class="overview-card__label">Nights at Sea</p>
+            <p class="overview-card__value">{{num_nights}} Nights</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- DESTINATIONS -->
+    <section class="section section--warm" aria-labelledby="destinations-heading">
+      <div class="container">
+        <p class="section-label reveal" style="text-align:center;">Where We're Going</p>
+        <h2 class="section__heading section__heading--center reveal" id="destinations-heading">
+          {{destinations_headline}}
+        </h2>
+        <div class="gold-rule gold-rule--center reveal"></div>
+        <div class="destinations-grid reveal">
+          {{itinerary_items}}
+        </div>
+      </div>
+    </section>
+    <!-- ITINERARY -->
+    <section class="section section--cream" id="itinerary" aria-labelledby="itinerary-heading">
+      <div class="container container--narrow">
+        <p class="section-label reveal" style="text-align:center;">Day by Day</p>
+        <h2 class="section__heading section__heading--center reveal" id="itinerary-heading">
+          Full Itinerary
+        </h2>
+        <div class="gold-rule gold-rule--center reveal"></div>
+        <div class="itinerary-list reveal">
+          {{detailed_itinerary}}
+        </div>
+      </div>
+    </section>
+    <!-- CABIN & PRICING -->
+    <section class="section section--warm" aria-labelledby="cabin-heading">
+      <div class="container">
+        <p class="section-label reveal" style="text-align:center;">Your Space</p>
+        <h2 class="section__heading section__heading--center reveal" id="cabin-heading">
+          Cabin & Pricing
+        </h2>
+        <div class="gold-rule gold-rule--center reveal"></div>
+        <div class="cabin-wrap reveal">
+          <div class="cabin-card">
+            <p class="cabin-card__label">{{cabin_type}}</p>
+            <p class="cabin-card__name">{{cabin_headline}}</p>
+            <p class="cabin-card__desc">{{cabin_description}}</p>
+            <div class="cabin-card__price-wrap">
+              <p class="cabin-card__price-main">{{starting_price}}</p>
+              <p class="cabin-card__price-sub">per cabin · double occupancy</p>
+              <p class="cabin-card__price-pp">{{price_per_person}} per person</p>
+            </div>
+          </div>
+          <div class="payment-card">
+            <p class="payment-card__heading">Payment Details</p>
+            <ul class="payment-list">
+              <li>
+                <span class="payment-list__label">Deposit to Secure</span>
+                <span class="payment-list__value">{{deposit_amount}}</span>
+                <span class="payment-list__note">Due within 24 hours of booking request</span>
+              </li>
+              <li>
+                <span class="payment-list__label">Final Payment Due</span>
+                <span class="payment-list__value">{{final_payment_date}}</span>
+              </li>
+              <li>
+                <span class="payment-list__label">Payment Plans</span>
+                <span class="payment-list__value">Available</span>
+                <span class="payment-list__note">Ask about flexible payment options when you inquire</span>
+              </li>
+              <li>
+                <span class="payment-list__label">Occupancy</span>
+                <span class="payment-list__value">Double Only</span>
+                <span class="payment-list__note">Solo travelers, submit an inquiry for custom arrangements</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- INCLUDED -->
+    <section class="section section--cream" aria-labelledby="included-heading">
+      <div class="container">
+        <p class="section-label reveal" style="text-align:center;">What to Expect</p>
+        <h2 class="section__heading section__heading--center reveal" id="included-heading">
+          What's Included
+        </h2>
+        <div class="gold-rule gold-rule--center reveal"></div>
+        <div class="included-grid reveal">
+          <div class="included-card included-card--yes">
+            <p class="included-card__heading included-card__heading--yes">Included</p>
+            <ul>
+              {{included_items}}
+            </ul>
+          </div>
+          <div class="included-card included-card--no">
+            <p class="included-card__heading included-card__heading--no">Not Included</p>
+            <ul>
+              {{not_included_items}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- HOW TO BOOK -->
+    <section class="section section--warm" aria-labelledby="how-heading">
+      <div class="container container--narrow">
+        <p class="section-label reveal" style="text-align:center;">Secure Your Spot</p>
+        <h2 class="section__heading section__heading--center reveal" id="how-heading">
+          Here's How It Works
+        </h2>
+        <div class="gold-rule gold-rule--center reveal"></div>
+        <div class="steps-list reveal">
+          <div class="step-item">
+            <div class="step-item__num">1</div>
+            <div class="step-item__body">
+              <strong>Submit your inquiry below</strong>
+              <p>Fill out the short form with your details. Cabins are limited so don't wait.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-item__num">2</div>
+            <div class="step-item__body">
+              <strong>Receive your booking details</strong>
+              <p>{{advisor_name}} will send you everything you need to confirm your cabin and secure your spot.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-item__num">3</div>
+            <div class="step-item__body">
+              <strong>Secure your cabin with a deposit</strong>
+              <p>A {{deposit_amount}} per person deposit holds your space. Due within 24 hours of your booking request.</p>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; margin-top: var(--space-10);" class="reveal">
+          <a href="#inquiry-form" class="btn-gold">Reserve Your Cabin</a>
+        </div>
+      </div>
+    </section>
+    <!-- INQUIRY FORM -->
+    <section class="section section--cream" id="inquiry-form" aria-labelledby="form-heading">
+      <div class="container">
+        <p class="section-label reveal" style="text-align:center;">Let's Get You Booked</p>
+        <h2 class="section__heading section__heading--center reveal" id="form-heading">Start My Booking</h2>
+        <div class="gold-rule gold-rule--center reveal"></div>
+        <div class="form-wrap">
+          <div class="form-intro reveal">
+            <p>Fill out the form below and {{advisor_name}} will follow up with everything you need to secure your cabin. Spots are limited and go fast.</p>
+            <p>Not sure if you're coming solo or with someone? That's fine. Submit what you know and we'll sort the details together.</p>
+          </div>
+          <form id="inquiry" action="{{form_action_url}}" method="POST" novalidate class="reveal" aria-label="Cruise booking inquiry form">
+            <input type="hidden" name="page_source" value="{{trip_name}} landing page">
+            <input type="hidden" name="trip_name" value="{{trip_name}}">
+            <input type="hidden" name="trip_dates" value="{{sailing_dates}}">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="first-name">First Name (as it appears on your valid travel document)</label>
+                <input type="text" id="first-name" name="first-name" placeholder="Your first name" autocomplete="given-name" required>
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name (as it appears on your valid travel document)</label>
+                <input type="text" id="last-name" name="last-name" placeholder="Your last name" autocomplete="family-name" required>
+              </div>
+              <div class="form-group form-group--full">
+                <label for="email">Best Email</label>
+                <input type="email" id="email" name="email" placeholder="email@example.com" autocomplete="email" required>
+              </div>
+              <div class="form-group form-group--full">
+                <label for="phone">Best Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" autocomplete="tel" required>
+              </div>
+              <div class="form-group form-group--full">
+                <label for="contact-method">How would you like me to follow up?</label>
+                <select id="contact-method" name="contact-method" required>
+                  <option value="">Select an option</option>
+                  <option>Email</option>
+                  <option>Text Message</option>
+                  <option>Phone Call</option>
+                </select>
+              </div>
+              <div class="form-group form-group--full">
+                <label for="cabin-mate">Who will be sharing your cabin with you?</label>
+                <select id="cabin-mate" name="cabin-mate" required>
+                  <option value="">Select an option</option>
+                  <option>I already have my cabin mate</option>
+                  <option>I need help finding a cabin mate</option>
+                  <option>I'm not sure yet</option>
+                </select>
+              </div>
+              <div class="form-group form-group--full">
+                <label for="cabin-count">How many cabins (2 guests per cabin) would you like to reserve?</label>
+                <select id="cabin-count" name="cabin-count" required>
+                  <option value="">Select an option</option>
+                  <option>1 cabin (2 guests)</option>
+                  <option>2 cabins (4 guests)</option>
+                  <option>3+ cabins (group booking)</option>
+                  <option>I'm not sure yet</option>
+                </select>
+              </div>
+              <div class="form-group form-group--full">
+                <label for="celebration">What are you celebrating on this trip?</label>
+                <select id="celebration" name="celebration">
+                  <option value="">Select an option</option>
+                  <option>🎉 Birthday Celebration</option>
+                  <option>💃 Girls trip</option>
+                  <option>❤️ Anniversary / Romance</option>
+                  <option>✨ Just getaway / good vibes only</option>
+                  <option>✨ Something else</option>
+                </select>
+              </div>
+              <div class="form-group form-group--full">
+                <label for="readiness">Are you ready to secure your cabin?</label>
+                <select id="readiness" name="readiness">
+                  <option value="">Select an option</option>
+                  <option>Yes, I'm ready to book</option>
+                  <option>I'm close, just need a little more info</option>
+                  <option>Just exploring right now</option>
+                </select>
+              </div>
+              <div class="form-group form-group--full">
+                <label for="notes">Anything I should know?</label>
+                <textarea id="notes" name="notes" placeholder="Cabin mate details, celebration plans, or any quick questions…"></textarea>
+              </div>
+              <div class="form-submit">
+                <button type="submit" class="btn-gold">Start My Booking</button>
+                <p id="form-success-message" style="display:none; margin-top: 12px; color: var(--color-text-muted); text-align: center;">
+                  Your request has been submitted ✨ {{advisor_name}} will review your details and follow up with the next steps shortly.
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- FINAL CTA -->
+    <section class="cta-section" aria-labelledby="cta-heading">
+      <div class="container container--narrow">
+        <p class="section-label reveal" style="color: var(--color-gold);">{{sailing_dates}}</p>
+        <h2 class="cta-section__heading reveal" id="cta-heading">
+          {{cta_headline}}
+        </h2>
+        <p class="cta-section__sub reveal">{{trip_name}} · {{cruise_line}} · {{ship_name}}</p>
+        <div class="reveal">
+          <a href="#inquiry-form" class="btn-gold">Reserve Your Cabin</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" role="contentinfo">
+    <p>© {{year}} {{agency_name}} · Prices are based on double occupancy and are subject to availability.</p>
+  </footer>
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("inquiry");
+      const success = document.getElementById("form-success-message");
+      if (!form || !success) return;
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        try {
+          const response = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: {
+              Accept: "application/json"
+            }
+          });
+          if (response.ok) {
+            form.reset();
+            success.style.display = "block";
+            success.scrollIntoView({ behavior: "smooth", block: "center" });
+          } else {
+            alert("Something went wrong. Please try again.");
+          }
+        } catch (error) {
+          alert("Something went wrong. Please try again.");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
