@@ -1,809 +1,844 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tripp Lounge™ | Custom Travel Concierge Intake</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tripp Lounge™ | Advisor Intake</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --lagoon: #4AC0D7;
+      --mint: #A1E1D5;
+      --mist: #B0F1F1;
+      --teal: #25869C;
+      --sand: #8B866D;
+      --sand-light: #f5f3ee;
+      --dark: #1a2a2e;
+      --white: #ffffff;
+      --border: rgba(74, 192, 215, 0.2);
+      --input-bg: rgba(255,255,255,0.85);
+    }
 
-  :root {
-    --lagoon-light: #B0F1F1;
-    --lagoon-mid: #A1E1D5;
-    --lagoon-bright: #4AC0D7;
-    --lagoon-deep: #25869C;
-    --botanical: #8B866D;
-    --dark: #1A3C40;
-    --dark-mid: #1e5060;
-    --cream: #F0FDFD;
-    --white: #ffffff;
-    --muted-text: #5a7a7e;
-    --font-display: 'Cormorant Garamond', Georgia, serif;
-    --font-body: 'DM Sans', sans-serif;
-  }
+```
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--sand-light);
+  color: var(--dark);
+  min-height: 100vh;
+}
 
-  body {
-    background-color: var(--cream);
-    color: var(--dark);
-    font-family: var(--font-body);
-    font-weight: 300;
-    line-height: 1.7;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+/* HERO */
+.hero {
+  background: linear-gradient(160deg, var(--dark) 0%, #1e3a40 50%, #0f2a30 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+  position: relative;
+  overflow: hidden;
+}
 
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 80px 24px 60px;
-    text-align: center;
-    background-color: var(--dark);
-    overflow: hidden;
-  }
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 80%, rgba(74,192,215,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(161,225,213,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
 
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74,192,215,0.18) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 40% at 90% 100%, rgba(161,225,213,0.1) 0%, transparent 60%);
-    pointer-events: none;
-  }
+.hero-badge {
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--lagoon);
+  border: 1px solid rgba(74,192,215,0.35);
+  padding: 6px 18px;
+  border-radius: 100px;
+  margin-bottom: 32px;
+}
 
-  .deco-line { position: absolute; background: rgba(74,192,215,0.15); }
-  .deco-line-h { width: 100%; height: 1px; left: 0; }
-  .deco-line-v { width: 1px; height: 100%; top: 0; }
-  .deco-line.top { top: 32px; }
-  .deco-line.bottom { bottom: 32px; }
-  .deco-line.left { left: 32px; }
-  .deco-line.right { right: 32px; }
+.hero-wordmark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 10vw, 96px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
 
-  .hero-badge {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--lagoon-bright);
-    border: 1px solid rgba(74,192,215,0.35);
-    padding: 6px 20px;
-    border-radius: 100px;
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.2s;
-  }
+.hero-wordmark em {
+  font-style: italic;
+  color: var(--lagoon);
+}
 
-  .hero-wordmark {
-    font-family: var(--font-display);
-    font-size: clamp(48px, 9vw, 88px);
-    font-weight: 300;
-    color: var(--lagoon-light);
-    letter-spacing: 0.04em;
-    line-height: 1;
-    opacity: 0;
-    animation: fadeUp 0.9s ease forwards 0.4s;
-  }
+.hero-tm {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--sand);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
 
-  .hero-wordmark em { font-style: italic; color: var(--lagoon-bright); }
+.hero-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--lagoon);
+  margin: 0 auto 40px;
+  opacity: 0.5;
+}
 
-  .hero-tm {
-    font-family: var(--font-body);
-    font-size: 14px;
-    vertical-align: super;
-    color: var(--lagoon-bright);
-  }
+.hero-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 4vw, 36px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.3;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
 
-  .hero-divider {
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--lagoon-bright), transparent);
-    margin: 28px auto;
-    opacity: 0;
-    animation: fadeIn 1s ease forwards 0.7s;
-  }
+.hero-headline em {
+  font-style: italic;
+  color: var(--mint);
+}
 
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(14px, 2vw, 18px);
-    font-weight: 400;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(176,241,241,0.65);
-    opacity: 0;
-    animation: fadeUp 0.9s ease forwards 0.8s;
-  }
+.hero-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 16px;
+}
 
+.hero-cta {
+  display: inline-block;
+  margin-top: 40px;
+  background: var(--lagoon);
+  color: var(--dark);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
 
-  .hero-subheadline {
-    font-family: var(--font-display);
-    font-size: clamp(20px, 3vw, 30px);
-    font-weight: 300;
-    font-style: italic;
-    color: var(--lagoon-mid);
-    margin-top: 20px;
-    max-width: 640px;
-    line-height: 1.35;
-    opacity: 0;
-    animation: fadeUp 0.9s ease forwards 0.9s;
-  }
+.hero-cta:hover {
+  background: var(--mint);
+  transform: translateY(-2px);
+}
 
-  .hero-intro {
-    max-width: 600px;
-    margin-top: 36px;
-    opacity: 0;
-    animation: fadeUp 0.9s ease forwards 1.1s;
-  }
+/* FORM WRAPPER */
+.form-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 80px 24px 100px;
+}
 
-  .hero-intro p {
-    font-size: 15px;
-    color: rgba(176,241,241,0.62);
-    line-height: 1.9;
-    margin-bottom: 14px;
-  }
+.form-intro {
+  text-align: center;
+  margin-bottom: 64px;
+}
 
-  .hero-intro p:last-child { margin-bottom: 0; }
+.form-intro h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 300;
+  color: var(--dark);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
 
-  .hero-intro strong {
-    color: rgba(176,241,241,0.85);
-    font-weight: 400;
-  }
+.form-intro h2 em {
+  font-style: italic;
+  color: var(--teal);
+}
 
-  .hero-cta {
-    margin-top: 48px;
-    opacity: 0;
-    animation: fadeUp 0.9s ease forwards 1.3s;
-  }
+.form-intro p {
+  font-size: 15px;
+  color: var(--sand);
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+}
 
-  .btn-hero {
-    display: inline-block;
-    background: var(--lagoon-deep);
-    color: var(--white);
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 16px 44px;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-  }
+/* SECTION BLOCKS */
+.form-section {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 40px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
 
-  .btn-hero:hover {
-    background: var(--lagoon-bright);
-    transform: translateY(-2px);
-  }
+.form-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--lagoon), var(--mint));
+}
 
-  .form-page {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 80px 24px 100px;
-  }
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 36px;
+}
 
-  .form-intro {
-    text-align: center;
-    margin-bottom: 64px;
-  }
+.section-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 300;
+  color: var(--mist);
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: -4px;
+}
 
-  .form-intro-title {
-    font-family: var(--font-display);
-    font-size: clamp(28px, 4vw, 44px);
-    font-weight: 300;
-    color: var(--dark);
-    line-height: 1.2;
-    margin-bottom: 16px;
-  }
+.section-title-wrap h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
 
-  .form-intro-title em { font-style: italic; color: var(--lagoon-deep); }
+.section-title-wrap p {
+  font-size: 13px;
+  color: var(--sand);
+  line-height: 1.5;
+}
 
-  .form-intro-sub {
-    font-size: 15px;
-    color: var(--muted-text);
-    max-width: 540px;
-    margin: 0 auto;
-    line-height: 1.9;
-  }
+/* FIELDS */
+.field-grid {
+  display: grid;
+  gap: 20px;
+}
 
-  .form-section { margin-bottom: 52px; }
+.field-grid.two-col {
+  grid-template-columns: 1fr 1fr;
+}
 
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 32px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid rgba(74,192,215,0.22);
-  }
+@media (max-width: 600px) {
+  .field-grid.two-col { grid-template-columns: 1fr; }
+  .form-section { padding: 28px 20px; }
+}
 
-  .section-num {
-    font-family: var(--font-display);
-    font-size: 38px;
-    font-weight: 300;
-    color: rgba(74,192,215,0.28);
-    line-height: 1;
-    flex-shrink: 0;
-  }
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-  .section-name {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--lagoon-deep);
-  }
+.field label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
 
-  .field-group { margin-bottom: 22px; }
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid rgba(37,134,156,0.2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--dark);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
 
-  .field-label {
-    display: block;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--botanical);
-    margin-bottom: 8px;
-  }
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--lagoon);
+  box-shadow: 0 0 0 3px rgba(74,192,215,0.12);
+}
 
-  .field-input,
-  .field-textarea,
-  .field-select {
-    width: 100%;
-    background: var(--white);
-    border: 1px solid rgba(37,134,156,0.2);
-    border-radius: 3px;
-    color: var(--dark);
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 300;
-    padding: 13px 16px;
-    outline: none;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
-    appearance: none;
-    -webkit-appearance: none;
-  }
+.field textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.6;
+}
 
-  .field-input::placeholder,
-  .field-textarea::placeholder { color: rgba(26,60,64,0.28); }
+.field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2325869C' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
 
-  .field-input:focus,
-  .field-textarea:focus,
-  .field-select:focus {
-    border-color: var(--lagoon-bright);
-    box-shadow: 0 0 0 3px rgba(74,192,215,0.12);
-  }
+.field-note {
+  font-size: 12px;
+  color: var(--sand);
+  line-height: 1.5;
+  font-style: italic;
+}
 
-  .field-textarea { resize: vertical; min-height: 100px; }
+/* RADIO GROUP */
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
 
-  .field-select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2325869C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 40px;
-    cursor: pointer;
-  }
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--dark);
+  background: var(--sand-light);
+  border: 1px solid rgba(37,134,156,0.15);
+  border-radius: 100px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
 
-  .field-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-  }
+.radio-group input[type="radio"],
+.radio-group input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+  accent-color: var(--lagoon);
+}
 
-  @media (max-width: 580px) { .field-row { grid-template-columns: 1fr; } }
+.radio-group label:has(input:checked) {
+  background: rgba(74,192,215,0.12);
+  border-color: var(--lagoon);
+  color: var(--teal);
+}
 
-  .field-upload {
-    width: 100%;
-    border: 1px dashed rgba(74,192,215,0.4);
-    border-radius: 3px;
-    background: rgba(176,241,241,0.07);
-    padding: 28px 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.25s, background 0.25s;
-    position: relative;
-  }
+/* ITINERARY SECTION */
+.itinerary-note {
+  background: linear-gradient(135deg, rgba(74,192,215,0.08), rgba(161,225,213,0.08));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-top: 16px;
+}
 
-  .field-upload:hover {
-    border-color: var(--lagoon-bright);
-    background: rgba(176,241,241,0.13);
-  }
+.itinerary-note p {
+  font-size: 13px;
+  color: var(--teal);
+  line-height: 1.6;
+}
 
-  .field-upload input[type="file"] {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-  }
+.itinerary-note strong {
+  font-weight: 500;
+}
 
-  .upload-label { font-size: 13px; color: var(--lagoon-deep); font-weight: 400; }
-  .upload-sub { font-size: 11px; color: var(--muted-text); margin-top: 4px; }
+.itinerary-note a {
+  color: var(--lagoon);
+  text-decoration: none;
+  font-weight: 500;
+}
 
-  .cta-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 4px;
-  }
+/* SECTION DIVIDER */
+.field-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 8px 0;
+}
 
-  .cta-pill {
-    border: 1px solid rgba(37,134,156,0.3);
-    border-radius: 100px;
-    padding: 7px 18px;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--lagoon-deep);
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: var(--font-body);
-  }
+/* SUBMIT */
+.submit-wrap {
+  text-align: center;
+  margin-top: 48px;
+}
 
-  .cta-pill:hover,
-  .cta-pill.active {
-    background: var(--lagoon-deep);
-    color: var(--white);
-    border-color: var(--lagoon-deep);
-  }
+.submit-wrap p {
+  font-size: 13px;
+  color: var(--sand);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
 
-  .form-rule {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(74,192,215,0.28), transparent);
-    margin: 48px 0;
-  }
+.btn-submit {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--teal), var(--lagoon));
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 18px 52px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(37,134,156,0.3);
+}
 
-  .submit-wrap { text-align: center; padding-top: 16px; }
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37,134,156,0.4);
+}
 
-  .btn-submit {
-    display: inline-block;
-    background: var(--lagoon-deep);
-    color: var(--white);
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 18px 52px;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-  }
+/* SUCCESS */
+.success-screen {
+  display: none;
+  text-align: center;
+  padding: 80px 24px;
+  max-width: 560px;
+  margin: 0 auto;
+}
 
-  .btn-submit:hover { background: var(--lagoon-bright); transform: translateY(-2px); }
-  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.success-screen.visible { display: block; }
 
-  .submit-note {
-    font-size: 12px;
-    color: var(--muted-text);
-    margin-top: 16px;
-    letter-spacing: 0.04em;
-  }
+.success-icon {
+  font-size: 48px;
+  margin-bottom: 24px;
+}
 
-  #success {
-    display: none;
-    text-align: center;
-    padding: 80px 24px;
-    max-width: 600px;
-    margin: 0 auto;
-  }
+.success-screen h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--dark);
+  margin-bottom: 16px;
+}
 
-  #success.visible { display: block; }
+.success-screen h2 em {
+  font-style: italic;
+  color: var(--teal);
+}
 
-  .success-mark {
-    font-family: var(--font-display);
-    font-size: 52px;
-    color: var(--lagoon-bright);
-    margin-bottom: 24px;
-    font-style: italic;
-  }
+.success-screen p {
+  font-size: 15px;
+  color: var(--sand);
+  line-height: 1.7;
+}
 
-  #success h2 {
-    font-family: var(--font-display);
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: 300;
-    color: var(--dark);
-    margin-bottom: 20px;
-    line-height: 1.2;
-  }
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px 24px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--sand);
+  letter-spacing: 0.05em;
+}
 
-  #success h2 em { font-style: italic; color: var(--lagoon-deep); }
+footer a {
+  color: var(--lagoon);
+  text-decoration: none;
+}
+```
 
-  #success p {
-    font-size: 15px;
-    color: var(--muted-text);
-    line-height: 1.9;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-
-  .footer {
-    background: var(--dark);
-    padding: 44px 24px;
-    text-align: center;
-  }
-
-  .footer-wordmark {
-    font-family: var(--font-display);
-    font-size: 24px;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--lagoon-bright);
-    margin-bottom: 10px;
-  }
-
-  .footer-note { font-size: 11px; color: rgba(176,241,241,0.3); letter-spacing: 0.1em; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-</style>
+  </style>
 </head>
 <body>
 
+<!-- HERO -->
+
 <section class="hero">
-  <div class="deco-line deco-line-h top"></div>
-  <div class="deco-line deco-line-h bottom"></div>
-  <div class="deco-line deco-line-v left"></div>
-  <div class="deco-line deco-line-v right"></div>
-  <div class="hero-badge">Custom Travel Concierge Experiences For Travel Advisors</div>
-  <h1 class="hero-wordmark">Tripp <em>Lounge</em><span class="hero-tm">™</span></h1>
+  <div class="hero-badge">For Travel Advisors</div>
+  <div class="hero-wordmark">Tripp <em>Lounge</em>™</div>
+  <div class="hero-tm">Custom Travel Concierge Experiences</div>
   <div class="hero-divider"></div>
-  <p class="hero-subheadline">Turn your trip into an experience travelers actually remember.</p>
-  <div class="hero-intro">
-    <p>Your travelers need more than a flyer, random posts, and inbox messages.</p>
-    <p>Tripp Lounge™ helps you create a beautiful branded travel concierge experience where travelers can explore the trip, review details, submit their information, make payments, and stay connected from interest to booking.</p>
-    <p>This isn't just about sharing a trip. It's about creating a traveler experience that helps you build trust, grow your warm market, and keep your trip organized in one beautiful place.</p>
-    <p><strong>Built around your brand. Designed around your travelers. Created to help you book smarter.</strong></p>
-  </div>
-  <div class="hero-cta">
-    <a href="#intake-form" class="btn-hero">Start My Concierge Experience</a>
-  </div>
+  <h1 class="hero-headline">Your trip deserves a page<br><em>as beautiful as the destination.</em></h1>
+  <p class="hero-sub">Complete this intake and we'll build your custom branded travel concierge experience — the kind that answers questions before they're asked and turns interest into bookings.</p>
+  <p class="hero-sub">Built around your brand. Designed around your travelers.</p>
+  <a href="#intake-form" class="hero-cta">Start My Concierge Experience</a>
 </section>
 
-<div class="form-page">
+<!-- FORM -->
+
+<div class="form-wrapper" id="intake-form">
   <div class="form-intro">
-    <h2 class="form-intro-title">Tell us about the experience<br>you're <em>creating.</em></h2>
-    <p class="form-intro-sub">Complete the details below so we can create your custom branded travel concierge experience for your travelers.</p>
+    <h2>Tell us about the experience<br>you're <em>creating.</em></h2>
+    <p>Complete every section as fully as possible. The more detail you give us, the more your page will feel like you.</p>
   </div>
 
-  <div id="form-wrap">
-  <form id="intake-form" action="https://formspree.io/f/mvzlwelp" method="POST">
+  <form id="advisorForm" action="https://formspree.io/f/mvzlwelp" method="POST">
 
-    <!-- 01 BASIC INFORMATION -->
-    <div class="form-section">
-      <div class="section-header">
-        <div class="section-num">01</div>
-        <div class="section-name">Basic Information</div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label class="field-label" for="name">Your Name</label>
-          <input class="field-input" type="text" id="name" name="name" placeholder="First and last" required>
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="business">Business / Travel Brand Name</label>
-          <input class="field-input" type="text" id="business" name="business" placeholder="Your travel brand" required>
-        </div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label class="field-label" for="email">Email Address</label>
-          <input class="field-input" type="email" id="email" name="email" placeholder="your@email.com" required>
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="phone">Phone Number</label>
-          <input class="field-input" type="tel" id="phone" name="phone" placeholder="(000) 000-0000">
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="social">Social Media Links</label>
-        <input class="field-input" type="text" id="social" name="social" placeholder="Facebook, Instagram, TikTok — paste your links">
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="brand_colors">Preferred Brand Colors</label>
-        <input class="field-input" type="text" id="brand_colors" name="brand_colors" placeholder="e.g. Black and gold, blush pink, teal — hex codes welcome">
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="logo_link">Logo File Link</label>
-        <input class="field-input" type="url" id="logo_link" name="logo_link" placeholder="Paste a link to your logo — Google Drive, Dropbox, or your website">
-      </div>
+```
+<!-- SECTION 1 -->
+<div class="form-section">
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <div class="section-title-wrap">
+      <h3>About You</h3>
+      <p>Let's start with your brand and contact information.</p>
     </div>
-
-    <div class="form-rule"></div>
-
-    <!-- 02 TRIP DETAILS -->
-    <div class="form-section">
-      <div class="section-header">
-        <div class="section-num">02</div>
-        <div class="section-name">Trip Details</div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label class="field-label" for="cruise_line">Cruise Line</label>
-          <select class="field-select" id="cruise_line" name="cruise_line" required>
-            <option value="" disabled selected>Select cruise line</option>
-            <option>Carnival</option>
-            <option>Royal Caribbean</option>
-            <option>Virgin Voyages</option>
-            <option>MSC</option>
-            <option>Norwegian Cruise Line</option>
-            <option>Princess</option>
-            <option>Celebrity</option>
-            <option>Disney</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="ship_name">Ship Name</label>
-          <input class="field-input" type="text" id="ship_name" name="ship_name" placeholder="e.g. Wonder of the Seas">
-        </div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label class="field-label" for="sailing_dates">Sailing Dates</label>
-          <input class="field-input" type="text" id="sailing_dates" name="sailing_dates" placeholder="e.g. July 12–19, 2026">
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="departure_port">Departure Port</label>
-          <input class="field-input" type="text" id="departure_port" name="departure_port" placeholder="e.g. Miami, FL">
-        </div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label class="field-label" for="nights">Number of Nights</label>
-          <select class="field-select" id="nights" name="nights">
-            <option value="" disabled selected>Select nights</option>
-            <option>2 Nights</option>
-            <option>3 Nights</option>
-            <option>4 Nights</option>
-            <option>5 Nights</option>
-            <option>6 Nights</option>
-            <option>7 Nights</option>
-            <option>8 Nights</option>
-            <option>9 Nights</option>
-            <option>10+ Nights</option>
-          </select>
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="destinations">Destinations / Ports</label>
-          <input class="field-input" type="text" id="destinations" name="destinations" placeholder="e.g. Nassau, Cozumel, Labadee">
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="itinerary_link">Cruise Itinerary or Flyer Link</label>
-        <input class="field-input" type="url" id="itinerary_link" name="itinerary_link" placeholder="Paste your cruise itinerary text, or share a link to your flyer — Google Drive or Dropbox works great">
-      </div>
-    </div>
-
-    <div class="form-rule"></div>
-
-    <!-- 03 PRICING -->
-    <div class="form-section">
-      <div class="section-header">
-        <div class="section-num">03</div>
-        <div class="section-name">Traveler Pricing Details</div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label class="field-label" for="price_interior">Interior Cabin Pricing</label>
-          <input class="field-input" type="text" id="price_interior" name="price_interior" placeholder="e.g. From $899/pp">
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="price_oceanview">Ocean View Pricing</label>
-          <input class="field-input" type="text" id="price_oceanview" name="price_oceanview" placeholder="e.g. From $1,099/pp">
-        </div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label class="field-label" for="price_balcony">Balcony Pricing</label>
-          <input class="field-input" type="text" id="price_balcony" name="price_balcony" placeholder="e.g. From $1,299/pp">
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="price_suite">Suite Pricing</label>
-          <input class="field-input" type="text" id="price_suite" name="price_suite" placeholder="e.g. From $2,199/pp">
-        </div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label class="field-label" for="price_solo">Solo Pricing (if applicable)</label>
-          <input class="field-input" type="text" id="price_solo" name="price_solo" placeholder="e.g. From $1,599 solo">
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="deposit">Deposit Amount</label>
-          <input class="field-input" type="text" id="deposit" name="deposit" placeholder="e.g. $250 per person">
-        </div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label class="field-label" for="deposit_due">When Is The Deposit Due?</label>
-          <input class="field-input" type="text" id="deposit_due" name="deposit_due" placeholder="e.g. Due at booking">
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="final_payment">Final Payment Date</label>
-          <input class="field-input" type="text" id="final_payment" name="final_payment" placeholder="e.g. April 15, 2026">
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="payment_plan">Payment Plan Available?</label>
-        <select class="field-select" id="payment_plan" name="payment_plan">
-          <option value="" disabled selected>Select option</option>
-          <option>Yes</option>
-          <option>No</option>
-          <option>FlexPay Available</option>
-        </select>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="payment_notes">Anything Travelers Should Know About Payments?</label>
-        <textarea class="field-textarea" id="payment_notes" name="payment_notes" placeholder="Payment instructions, policies, or anything important for your travelers to know"></textarea>
-      </div>
-    </div>
-
-    <div class="form-rule"></div>
-
-    <!-- 04 BOOKING -->
-    <div class="form-section">
-      <div class="section-header">
-        <div class="section-num">04</div>
-        <div class="section-name">Booking Details</div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="booking_url">Booking Link or Inquiry Form Link</label>
-        <input class="field-input" type="url" id="booking_url" name="booking_url" placeholder="https://" required>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label">Preferred Call-To-Action</label>
-        <div class="cta-pills">
-          <button type="button" class="cta-pill" data-value="Book Now">Book Now</button>
-          <button type="button" class="cta-pill" data-value="Reserve Your Cabin">Reserve Your Cabin</button>
-          <button type="button" class="cta-pill" data-value="Get More Information">Get More Information</button>
-          <button type="button" class="cta-pill" data-value="Join The Group Trip">Join The Group Trip</button>
-          <button type="button" class="cta-pill" data-value="Start Planning">Start Planning</button>
-        </div>
-        <input type="hidden" id="cta_selected" name="cta_button" value="">
-      </div>
-    </div>
-
-    <div class="form-rule"></div>
-
-    <!-- 05 EXPERIENCE DETAILS -->
-    <div class="form-section">
-      <div class="section-header">
-        <div class="section-num">05</div>
-        <div class="section-name">Travel Experience Details</div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="vibe">Describe The Vibe Of This Trip</label>
-        <input class="field-input" type="text" id="vibe" name="vibe" placeholder="e.g. Girls Trip · Luxury Escape · Birthday Celebration · Wellness Retreat">
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="room_categories">Room Categories You Want Highlighted</label>
-        <input class="field-input" type="text" id="room_categories" name="room_categories" placeholder="e.g. Interior, Balcony, Suite">
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="perks">Special Perks or Group Amenities</label>
-        <textarea class="field-textarea" id="perks" name="perks" placeholder="e.g. Welcome drinks, group meet-up, onboard credits, exclusive shore excursion"></textarea>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="excursions">Excursions or Experiences To Highlight</label>
-        <textarea class="field-textarea" id="excursions" name="excursions" placeholder="e.g. Snorkeling in Nassau, Tulum ruins, private beach day in Cozumel"></textarea>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="faqs">Frequently Asked Questions Travelers Usually Ask</label>
-        <textarea class="field-textarea" id="faqs" name="faqs" style="min-height:130px" placeholder="List the questions your travelers always ask — we'll build them into your page"></textarea>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="must_include">Anything You Definitely Want Included?</label>
-        <textarea class="field-textarea" id="must_include" name="must_include" placeholder="Anything specific you need on your page — don't leave anything out"></textarea>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="photos_link">Additional Photos Link (Optional)</label>
-        <input class="field-input" type="url" id="photos_link" name="photos_link" placeholder="Paste a link to a folder with your trip photos — Google Drive or Dropbox">
-      </div>
-    </div>
-
-    <div class="submit-wrap">
-      <button type="submit" class="btn-submit">Start My Concierge Experience</button>
-      <p class="submit-note">We'll begin building your traveler experience and send everything to your inbox once it's ready to review.</p>
-    </div>
-
-  </form>
   </div>
-
-  <div id="success">
-    <div class="success-mark">✦</div>
-    <h2>You're all <em>set.</em></h2>
-    <p>Your information has been received and your custom travel concierge experience is officially in the works.<br><br>We'll begin creating your traveler experience and send everything directly to your inbox within 3–5 business days for review.</p>
+  <div class="field-grid two-col">
+    <div class="field">
+      <label>Full Name</label>
+      <input type="text" name="full_name" placeholder="Your full name" required />
+    </div>
+    <div class="field">
+      <label>Business / Travel Brand Name</label>
+      <input type="text" name="brand_name" placeholder="Your brand name" required />
+    </div>
+    <div class="field">
+      <label>Email Address</label>
+      <input type="email" name="email" placeholder="your@email.com" required />
+    </div>
+    <div class="field">
+      <label>Phone Number</label>
+      <input type="tel" name="phone" placeholder="(000) 000-0000" />
+    </div>
+    <div class="field">
+      <label>Logo Link</label>
+      <input type="url" name="logo_link" placeholder="Google Drive or Dropbox link" />
+      <span class="field-note">Upload your logo to Google Drive or Dropbox and paste the shareable link here.</span>
+    </div>
+    <div class="field">
+      <label>Preferred Brand Colors</label>
+      <input type="text" name="brand_colors" placeholder="e.g. #B5A642, #1A1A1A, deep gold" />
+      <span class="field-note">List up to 3 hex codes or describe your colors.</span>
+    </div>
   </div>
-
 </div>
 
-<footer class="footer">
-  <div class="footer-wordmark">Tripp Lounge™</div>
-  <p class="footer-note">Powered by Elite Tripps™ &nbsp;·&nbsp; For travel advisors who lead with experience</p>
+<!-- SECTION 2 -->
+<div class="form-section">
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <div class="section-title-wrap">
+      <h3>Your Trip</h3>
+      <p>The core details we need to build your page.</p>
+    </div>
+  </div>
+  <div class="field-grid two-col">
+    <div class="field">
+      <label>Cruise Line</label>
+      <select name="cruise_line" required>
+        <option value="" disabled selected>Select cruise line</option>
+        <option>Carnival</option>
+        <option>Royal Caribbean</option>
+        <option>Virgin Voyages</option>
+        <option>MSC</option>
+        <option>Norwegian Cruise Line</option>
+        <option>Princess</option>
+        <option>Celebrity</option>
+        <option>Disney</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Ship Name</label>
+      <input type="text" name="ship_name" placeholder="e.g. Resilient Lady" required />
+    </div>
+    <div class="field">
+      <label>Trip Name</label>
+      <input type="text" name="trip_name" placeholder="What are you calling this trip?" required />
+    </div>
+    <div class="field">
+      <label>Departure Port</label>
+      <input type="text" name="departure_port" placeholder="e.g. Miami, Florida" required />
+    </div>
+    <div class="field">
+      <label>Departure Date</label>
+      <input type="date" name="departure_date" required />
+    </div>
+    <div class="field">
+      <label>Return Date</label>
+      <input type="date" name="return_date" required />
+    </div>
+  </div>
+
+  <div class="field" style="margin-top: 20px;">
+    <label>What type of trip is this?</label>
+    <div class="radio-group">
+      <label><input type="radio" name="trip_type" value="Adults Only" /> Adults Only</label>
+      <label><input type="radio" name="trip_type" value="Family Friendly" /> Family Friendly</label>
+      <label><input type="radio" name="trip_type" value="Girls Trip" /> Girls Trip</label>
+      <label><input type="radio" name="trip_type" value="Couples Trip" /> Couples Trip</label>
+      <label><input type="radio" name="trip_type" value="Mixed Group" /> Mixed Group</label>
+      <label><input type="radio" name="trip_type" value="Other" /> Other</label>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="form-section">
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <div class="section-title-wrap">
+      <h3>Itinerary</h3>
+      <p>Share your cruise itinerary so we can build the port-by-port details on your page.</p>
+    </div>
+  </div>
+  <div class="field-grid">
+    <div class="field">
+      <label>Itinerary or Flyer Link</label>
+      <input type="url" name="itinerary_link" placeholder="Paste a Google Drive, Dropbox, or cruise line link" />
+    </div>
+  </div>
+  <div class="itinerary-note">
+    <p>Have a PDF flyer or cruise confirmation? <strong>Email it directly to <a href="mailto:elitetrippslounge@gmail.com">elitetrippslounge@gmail.com</a></strong> with your name and trip name in the subject line. We'll pull everything we need from there.</p>
+  </div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="form-section">
+  <div class="section-header">
+    <div class="section-number">04</div>
+    <div class="section-title-wrap">
+      <h3>Cabin & Pricing</h3>
+      <p>Everything travelers need to know before they commit.</p>
+    </div>
+  </div>
+  <div class="field-grid two-col">
+    <div class="field">
+      <label>Cabin Type(s) You're Offering</label>
+      <input type="text" name="cabin_types" placeholder="e.g. Sea Terrace, Interior, Suite" required />
+    </div>
+    <div class="field">
+      <label>Cabin Occupancy</label>
+      <select name="cabin_occupancy">
+        <option value="" disabled selected>Select occupancy</option>
+        <option>Double Occupancy</option>
+        <option>Single Occupancy</option>
+        <option>Flexible</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Price Per Cabin</label>
+      <input type="text" name="price_per_cabin" placeholder="e.g. $2,886" required />
+    </div>
+    <div class="field">
+      <label>Price Per Person</label>
+      <input type="text" name="price_per_person" placeholder="e.g. $1,443" required />
+    </div>
+    <div class="field">
+      <label>Deposit Amount</label>
+      <input type="text" name="deposit_amount" placeholder="e.g. $250 per person" required />
+    </div>
+    <div class="field">
+      <label>When Is The Deposit Due?</label>
+      <select name="deposit_due">
+        <option value="" disabled selected>Select option</option>
+        <option>At time of booking</option>
+        <option>Within 24 hours of booking</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Final Payment Date</label>
+      <input type="date" name="final_payment_date" />
+    </div>
+    <div class="field">
+      <label>Payment Plan Available?</label>
+      <select name="payment_plan">
+        <option value="" disabled selected>Select option</option>
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="field" style="margin-top: 20px;">
+    <label>If a traveler needs more or fewer than 2 guests per cabin, how should they handle it?</label>
+    <textarea name="occupancy_exception" placeholder="e.g. Submit an inquiry and I'll work out the details personally."></textarea>
+  </div>
+
+  <div class="field" style="margin-top: 20px;">
+    <label>Anything Travelers Should Know About Payments?</label>
+    <textarea name="payment_notes" placeholder="Any additional payment details, exceptions, or notes..."></textarea>
+  </div>
+</div>
+
+<!-- SECTION 5 -->
+<div class="form-section">
+  <div class="section-header">
+    <div class="section-number">05</div>
+    <div class="section-title-wrap">
+      <h3>What's Included</h3>
+      <p>Be specific. This section sets expectations and reduces questions.</p>
+    </div>
+  </div>
+  <div class="field-grid">
+    <div class="field">
+      <label>Are Flights Included?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="flights_included" value="Yes, flights are included" /> Yes, flights included</label>
+        <label><input type="radio" name="flights_included" value="No, travelers book their own flights" /> No, travelers book their own</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>What's Included In This Trip</label>
+      <textarea name="whats_included" placeholder="List everything that comes with the trip — meals, entertainment, amenities, excursions, etc." required></textarea>
+    </div>
+    <div class="field">
+      <label>What's NOT Included</label>
+      <textarea name="whats_not_included" placeholder="List anything travelers will need to cover separately — flights, excursions, gratuities, etc." required></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6 -->
+<div class="form-section">
+  <div class="section-header">
+    <div class="section-number">06</div>
+    <div class="section-title-wrap">
+      <h3>The Experience</h3>
+      <p>Help us capture the full picture of what makes this trip worth booking.</p>
+    </div>
+  </div>
+  <div class="field-grid">
+    <div class="field">
+      <label>Flyer or Promo Graphic Link</label>
+      <input type="url" name="flyer_link" placeholder="Google Drive or Dropbox link to your flyer or promo image" />
+    </div>
+    <div class="field">
+      <label>Trip Requirements or Restrictions</label>
+      <textarea name="trip_requirements" placeholder="e.g. Valid passport required, travel insurance recommended, must be 21+, no children under 18..."></textarea>
+    </div>
+    <div class="field">
+      <label>Excursions or Experiences You Want Highlighted</label>
+      <textarea name="excursions" placeholder="List any shore excursions, group activities, or onboard experiences you want featured on the page..."></textarea>
+    </div>
+    <div class="field">
+      <label>Special Group Perks or Amenities</label>
+      <textarea name="group_perks" placeholder="e.g. Group dinner, private event, onboard credit, welcome gifts..."></textarea>
+    </div>
+    <div class="field">
+      <label>Top Questions Travelers Always Ask You</label>
+      <textarea name="faqs" style="min-height: 140px;" placeholder="List your top 3–5 questions with answers. Format: Q: [question] A: [answer]"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7 -->
+<div class="form-section">
+  <div class="section-header">
+    <div class="section-number">07</div>
+    <div class="section-title-wrap">
+      <h3>Your Booking Form</h3>
+      <p>Customize how travelers reach you through your page.</p>
+    </div>
+  </div>
+  <div class="field-grid two-col">
+    <div class="field">
+      <label>Where Should Inquiry Submissions Be Sent?</label>
+      <input type="email" name="inquiry_email" placeholder="The email address you want leads delivered to" required />
+    </div>
+    <div class="field">
+      <label>Preferred CTA Button Text</label>
+      <input type="text" name="cta_text" placeholder="e.g. Reserve My Cabin, I'm Ready to Book" />
+      <span class="field-note">Leave blank and we'll suggest one based on your trip.</span>
+    </div>
+  </div>
+
+  <div class="field" style="margin-top: 20px;">
+    <label>What Celebration Options Should Appear on Your Booking Form?</label>
+    <textarea name="celebration_options" placeholder="e.g. Birthday, Girls Trip, Honeymoon, Anniversary, Just Outside — list everything that fits your crowd."></textarea>
+  </div>
+
+  <div class="field" style="margin-top: 20px;">
+    <label>Do You Want Urgency Language on Your Page?</label>
+    <div class="radio-group">
+      <label><input type="radio" name="urgency_language" value="Yes" /> Yes — cabins are limited, create urgency</label>
+      <label><input type="radio" name="urgency_language" value="No" /> No — keep it relaxed</label>
+    </div>
+  </div>
+
+  <div class="field" style="margin-top: 20px;">
+    <label>Do You Want a Chatbot on Your Page?</label>
+    <div class="radio-group">
+      <label><input type="radio" name="chatbot" value="Yes" id="chatbot_yes" /> Yes</label>
+      <label><input type="radio" name="chatbot" value="No" /> No</label>
+    </div>
+  </div>
+
+  <div class="field" id="chatbot_name_field" style="margin-top: 16px; display: none;">
+    <label>Chatbot Name</label>
+    <input type="text" name="chatbot_name" placeholder="What would you like to name your chatbot?" />
+  </div>
+</div>
+
+<!-- SUBMIT -->
+<div class="submit-wrap">
+  <p>Once submitted we'll review your details and have your custom travel concierge page ready within 3–5 business days.</p>
+  <button type="submit" class="btn-submit">Start My Concierge Experience</button>
+</div>
+```
+
+  </form>
+
+  <!-- SUCCESS -->
+
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✦</div>
+    <h2>You're all <em>set.</em></h2>
+    <p>Your information has been received and your custom travel concierge experience is officially in the works.<br><br>We'll send everything directly to your inbox within 3–5 business days for review.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+  <p>Tripp Lounge™ &nbsp;·&nbsp; Powered by <a href="https://www.elitetripps.com" target="_blank">Elite Tripps™</a> &nbsp;·&nbsp; For travel advisors who lead with experience</p>
 </footer>
 
 <script>
-  const pills = document.querySelectorAll('.cta-pill');
-  const ctaInput = document.getElementById('cta_selected');
-
-  pills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      pills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      ctaInput.value = pill.dataset.value;
+  // Chatbot name field toggle
+  document.querySelectorAll('input[name="chatbot"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+      const nameField = document.getElementById('chatbot_name_field');
+      nameField.style.display = this.value === 'Yes' ? 'block' : 'none';
     });
   });
 
-  const form = document.getElementById('intake-form');
-  const formWrap = document.getElementById('form-wrap');
-  const success = document.getElementById('success');
+  // Form submission
+  const form = document.getElementById('advisorForm');
+  const successScreen = document.getElementById('successScreen');
 
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
-    const btn = form.querySelector('.btn-submit');
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-
+    const data = new FormData(form);
     try {
       const res = await fetch(form.action, {
         method: 'POST',
-        body: new FormData(form),
+        body: data,
         headers: { 'Accept': 'application/json' }
       });
       if (res.ok) {
-        formWrap.style.display = 'none';
-        success.classList.add('visible');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        form.style.display = 'none';
+        successScreen.classList.add('visible');
+        window.scrollTo({ top: document.getElementById('intake-form').offsetTop, behavior: 'smooth' });
       } else {
-        btn.textContent = 'Start My Concierge Experience';
-        btn.disabled = false;
-        alert('Something went wrong. Please try again.');
+        alert('Something went wrong. Please try again or email us directly at elitetrippslounge@gmail.com');
       }
     } catch {
-      btn.textContent = 'Start My Concierge Experience';
-      btn.disabled = false;
-      alert('Something went wrong. Please try again.');
+      alert('Something went wrong. Please try again or email us directly at elitetrippslounge@gmail.com');
     }
   });
 </script>
