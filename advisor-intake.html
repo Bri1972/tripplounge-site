@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tripp Lounge™ | Custom Travel Concierge Intake</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --lagoon-light: #B0F1F1;
+    --lagoon-mid: #A1E1D5;
+    --lagoon-bright: #4AC0D7;
+    --lagoon-deep: #25869C;
+    --botanical: #8B866D;
+    --dark: #1A3C40;
+    --dark-mid: #1e5060;
+    --cream: #F0FDFD;
+    --white: #ffffff;
+    --muted-text: #5a7a7e;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--dark);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px 60px;
+    text-align: center;
+    background-color: var(--dark);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74,192,215,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 90% 100%, rgba(161,225,213,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .deco-line { position: absolute; background: rgba(74,192,215,0.15); }
+  .deco-line-h { width: 100%; height: 1px; left: 0; }
+  .deco-line-v { width: 1px; height: 100%; top: 0; }
+  .deco-line.top { top: 32px; }
+  .deco-line.bottom { bottom: 32px; }
+  .deco-line.left { left: 32px; }
+  .deco-line.right { right: 32px; }
+
+  .hero-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--lagoon-bright);
+    border: 1px solid rgba(74,192,215,0.35);
+    padding: 6px 20px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-wordmark {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 9vw, 88px);
+    font-weight: 300;
+    color: var(--lagoon-light);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.4s;
+  }
+
+  .hero-wordmark em { font-style: italic; color: var(--lagoon-bright); }
+
+  .hero-tm {
+    font-family: var(--font-body);
+    font-size: 14px;
+    vertical-align: super;
+    color: var(--lagoon-bright);
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--lagoon-bright), transparent);
+    margin: 28px auto;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 0.7s;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(176,241,241,0.65);
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.8s;
+  }
+
+
+  .hero-subheadline {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 3vw, 30px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--lagoon-mid);
+    margin-top: 20px;
+    max-width: 640px;
+    line-height: 1.35;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.9s;
+  }
+
+  .hero-intro {
+    max-width: 600px;
+    margin-top: 36px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 1.1s;
+  }
+
+  .hero-intro p {
+    font-size: 15px;
+    color: rgba(176,241,241,0.62);
+    line-height: 1.9;
+    margin-bottom: 14px;
+  }
+
+  .hero-intro p:last-child { margin-bottom: 0; }
+
+  .hero-intro strong {
+    color: rgba(176,241,241,0.85);
+    font-weight: 400;
+  }
+
+  .hero-cta {
+    margin-top: 48px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 1.3s;
+  }
+
+  .btn-hero {
+    display: inline-block;
+    background: var(--lagoon-deep);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 44px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn-hero:hover {
+    background: var(--lagoon-bright);
+    transform: translateY(-2px);
+  }
+
+  .form-page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 24px 100px;
+  }
+
+  .form-intro {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .form-intro-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 300;
+    color: var(--dark);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .form-intro-title em { font-style: italic; color: var(--lagoon-deep); }
+
+  .form-intro-sub {
+    font-size: 15px;
+    color: var(--muted-text);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.9;
+  }
+
+  .form-section { margin-bottom: 52px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(74,192,215,0.22);
+  }
+
+  .section-num {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 300;
+    color: rgba(74,192,215,0.28);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .section-name {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--lagoon-deep);
+  }
+
+  .field-group { margin-bottom: 22px; }
+
+  .field-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--botanical);
+    margin-bottom: 8px;
+  }
+
+  .field-input,
+  .field-textarea,
+  .field-select {
+    width: 100%;
+    background: var(--white);
+    border: 1px solid rgba(37,134,156,0.2);
+    border-radius: 3px;
+    color: var(--dark);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    padding: 13px 16px;
+    outline: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .field-input::placeholder,
+  .field-textarea::placeholder { color: rgba(26,60,64,0.28); }
+
+  .field-input:focus,
+  .field-textarea:focus,
+  .field-select:focus {
+    border-color: var(--lagoon-bright);
+    box-shadow: 0 0 0 3px rgba(74,192,215,0.12);
+  }
+
+  .field-textarea { resize: vertical; min-height: 100px; }
+
+  .field-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2325869C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  @media (max-width: 580px) { .field-row { grid-template-columns: 1fr; } }
+
+  .field-upload {
+    width: 100%;
+    border: 1px dashed rgba(74,192,215,0.4);
+    border-radius: 3px;
+    background: rgba(176,241,241,0.07);
+    padding: 28px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.25s, background 0.25s;
+    position: relative;
+  }
+
+  .field-upload:hover {
+    border-color: var(--lagoon-bright);
+    background: rgba(176,241,241,0.13);
+  }
+
+  .field-upload input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .upload-label { font-size: 13px; color: var(--lagoon-deep); font-weight: 400; }
+  .upload-sub { font-size: 11px; color: var(--muted-text); margin-top: 4px; }
+
+  .cta-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .cta-pill {
+    border: 1px solid rgba(37,134,156,0.3);
+    border-radius: 100px;
+    padding: 7px 18px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--lagoon-deep);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font-body);
+  }
+
+  .cta-pill:hover,
+  .cta-pill.active {
+    background: var(--lagoon-deep);
+    color: var(--white);
+    border-color: var(--lagoon-deep);
+  }
+
+  .form-rule {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(74,192,215,0.28), transparent);
+    margin: 48px 0;
+  }
+
+  .submit-wrap { text-align: center; padding-top: 16px; }
+
+  .btn-submit {
+    display: inline-block;
+    background: var(--lagoon-deep);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 18px 52px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn-submit:hover { background: var(--lagoon-bright); transform: translateY(-2px); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .submit-note {
+    font-size: 12px;
+    color: var(--muted-text);
+    margin-top: 16px;
+    letter-spacing: 0.04em;
+  }
+
+  #success {
+    display: none;
+    text-align: center;
+    padding: 80px 24px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  #success.visible { display: block; }
+
+  .success-mark {
+    font-family: var(--font-display);
+    font-size: 52px;
+    color: var(--lagoon-bright);
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  #success h2 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 300;
+    color: var(--dark);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  #success h2 em { font-style: italic; color: var(--lagoon-deep); }
+
+  #success p {
+    font-size: 15px;
+    color: var(--muted-text);
+    line-height: 1.9;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .footer {
+    background: var(--dark);
+    padding: 44px 24px;
+    text-align: center;
+  }
+
+  .footer-wordmark {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--lagoon-bright);
+    margin-bottom: 10px;
+  }
+
+  .footer-note { font-size: 11px; color: rgba(176,241,241,0.3); letter-spacing: 0.1em; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="deco-line deco-line-h top"></div>
+  <div class="deco-line deco-line-h bottom"></div>
+  <div class="deco-line deco-line-v left"></div>
+  <div class="deco-line deco-line-v right"></div>
+  <div class="hero-badge">Custom Travel Concierge Experiences For Travel Advisors</div>
+  <h1 class="hero-wordmark">Tripp <em>Lounge</em><span class="hero-tm">™</span></h1>
+  <div class="hero-divider"></div>
+  <p class="hero-subheadline">Turn your trip into an experience travelers actually remember.</p>
+  <div class="hero-intro">
+    <p>Your travelers need more than a flyer, random posts, and inbox messages.</p>
+    <p>Tripp Lounge™ helps you create a beautiful branded travel concierge experience where travelers can explore the trip, review details, submit their information, make payments, and stay connected from interest to booking.</p>
+    <p>This isn't just about sharing a trip. It's about creating a traveler experience that helps you build trust, grow your warm market, and keep your trip organized in one beautiful place.</p>
+    <p><strong>Built around your brand. Designed around your travelers. Created to help you book smarter.</strong></p>
+  </div>
+  <div class="hero-cta">
+    <a href="#intake-form" class="btn-hero">Start My Concierge Experience</a>
+  </div>
+</section>
+
+<div class="form-page">
+  <div class="form-intro">
+    <h2 class="form-intro-title">Tell us about the experience<br>you're <em>creating.</em></h2>
+    <p class="form-intro-sub">Complete the details below so we can create your custom branded travel concierge experience for your travelers.</p>
+  </div>
+
+  <div id="form-wrap">
+  <form id="intake-form" action="https://formspree.io/f/mvzlwelp" method="POST" enctype="multipart/form-data">
+
+    <!-- 01 BASIC INFORMATION -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div class="section-name">Basic Information</div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label" for="name">Your Name</label>
+          <input class="field-input" type="text" id="name" name="name" placeholder="First and last" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="business">Business / Travel Brand Name</label>
+          <input class="field-input" type="text" id="business" name="business" placeholder="Your travel brand" required>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label" for="email">Email Address</label>
+          <input class="field-input" type="email" id="email" name="email" placeholder="your@email.com" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="phone">Phone Number</label>
+          <input class="field-input" type="tel" id="phone" name="phone" placeholder="(000) 000-0000">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="social">Social Media Links</label>
+        <input class="field-input" type="text" id="social" name="social" placeholder="Facebook, Instagram, TikTok — paste your links">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="brand_colors">Preferred Brand Colors</label>
+        <input class="field-input" type="text" id="brand_colors" name="brand_colors" placeholder="e.g. Black and gold, blush pink, teal — hex codes welcome">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Upload Your Logo</label>
+        <div class="field-upload">
+          <input type="file" name="logo" accept="image/*,.pdf,.svg">
+          <div class="upload-label">Click to upload your logo</div>
+          <div class="upload-sub">PNG, JPG, SVG or PDF · Max 10MB</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-rule"></div>
+
+    <!-- 02 TRIP DETAILS -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div class="section-name">Trip Details</div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label" for="cruise_line">Cruise Line</label>
+          <select class="field-select" id="cruise_line" name="cruise_line" required>
+            <option value="" disabled selected>Select cruise line</option>
+            <option>Carnival</option>
+            <option>Royal Caribbean</option>
+            <option>Virgin Voyages</option>
+            <option>MSC</option>
+            <option>Norwegian Cruise Line</option>
+            <option>Princess</option>
+            <option>Celebrity</option>
+            <option>Disney</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="ship_name">Ship Name</label>
+          <input class="field-input" type="text" id="ship_name" name="ship_name" placeholder="e.g. Wonder of the Seas">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label" for="sailing_dates">Sailing Dates</label>
+          <input class="field-input" type="text" id="sailing_dates" name="sailing_dates" placeholder="e.g. July 12–19, 2026">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="departure_port">Departure Port</label>
+          <input class="field-input" type="text" id="departure_port" name="departure_port" placeholder="e.g. Miami, FL">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label" for="nights">Number of Nights</label>
+          <select class="field-select" id="nights" name="nights">
+            <option value="" disabled selected>Select nights</option>
+            <option>2 Nights</option>
+            <option>3 Nights</option>
+            <option>4 Nights</option>
+            <option>5 Nights</option>
+            <option>6 Nights</option>
+            <option>7 Nights</option>
+            <option>8 Nights</option>
+            <option>9 Nights</option>
+            <option>10+ Nights</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="destinations">Destinations / Ports</label>
+          <input class="field-input" type="text" id="destinations" name="destinations" placeholder="e.g. Nassau, Cozumel, Labadee">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Upload Cruise Itinerary or Flyer</label>
+        <div class="field-upload">
+          <input type="file" name="itinerary_file" accept="image/*,.pdf">
+          <div class="upload-label">Click to upload itinerary or flyer</div>
+          <div class="upload-sub">PNG, JPG or PDF · Max 10MB</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-rule"></div>
+
+    <!-- 03 PRICING -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div class="section-name">Traveler Pricing Details</div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label" for="price_interior">Interior Cabin Pricing</label>
+          <input class="field-input" type="text" id="price_interior" name="price_interior" placeholder="e.g. From $899/pp">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="price_oceanview">Ocean View Pricing</label>
+          <input class="field-input" type="text" id="price_oceanview" name="price_oceanview" placeholder="e.g. From $1,099/pp">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label" for="price_balcony">Balcony Pricing</label>
+          <input class="field-input" type="text" id="price_balcony" name="price_balcony" placeholder="e.g. From $1,299/pp">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="price_suite">Suite Pricing</label>
+          <input class="field-input" type="text" id="price_suite" name="price_suite" placeholder="e.g. From $2,199/pp">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label" for="price_solo">Solo Pricing (if applicable)</label>
+          <input class="field-input" type="text" id="price_solo" name="price_solo" placeholder="e.g. From $1,599 solo">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="deposit">Deposit Amount</label>
+          <input class="field-input" type="text" id="deposit" name="deposit" placeholder="e.g. $250 per person">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label" for="deposit_due">When Is The Deposit Due?</label>
+          <input class="field-input" type="text" id="deposit_due" name="deposit_due" placeholder="e.g. Due at booking">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="final_payment">Final Payment Date</label>
+          <input class="field-input" type="text" id="final_payment" name="final_payment" placeholder="e.g. April 15, 2026">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="payment_plan">Payment Plan Available?</label>
+        <select class="field-select" id="payment_plan" name="payment_plan">
+          <option value="" disabled selected>Select option</option>
+          <option>Yes</option>
+          <option>No</option>
+          <option>FlexPay Available</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="payment_notes">Anything Travelers Should Know About Payments?</label>
+        <textarea class="field-textarea" id="payment_notes" name="payment_notes" placeholder="Payment instructions, policies, or anything important for your travelers to know"></textarea>
+      </div>
+    </div>
+
+    <div class="form-rule"></div>
+
+    <!-- 04 BOOKING -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div class="section-name">Booking Details</div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="booking_url">Booking Link or Inquiry Form Link</label>
+        <input class="field-input" type="url" id="booking_url" name="booking_url" placeholder="https://" required>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Preferred Call-To-Action</label>
+        <div class="cta-pills">
+          <button type="button" class="cta-pill" data-value="Book Now">Book Now</button>
+          <button type="button" class="cta-pill" data-value="Reserve Your Cabin">Reserve Your Cabin</button>
+          <button type="button" class="cta-pill" data-value="Get More Information">Get More Information</button>
+          <button type="button" class="cta-pill" data-value="Join The Group Trip">Join The Group Trip</button>
+          <button type="button" class="cta-pill" data-value="Start Planning">Start Planning</button>
+        </div>
+        <input type="hidden" id="cta_selected" name="cta_button" value="">
+      </div>
+    </div>
+
+    <div class="form-rule"></div>
+
+    <!-- 05 EXPERIENCE DETAILS -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-num">05</div>
+        <div class="section-name">Travel Experience Details</div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="vibe">Describe The Vibe Of This Trip</label>
+        <input class="field-input" type="text" id="vibe" name="vibe" placeholder="e.g. Girls Trip · Luxury Escape · Birthday Celebration · Wellness Retreat">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="room_categories">Room Categories You Want Highlighted</label>
+        <input class="field-input" type="text" id="room_categories" name="room_categories" placeholder="e.g. Interior, Balcony, Suite">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="perks">Special Perks or Group Amenities</label>
+        <textarea class="field-textarea" id="perks" name="perks" placeholder="e.g. Welcome drinks, group meet-up, onboard credits, exclusive shore excursion"></textarea>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="excursions">Excursions or Experiences To Highlight</label>
+        <textarea class="field-textarea" id="excursions" name="excursions" placeholder="e.g. Snorkeling in Nassau, Tulum ruins, private beach day in Cozumel"></textarea>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="faqs">Frequently Asked Questions Travelers Usually Ask</label>
+        <textarea class="field-textarea" id="faqs" name="faqs" style="min-height:130px" placeholder="List the questions your travelers always ask — we'll build them into your page"></textarea>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="must_include">Anything You Definitely Want Included?</label>
+        <textarea class="field-textarea" id="must_include" name="must_include" placeholder="Anything specific you need on your page — don't leave anything out"></textarea>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Upload Additional Photos (Optional)</label>
+        <div class="field-upload">
+          <input type="file" name="photos" accept="image/*" multiple>
+          <div class="upload-label">Click to upload photos</div>
+          <div class="upload-sub">PNG or JPG · Multiple files allowed · Max 10MB each</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-wrap">
+      <button type="submit" class="btn-submit">Start My Concierge Experience</button>
+      <p class="submit-note">We'll begin building your traveler experience and send everything to your inbox once it's ready to review.</p>
+    </div>
+
+  </form>
+  </div>
+
+  <div id="success">
+    <div class="success-mark">✦</div>
+    <h2>You're all <em>set.</em></h2>
+    <p>Your information has been received and your custom travel concierge experience is officially in the works.<br><br>We'll begin creating your traveler experience and send everything directly to your inbox within 3–5 business days for review.</p>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-wordmark">Tripp Lounge™</div>
+  <p class="footer-note">Powered by Elite Tripps™ &nbsp;·&nbsp; For travel advisors who lead with experience</p>
+</footer>
+
+<script>
+  const pills = document.querySelectorAll('.cta-pill');
+  const ctaInput = document.getElementById('cta_selected');
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      ctaInput.value = pill.dataset.value;
+    });
+  });
+
+  const form = document.getElementById('intake-form');
+  const formWrap = document.getElementById('form-wrap');
+  const success = document.getElementById('success');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = form.querySelector('.btn-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        formWrap.style.display = 'none';
+        success.classList.add('visible');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        btn.textContent = 'Start My Concierge Experience';
+        btn.disabled = false;
+        alert('Something went wrong. Please try again.');
+      }
+    } catch {
+      btn.textContent = 'Start My Concierge Experience';
+      btn.disabled = false;
+      alert('Something went wrong. Please try again.');
+    }
+  });
+</script>
+
+</body>
+</html>
