@@ -182,11 +182,9 @@
 
     /* ── HERO ── */
     .hero {
-      /* Replace [HERO IMAGE FILENAME] with your actual image file */
       background: url('[HERO IMAGE FILENAME]') center/cover no-repeat;
       min-height:600px;
       height:min(82vh, 600px);
-      /* Fallback: if no image, hero renders as dark branded block */
       background-color: var(--color-surface-navy);
       display:flex;
       flex-direction:column;
@@ -295,7 +293,8 @@
     .cabin-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--color-gold); }
     .cabin-card__label     { font-size:var(--text-xs); letter-spacing:0.2em; text-transform:uppercase; color:var(--color-gold); margin-bottom:var(--space-3); }
     .cabin-card__name      { font-family:var(--font-display); font-size:var(--text-xl); font-weight:400; margin-bottom:var(--space-4); line-height:1.2; }
-    .cabin-card__desc      { font-size:var(--text-sm); color:rgba(253,249,242,0.7); line-height:1.7; margin-bottom:var(--space-6); }
+    .cabin-card__desc      { font-size:var(--text-sm); color:rgba(253,249,242,0.7); line-height:1.7; margin-bottom:var(--space-4); }
+    .cabin-card__nonrefund { font-size:var(--text-xs); color:rgba(253,249,242,0.5); line-height:1.6; margin-bottom:var(--space-6); font-style:italic; }
     .cabin-card__price-wrap{ border-top:1px solid rgba(255,255,255,0.1); padding-top:var(--space-5); }
     .cabin-card__price-main{ font-family:var(--font-display); font-size:var(--text-2xl); font-weight:400; color:var(--color-gold); line-height:1; }
     .cabin-card__price-sub { font-size:var(--text-xs); color:rgba(253,249,242,0.5); margin-top:var(--space-1); letter-spacing:0.05em; }
@@ -359,6 +358,7 @@
     .form-group { display:flex; flex-direction:column; gap:var(--space-2); }
     .form-group--full { grid-column:1 / -1; }
     label { font-size:var(--text-xs); letter-spacing:0.1em; text-transform:uppercase; color:var(--color-text-muted); font-weight:500; }
+    label .label-note { font-size:0.7rem; letter-spacing:0.04em; text-transform:none; color:var(--color-text-faint); font-weight:400; display:block; margin-top:2px; }
     input, select, textarea {
       font-family:var(--font-body); font-size:var(--text-sm);
       color:var(--color-text); background:var(--color-surface);
@@ -376,6 +376,9 @@
     .form-submit { grid-column:1/-1; display:flex; flex-direction:column; align-items:center; gap:var(--space-3); margin-top:var(--space-4); }
     .form-submit p { font-size:var(--text-xs); color:var(--color-text-faint); text-align:center; }
 
+    /* Birthday field row */
+    .birthday-row { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-3); }
+
     /* Footer */
     .site-footer {
       background:var(--color-surface-navy-2);
@@ -383,7 +386,6 @@
       text-align:center; padding-block:var(--space-8);
       font-size:var(--text-xs); letter-spacing:0.05em;
     }
-    .site-footer a { color:var(--color-gold); text-decoration:none; }
 
     /* Reveal animation */
     .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.6s ease, transform 0.6s ease; }
@@ -405,6 +407,7 @@
       .btn-gold, .btn-outline { width:100%; justify-content:center; padding:var(--space-4) var(--space-5); }
       .form-grid { grid-template-columns:1fr; }
       .form-group--full { grid-column:auto; }
+      .birthday-row { grid-template-columns:1fr 1fr; }
     }
     @media (max-width:420px) {
       .hero { min-height:360px; height:min(56vh, 440px); }
@@ -434,9 +437,8 @@
 
     <!-- ============================================================
          HERO
-         Replace [HERO IMAGE FILENAME] in both the CSS :root and
-         the inline style below. Use a high-res landscape image.
-         Minimum recommended: 1600×900px.
+         Replace [HERO IMAGE FILENAME] in the CSS above.
+         Use a high-res landscape image. Min recommended: 1600×900px.
     ============================================================ -->
     <section class="hero" aria-label="[TRIP NAME] hero">
       <h1 class="hero__title">[TRIP NAME LINE 1]<br><em>[TRIP NAME LINE 2 — optional italic second line]</em></h1>
@@ -455,8 +457,6 @@
 
     <!-- ============================================================
          TRIP OVERVIEW
-         Replace each [PLACEHOLDER] with trip-specific info.
-         Add or remove .overview-card blocks as needed.
     ============================================================ -->
     <section class="section section--cream" aria-labelledby="overview-heading">
       <div class="container">
@@ -491,8 +491,7 @@
             <p class="overview-card__value">[NUMBER OF NIGHTS] Nights</p>
           </div>
 
-          <!-- OPTIONAL: add a 5th card if needed, e.g. Ship Name -->
-          <!-- 
+          <!--
           <div class="overview-card">
             <span class="overview-card__icon">⛴️</span>
             <p class="overview-card__label">Ship</p>
@@ -506,9 +505,6 @@
 
     <!-- ============================================================
          DESTINATIONS
-         Duplicate .destination-card blocks to match port count.
-         Delete extras if fewer stops. Day numbers are relative
-         to departure (Day 1 = embarkation).
     ============================================================ -->
     <section class="section section--warm" aria-labelledby="destinations-heading">
       <div class="container">
@@ -551,9 +547,6 @@
 
     <!-- ============================================================
          FULL ITINERARY
-         One .itinerary-item per day.
-         Add .itinerary-item--sea class for sea days.
-         Adjust total days to match cruise length.
     ============================================================ -->
     <section class="section section--cream" id="itinerary" aria-labelledby="itinerary-heading">
       <div class="container container--narrow">
@@ -562,7 +555,6 @@
         <div class="gold-rule gold-rule--center reveal"></div>
         <div class="itinerary-list reveal">
 
-          <!-- Day 1: Embarkation -->
           <div class="itinerary-item">
             <div>
               <p class="itinerary-item__day">Day 1</p>
@@ -574,7 +566,6 @@
             </div>
           </div>
 
-          <!-- Day 2: Example sea day -->
           <div class="itinerary-item itinerary-item--sea">
             <div>
               <p class="itinerary-item__day">Day 2</p>
@@ -586,7 +577,6 @@
             </div>
           </div>
 
-          <!-- Day 3: Port call -->
           <div class="itinerary-item">
             <div>
               <p class="itinerary-item__day">Day 3</p>
@@ -594,11 +584,10 @@
             </div>
             <div>
               <p class="itinerary-item__port">[PORT NAME]</p>
-              <p class="itinerary-item__times">[ARRIVAL TIME] – [DEPARTURE TIME][PORT NOTE — e.g., " · Tender port"]</p>
+              <p class="itinerary-item__times">[ARRIVAL TIME] – [DEPARTURE TIME]</p>
             </div>
           </div>
 
-          <!-- Day 4: Port call -->
           <div class="itinerary-item">
             <div>
               <p class="itinerary-item__day">Day 4</p>
@@ -610,7 +599,6 @@
             </div>
           </div>
 
-          <!-- Day 5: Example sea day -->
           <div class="itinerary-item itinerary-item--sea">
             <div>
               <p class="itinerary-item__day">Day 5</p>
@@ -622,7 +610,6 @@
             </div>
           </div>
 
-          <!-- Day 6: Port call -->
           <div class="itinerary-item">
             <div>
               <p class="itinerary-item__day">Day 6</p>
@@ -634,7 +621,6 @@
             </div>
           </div>
 
-          <!-- Day 7: Port call -->
           <div class="itinerary-item">
             <div>
               <p class="itinerary-item__day">Day 7</p>
@@ -646,7 +632,6 @@
             </div>
           </div>
 
-          <!-- Last day: Disembarkation -->
           <div class="itinerary-item">
             <div>
               <p class="itinerary-item__day">Day [LAST DAY #]</p>
@@ -658,16 +643,12 @@
             </div>
           </div>
 
-          <!-- Add or remove day rows to match cruise length -->
-
         </div>
       </div>
     </section>
 
     <!-- ============================================================
          CABIN & PRICING
-         Update cabin type, pricing, and payment schedule.
-         For solo traveler options, update the occupancy note.
     ============================================================ -->
     <section class="section section--warm" aria-labelledby="cabin-heading">
       <div class="container">
@@ -680,6 +661,7 @@
             <p class="cabin-card__label">[CABIN TYPE] · [CABIN CATEGORY]</p>
             <p class="cabin-card__name">[CABIN HEADLINE LINE 1]<br>[CABIN HEADLINE LINE 2]</p>
             <p class="cabin-card__desc">[CABIN DESCRIPTION — 1-2 sentences about the cabin experience. Include occupancy type.]</p>
+            <p class="cabin-card__nonrefund">Please note: All deposits are non-refundable. By submitting your booking request, you acknowledge and agree to this policy.</p>
             <div class="cabin-card__price-wrap">
               <p class="cabin-card__price-main">[TOTAL CABIN PRICE — e.g., $2,886]</p>
               <p class="cabin-card__price-sub">per cabin · [OCCUPANCY TYPE — e.g., double occupancy]</p>
@@ -693,7 +675,7 @@
               <li>
                 <span class="payment-list__label">Deposit to Secure</span>
                 <span class="payment-list__value">[DEPOSIT AMOUNT] per person</span>
-                <span class="payment-list__note">[DEPOSIT DEADLINE — e.g., "Due within 24 hours of booking request"]</span>
+                <span class="payment-list__note">[DEPOSIT DEADLINE — e.g., "Due within 24 hours of booking request"] · Deposits are non-refundable.</span>
               </li>
               <li>
                 <span class="payment-list__label">Final Payment Due</span>
@@ -723,8 +705,6 @@
 
     <!-- ============================================================
          WHAT'S INCLUDED / NOT INCLUDED
-         Edit list items to match what the cruise line provides.
-         Add or remove <li> items as needed.
     ============================================================ -->
     <section class="section section--cream" aria-labelledby="included-heading">
       <div class="container">
@@ -741,7 +721,6 @@
               <li>[INCLUDED ITEM 3]</li>
               <li>[INCLUDED ITEM 4]</li>
               <li>[INCLUDED ITEM 5]</li>
-              <!-- Add more as needed -->
             </ul>
           </div>
 
@@ -751,7 +730,6 @@
               <li>[NOT INCLUDED ITEM 1]</li>
               <li>[NOT INCLUDED ITEM 2]</li>
               <li>[NOT INCLUDED ITEM 3]</li>
-              <!-- Add more as needed -->
             </ul>
           </div>
 
@@ -761,7 +739,6 @@
 
     <!-- ============================================================
          HOW TO BOOK — STEPS
-         Edit step descriptions to match advisor's booking process.
     ============================================================ -->
     <section class="section section--warm" aria-labelledby="how-heading">
       <div class="container container--narrow">
@@ -773,7 +750,7 @@
           <div class="step-item">
             <div class="step-item__num">1</div>
             <div class="step-item__body">
-              <strong>[STEP 1 HEADING — e.g., "Submit your inquiry below"]</strong>
+              <strong>[STEP 1 HEADING]</strong>
               <p>[STEP 1 DESCRIPTION]</p>
             </div>
           </div>
@@ -781,7 +758,7 @@
           <div class="step-item">
             <div class="step-item__num">2</div>
             <div class="step-item__body">
-              <strong>[STEP 2 HEADING — e.g., "Receive your booking details"]</strong>
+              <strong>[STEP 2 HEADING]</strong>
               <p>[STEP 2 DESCRIPTION]</p>
             </div>
           </div>
@@ -789,7 +766,7 @@
           <div class="step-item">
             <div class="step-item__num">3</div>
             <div class="step-item__body">
-              <strong>[STEP 3 HEADING — e.g., "Secure your cabin with a deposit"]</strong>
+              <strong>[STEP 3 HEADING]</strong>
               <p>[STEP 3 DESCRIPTION]</p>
             </div>
           </div>
@@ -800,14 +777,7 @@
 
     <!-- ============================================================
          INQUIRY FORM
-         Replace [FORMSPREE FORM ID] with the advisor's Formspree ID
-         (or swap for another form provider entirely).
-         
-         Hidden fields carry trip metadata into the submission.
-         Add or remove form fields to match advisor's intake needs.
-         
-         Celebration options are optional — remove the whole block
-         if it doesn't fit the trip's vibe.
+         Replace [FORMSPREE FORM ID] with the advisor's Formspree ID.
     ============================================================ -->
     <section class="section section--cream" id="inquiry-form" aria-labelledby="form-heading">
       <div class="container">
@@ -816,8 +786,8 @@
         <div class="gold-rule gold-rule--center reveal"></div>
         <div class="form-wrap">
           <div class="form-intro reveal">
-            <p>[FORM INTRO LINE 1 — e.g., "Fill out the form below and I'll follow up with everything you need to secure your cabin."]</p>
-            <p>[FORM INTRO LINE 2 — optional reassurance note for undecided inquiries]</p>
+            <p>[FORM INTRO LINE 1]</p>
+            <p>[FORM INTRO LINE 2 — optional]</p>
           </div>
 
           <form
@@ -837,12 +807,18 @@
             <div class="form-grid">
 
               <div class="form-group">
-                <label for="first-name">First Name (as it appears on your valid travel document)</label>
+                <label for="first-name">
+                  First Name
+                  <span class="label-note">As it appears on your valid travel document</span>
+                </label>
                 <input type="text" id="first-name" name="first-name" placeholder="Your first name" autocomplete="given-name" required>
               </div>
 
               <div class="form-group">
-                <label for="last-name">Last Name (as it appears on your valid travel document)</label>
+                <label for="last-name">
+                  Last Name
+                  <span class="label-note">As it appears on your valid travel document</span>
+                </label>
                 <input type="text" id="last-name" name="last-name" placeholder="Your last name" autocomplete="family-name" required>
               </div>
 
@@ -854,6 +830,38 @@
               <div class="form-group form-group--full">
                 <label for="phone">Best Phone Number</label>
                 <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" autocomplete="tel" required>
+              </div>
+
+              <!-- BIRTHDAY FIELD -->
+              <div class="form-group form-group--full">
+                <label>Birthday <span class="label-note">Month and day only — so we can celebrate you ✨</span></label>
+                <div class="birthday-row">
+                  <select id="birthday-month" name="birthday-month">
+                    <option value="">Month</option>
+                    <option>January</option>
+                    <option>February</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>September</option>
+                    <option>October</option>
+                    <option>November</option>
+                    <option>December</option>
+                  </select>
+                  <select id="birthday-day" name="birthday-day">
+                    <option value="">Day</option>
+                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                    <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+                    <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
+                    <option>21</option><option>22</option><option>23</option><option>24</option><option>25</option>
+                    <option>26</option><option>27</option><option>28</option><option>29</option><option>30</option>
+                    <option>31</option>
+                  </select>
+                </div>
               </div>
 
               <div class="form-group form-group--full">
@@ -891,8 +899,8 @@
 
               <!--
                 OPTIONAL: Celebration field — great for themed trips.
-                Delete any options that don't fit. Remove this entire
-                block if celebrations aren't relevant to the trip.
+                Delete any options that don't fit. Remove entire block
+                if celebrations aren't relevant to the trip.
               -->
               <div class="form-group form-group--full">
                 <label for="celebration">What are you celebrating on this trip?</label>
@@ -924,7 +932,7 @@
               </div>
 
               <div class="form-submit">
-                <button type="submit" class="btn-gold">Start My Booking</button>
+                <button type="submit" class="btn-gold">Secure My Spot</button>
                 <p
                   id="form-success-message"
                   style="display:none; margin-top:12px; color:var(--color-text-muted); text-align:center;"
@@ -958,16 +966,10 @@
   </main>
 
   <!-- ============================================================
-       FOOTER
-       Replace [ADVISOR BUSINESS NAME] and [ADVISOR WEBSITE URL].
-       Update the pricing/availability disclaimer as needed.
+       FOOTER — copyright only
   ============================================================ -->
   <footer class="site-footer" role="contentinfo">
-    <p>
-      &copy; [YEAR] <a href="[ADVISOR WEBSITE URL]">[ADVISOR BUSINESS NAME]™</a> · All rights reserved ·
-      <a href="[ADVISOR WEBSITE URL]">Back to Main Site</a>
-    </p>
-    <p style="margin-top:0.5rem;">[FOOTER DISCLAIMER — e.g., "Prices based on double occupancy. Cabins subject to availability."]</p>
+    <p>&copy; [YEAR] [ADVISOR BUSINESS NAME]™ · All rights reserved</p>
   </footer>
 
   <!-- ── SCRIPTS ── -->
