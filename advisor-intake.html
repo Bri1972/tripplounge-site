@@ -20,6 +20,7 @@
       --input-bg: rgba(255,255,255,0.85);
     }
 
+```
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -492,6 +493,7 @@ footer a {
   border-color: var(--lagoon);
   color: var(--teal);
 }
+```
 
   </style>
 </head>
@@ -512,13 +514,14 @@ footer a {
 <!-- FORM -->
 
 <div class="form-wrapper" id="intake-form">
-  <div class="form-intro">
+  <div class="form-intro" id="form-intro">
     <h2>Tell us about the experience<br>you're <em>creating.</em></h2>
     <p>Complete every section as fully as possible. The more detail you give us, the more your page will feel like you.</p>
   </div>
 
   <form id="advisorForm" action="https://formspree.io/f/mvzlwelp" method="POST">
 
+```
 <!-- 01 ABOUT YOU -->
 <div class="form-section">
   <div class="section-header">
@@ -825,6 +828,7 @@ footer a {
   <p>Once submitted we'll review your details and have your custom travel concierge page ready within 3–5 business days.</p>
   <button type="submit" class="btn-submit">Start My Concierge Experience</button>
 </div>
+```
 
   </form>
 
@@ -860,6 +864,7 @@ footer a {
       });
       if (res.ok) {
         form.style.display = 'none';
+        document.getElementById('form-intro').style.display = 'none';
         successScreen.classList.add('visible');
         window.scrollTo({ top: document.getElementById('intake-form').offsetTop, behavior: 'smooth' });
       } else {
