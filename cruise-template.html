@@ -12,7 +12,7 @@
 
   <style>
     /* ============================================================
-       TRIPP LOUNGE™ CRUISE PAGE TEMPLATE
+       TRIPP LOUNGE™ CRUISE PAGE TEMPLATE — MOBILE-FIRST BUILD
        Built on the Elite Tripps™ Aquarius SZN framework.
        
        ADVISOR SETUP — replace these CSS variable values:
@@ -22,15 +22,23 @@
          --color-accent-border: accent color at ~35% opacity rgba()
        
        Everything else inherits automatically.
+       
+       BREAKPOINTS:
+         Base styles    = mobile (320px+)
+         sm  = 480px+   (large phones, landscape)
+         md  = 680px+   (tablets, small laptops)
+         lg  = 920px+   (desktop)
+         xl  = 1160px+  (wide desktop)
     ============================================================ */
+
     :root {
       /* ── ADVISOR BRAND COLORS (customize per client) ── */
-      --color-accent:        #b8924a;   /* [ADVISOR ACCENT COLOR] */
-      --color-accent-hover:  #9e7a38;   /* [ADVISOR ACCENT HOVER] */
-      --color-accent-light:  #f0e4cc;   /* [ADVISOR ACCENT LIGHT TINT] */
-      --color-accent-border: rgba(184,146,74,0.35); /* [ADVISOR ACCENT BORDER] */
+      --color-accent:        #b8924a;
+      --color-accent-hover:  #9e7a38;
+      --color-accent-light:  #f0e4cc;
+      --color-accent-border: rgba(184,146,74,0.35);
 
-      /* ── CORE PALETTE (leave as-is unless full rebrand) ── */
+      /* ── CORE PALETTE ── */
       --color-bg:            #f9f6f0;
       --color-surface:       #fdfaf5;
       --color-surface-2:     #fff8ee;
@@ -44,45 +52,70 @@
       --color-text-faint:    #b0a898;
       --color-text-inverse:  #fdf9f2;
 
-      /* ── ALIASES (keeps template code clean) ── */
+      /* ── ALIASES ── */
       --color-gold:          var(--color-accent);
       --color-gold-hover:    var(--color-accent-hover);
       --color-gold-light:    var(--color-accent-light);
       --color-gold-border:   var(--color-accent-border);
       --color-navy:          var(--color-surface-navy);
 
-      /* ── SPACING, TYPE, RADIUS, SHADOW ── */
-      --radius-sm:  0.25rem;
-      --radius-md:  0.5rem;
-      --radius-lg:  0.75rem;
-      --radius-xl:  1rem;
-      --radius-full:9999px;
-      --transition: 200ms cubic-bezier(0.16, 1, 0.3, 1);
-      --shadow-sm:  0 1px 3px rgba(26,19,10,0.07);
-      --shadow-md:  0 4px 16px rgba(26,19,10,0.09);
-      --shadow-lg:  0 12px 40px rgba(26,19,10,0.12);
+      /* ── SPACING ── */
+      --space-1: 2px;
+      --space-2: .5rem;
+      --space-3: .75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
 
-      --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
-      --text-sm:   clamp(0.875rem, 0.82rem + 0.28vw, 1rem);
-      --text-base: clamp(1rem,     0.96rem + 0.2vw,  1.125rem);
-      --text-lg:   clamp(1.125rem, 1rem    + 0.6vw,  1.4rem);
-      --text-xl:   clamp(1.5rem,   1.2rem  + 1.2vw,  2.25rem);
-      --text-2xl:  clamp(2rem,     1.3rem  + 2.5vw,  3.5rem);
+      /* ── TYPE SCALE — fluid, mobile-first ── */
+      --text-xs:   clamp(0.72rem,  0.68rem + 0.2vw,  0.875rem);
+      --text-sm:   clamp(0.85rem,  0.8rem  + 0.25vw, 1rem);
+      --text-base: clamp(0.95rem,  0.9rem  + 0.25vw, 1.125rem);
+      --text-lg:   clamp(1.1rem,   1rem    + 0.5vw,  1.4rem);
+      --text-xl:   clamp(1.35rem,  1.1rem  + 1.25vw, 2.25rem);
+      --text-2xl:  clamp(1.75rem,  1.2rem  + 2.75vw, 3.5rem);
 
-      --space-1:2px; --space-2:.5rem; --space-3:.75rem;
-      --space-4:1rem; --space-5:1.25rem; --space-6:1.5rem;
-      --space-8:2rem; --space-10:2.5rem; --space-12:3rem;
-      --space-16:4rem; --space-20:5rem; --space-24:6rem;
+      /* ── HERO TITLE — separate so we can clamp it tightly ── */
+      --text-hero: clamp(2.5rem, 2rem + 4vw, 7rem);
 
-      --font-display:'Cormorant Garamond', Georgia, serif;
-      --font-body:   'Jost', 'Helvetica Neue', sans-serif;
-      --content-narrow:640px;
-      --content-default:920px;
-      --content-wide:1160px;
+      /* ── MISC ── */
+      --radius-sm:   0.25rem;
+      --radius-md:   0.5rem;
+      --radius-lg:   0.75rem;
+      --radius-xl:   1rem;
+      --radius-full: 9999px;
+      --transition:  200ms cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow-sm:   0 1px 3px rgba(26,19,10,0.07);
+      --shadow-md:   0 4px 16px rgba(26,19,10,0.09);
+      --shadow-lg:   0 12px 40px rgba(26,19,10,0.12);
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Jost', 'Helvetica Neue', sans-serif;
+
+      --content-narrow:  640px;
+      --content-default: 920px;
+      --content-wide:    1160px;
+
+      /* ── SECTION PADDING — mobile first, grows with screen ── */
+      --section-py: var(--space-12);
+    }
+
+    @media (min-width: 680px) {
+      :root { --section-py: var(--space-16); }
+    }
+    @media (min-width: 920px) {
+      :root { --section-py: var(--space-20); }
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+
     body {
       font-family: var(--font-body);
       background: var(--color-bg);
@@ -90,206 +123,523 @@
       font-size: var(--text-base);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    .container { width:100%; max-width:var(--content-default); margin-inline:auto; padding-inline:var(--space-6); }
-    .container--narrow { max-width:var(--content-narrow); }
-    .container--wide   { max-width:var(--content-wide); }
+    /* ── CONTAINERS ── */
+    .container {
+      width: 100%;
+      max-width: var(--content-default);
+      margin-inline: auto;
+      padding-inline: var(--space-4);
+    }
+    @media (min-width: 480px)  { .container { padding-inline: var(--space-5); } }
+    @media (min-width: 680px)  { .container { padding-inline: var(--space-6); } }
+    @media (min-width: 920px)  { .container { padding-inline: var(--space-8); } }
 
-    /* Skip link */
+    .container--narrow { max-width: var(--content-narrow); }
+    .container--wide   { max-width: var(--content-wide); }
+
+    /* ── SKIP LINK ── */
     .skip-link {
-      position:absolute; top:-100%; left:var(--space-4);
-      background:var(--color-gold); color:#fff;
-      padding:var(--space-2) var(--space-4);
-      border-radius:var(--radius-md);
-      font-size:var(--text-sm); text-decoration:none; z-index:9999;
+      position: absolute; top: -100%; left: var(--space-4);
+      background: var(--color-gold); color: #fff;
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm); text-decoration: none; z-index: 9999;
     }
-    .skip-link:focus { top:var(--space-4); }
+    .skip-link:focus { top: var(--space-4); }
 
     /* ── HEADER ── */
     .site-header {
-      background:none;
-      border-bottom:1px solid var(--color-divider);
-      padding-block:var(--space-6);
-      text-align:center;
+      background: none;
+      border-bottom: 1px solid var(--color-divider);
+      padding-block: var(--space-4);
+      text-align: center;
     }
+    @media (min-width: 680px) {
+      .site-header { padding-block: var(--space-6); }
+    }
+
+    /* LOGO IMAGE — hidden by default, shown when src is set */
+    .site-header__logo {
+      display: block;
+      max-height: 64px;
+      max-width: 240px;
+      width: auto;
+      margin-inline: auto;
+      margin-bottom: var(--space-2);
+      object-fit: contain;
+    }
+    @media (min-width: 680px) {
+      .site-header__logo { max-height: 80px; max-width: 300px; }
+    }
+    /* Hide the logo element if no src is provided — 
+       remove this rule once you add the logo src */
+    .site-header__logo:not([src]),
+    .site-header__logo[src=""] { display: none; }
+
     .site-header__brand {
-      font-family:var(--font-display);
-      font-size:var(--text-2xl);
-      font-weight:400;
-      letter-spacing:0.08em;
-      color:var(--color-text);
-      text-decoration:none;
-      display:block;
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 1.2rem + 1vw, var(--text-2xl));
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--color-text);
+      text-decoration: none;
+      display: block;
     }
-    .site-header__brand span { color:var(--color-gold); font-weight:300; }
+    .site-header__brand span { color: var(--color-gold); font-weight: 300; }
     .site-header__tagline {
-      font-size:var(--text-xs);
-      letter-spacing:0.2em;
-      text-transform:uppercase;
-      color:var(--color-text-muted);
-      margin-top:var(--space-1);
+      font-size: var(--text-xs);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-top: var(--space-1);
     }
 
-    /* Utilities */
-    .gold-rule { width:48px; height:1px; background:var(--color-gold); margin-block:var(--space-6); }
-    .gold-rule--center { margin-inline:auto; }
+    /* ── UTILITIES ── */
+    .gold-rule {
+      width: 40px; height: 1px;
+      background: var(--color-gold);
+      margin-block: var(--space-5);
+    }
+    @media (min-width: 680px) { .gold-rule { width: 48px; margin-block: var(--space-6); } }
+    .gold-rule--center { margin-inline: auto; }
+
     .section-label {
-      font-size:var(--text-xs); letter-spacing:0.2em;
-      text-transform:uppercase; color:var(--color-gold);
-      font-weight:500; margin-bottom:var(--space-3);
+      font-size: var(--text-xs);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      font-weight: 500;
+      margin-bottom: var(--space-3);
     }
 
-    /* Buttons */
+    /* ── BUTTONS ── */
     .btn-gold {
-      display:inline-flex; align-items:center; gap:var(--space-2);
-      background:var(--color-gold); color:#fff;
-      font-family:var(--font-body); font-size:var(--text-sm);
-      font-weight:500; letter-spacing:0.08em; text-transform:uppercase;
-      text-decoration:none; padding:var(--space-4) var(--space-8);
-      border-radius:var(--radius-full); border:none; cursor:pointer;
-      transition:background var(--transition),transform var(--transition);
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+      background: var(--color-gold); color: #fff;
+      font-family: var(--font-body); font-size: var(--text-sm);
+      font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none;
+      /* Full-width on mobile, auto on larger screens */
+      width: 100%; padding: var(--space-4) var(--space-6);
+      border-radius: var(--radius-full); border: none; cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
-    .btn-gold:hover { background:var(--color-gold-hover); transform:translateY(-1px); }
-    .btn-gold:active { transform:translateY(0); }
+    @media (min-width: 480px) {
+      .btn-gold { width: auto; padding: var(--space-4) var(--space-8); }
+    }
+    .btn-gold:hover  { background: var(--color-gold-hover); transform: translateY(-1px); }
+    .btn-gold:active { transform: translateY(0); }
 
     .btn-outline {
-      display:inline-flex; align-items:center; gap:var(--space-2);
-      background:transparent; color:var(--color-gold);
-      font-family:var(--font-body); font-size:var(--text-sm);
-      font-weight:500; letter-spacing:0.08em; text-transform:uppercase;
-      text-decoration:none; padding:var(--space-4) var(--space-8);
-      border-radius:var(--radius-full); border:1px solid var(--color-gold-border); cursor:pointer;
-      transition:all var(--transition);
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+      background: transparent; color: var(--color-gold);
+      font-family: var(--font-body); font-size: var(--text-sm);
+      font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none;
+      width: 100%; padding: var(--space-4) var(--space-6);
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-gold-border); cursor: pointer;
+      transition: all var(--transition);
+      -webkit-tap-highlight-color: transparent;
     }
-    .btn-outline:hover { background:var(--color-gold-light); border-color:var(--color-gold); }
+    @media (min-width: 480px) {
+      .btn-outline { width: auto; padding: var(--space-4) var(--space-8); }
+    }
+    .btn-outline:hover { background: var(--color-gold-light); border-color: var(--color-gold); }
 
-    /* Sections */
-    .section { padding-block:var(--space-20); }
-    .section--cream  { background:var(--color-bg); }
-    .section--warm   { background:var(--color-surface-2); }
-    .section--navy   { background:var(--color-surface-navy); color:var(--color-text-inverse); }
-    .section--offset { background:var(--color-surface-offset); }
+    /* ── SECTIONS ── */
+    .section          { padding-block: var(--section-py); }
+    .section--cream   { background: var(--color-bg); }
+    .section--warm    { background: var(--color-surface-2); }
+    .section--navy    { background: var(--color-surface-navy); color: var(--color-text-inverse); }
+    .section--offset  { background: var(--color-surface-offset); }
 
     .section__heading {
-      font-family:var(--font-display); font-size:var(--text-2xl);
-      font-weight:400; line-height:1.2; color:var(--color-text);
-      margin-bottom:var(--space-6);
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--color-text);
+      margin-bottom: var(--space-5);
     }
-    .section__heading--center { text-align:center; }
-    .section__heading--inverse { color:var(--color-text-inverse); }
-    .section__heading em { font-style:italic; color:var(--color-gold); }
+    @media (min-width: 680px) { .section__heading { margin-bottom: var(--space-6); } }
+    .section__heading--center { text-align: center; }
+    .section__heading--inverse { color: var(--color-text-inverse); }
+    .section__heading em { font-style: italic; color: var(--color-gold); }
 
     /* ── HERO ── */
     .hero {
       background: url('[HERO IMAGE FILENAME]') center/cover no-repeat;
-      min-height:600px;
-      height:min(82vh, 600px);
       background-color: var(--color-surface-navy);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:var(--space-8);
-      position:relative;
-      overflow:hidden;
+      /* Mobile: taller than before, still feels full */
+      min-height: 420px;
+      height: min(75vh, 520px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      /* Push content to bottom on mobile so text isn't lost under header */
+      padding: var(--space-8) var(--space-5) var(--space-10);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
+    @media (min-width: 480px) {
+      .hero {
+        height: min(78vh, 560px);
+        justify-content: center;
+        padding: var(--space-8);
+      }
+    }
+    @media (min-width: 680px) {
+      .hero {
+        min-height: 560px;
+        height: min(82vh, 640px);
+        padding: var(--space-12);
+      }
+    }
+    @media (min-width: 920px) {
+      .hero { min-height: 600px; height: min(82vh, 700px); }
+    }
+
+    /* Overlay — always present for text legibility on photos */
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(10, 16, 28, 0.75) 0%,
+        rgba(10, 16, 28, 0.35) 50%,
+        rgba(10, 16, 28, 0.15) 100%
+      );
+      pointer-events: none;
+    }
+    /* When no hero image is set, use the brand gradient instead */
     .hero::before {
-      content:'';
-      position:absolute; inset:0;
+      content: '';
+      position: absolute; inset: 0;
       background: radial-gradient(ellipse at 50% 110%, rgba(184,146,74,0.2) 0%, transparent 60%);
-      pointer-events:none;
+      pointer-events: none;
+      z-index: 1;
     }
-    .hero__title {
-      font-family:var(--font-display);
-      font-size:clamp(3.5rem, 8vw, 7rem);
-      font-weight:300;
-      color:#fff;
-      line-height:1.05;
-      letter-spacing:0.04em;
-      position:relative;
-      margin-bottom:var(--space-5);
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-3);
     }
-    .hero__title em { font-style:italic; color:var(--color-gold); }
+
     .hero__eyebrow {
-      font-size:var(--text-xs);
-      letter-spacing:0.25em;
-      text-transform:uppercase;
-      color:var(--color-gold);
-      font-weight:500;
-      margin-bottom:var(--space-4);
-      position:relative;
+      font-size: var(--text-xs);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      font-weight: 500;
     }
+
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: var(--text-hero);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: 0.03em;
+    }
+    .hero__title em { font-style: italic; color: var(--color-gold); }
+
     .hero__subtitle {
-      font-size:var(--text-sm);
-      color:rgba(253,249,242,0.6);
-      letter-spacing:0.12em;
-      text-transform:uppercase;
-      position:relative;
+      font-size: var(--text-xs);
+      color: rgba(253,249,242,0.65);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    @media (min-width: 480px) {
+      .hero__subtitle { font-size: var(--text-sm); }
     }
 
-    /* Highlight strip */
-    .highlight-strip { background:var(--color-gold); padding-block:var(--space-5); text-align:center; }
+    /* ── HIGHLIGHT STRIP ── */
+    .highlight-strip {
+      background: var(--color-gold);
+      padding-block: var(--space-4);
+      padding-inline: var(--space-4);
+      text-align: center;
+    }
     .highlight-strip p {
-      font-size:var(--text-sm); letter-spacing:0.15em;
-      text-transform:uppercase; color:#fff; font-weight:500;
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+    @media (min-width: 480px) {
+      .highlight-strip p { font-size: var(--text-sm); letter-spacing: 0.15em; }
     }
 
-    /* Overview cards */
+    /* ── OVERVIEW CARDS ── */
     .overview-grid {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:var(--space-6); margin-top:var(--space-10);
+      display: grid;
+      /* 2 columns on mobile */
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+      margin-top: var(--space-8);
     }
+    @media (min-width: 480px) { .overview-grid { gap: var(--space-4); } }
+    @media (min-width: 680px) {
+      .overview-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: var(--space-5);
+        margin-top: var(--space-10);
+      }
+    }
+
     .overview-card {
-      background:var(--color-surface); border:1px solid var(--color-divider);
-      border-radius:var(--radius-lg); padding:var(--space-6); text-align:center;
+      background: var(--color-surface);
+      border: 1px solid var(--color-divider);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4) var(--space-3);
+      text-align: center;
     }
-    .overview-card__icon  { font-size:1.5rem; margin-bottom:var(--space-3); display:block; }
-    .overview-card__label { font-size:var(--text-xs); letter-spacing:0.15em; text-transform:uppercase; color:var(--color-text-muted); margin-bottom:var(--space-2); }
-    .overview-card__value { font-family:var(--font-display); font-size:var(--text-lg); font-weight:500; color:var(--color-text); line-height:1.3; }
+    @media (min-width: 480px) { .overview-card { padding: var(--space-5); } }
+    @media (min-width: 680px) { .overview-card { padding: var(--space-6); } }
 
-    /* Destinations */
+    .overview-card__icon  { font-size: 1.25rem; margin-bottom: var(--space-2); display: block; }
+    @media (min-width: 680px) { .overview-card__icon { font-size: 1.5rem; margin-bottom: var(--space-3); } }
+    .overview-card__label {
+      font-size: var(--text-xs);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-1);
+    }
+    .overview-card__value {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 0.9rem + 0.5vw, var(--text-lg));
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 1.3;
+    }
+
+    /* ── DESTINATIONS ── */
     .destinations-grid {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:var(--space-4); margin-top:var(--space-10);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+      margin-top: var(--space-8);
     }
+    @media (min-width: 480px) {
+      .destinations-grid { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+    }
+    @media (min-width: 680px) {
+      .destinations-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--space-4);
+        margin-top: var(--space-10);
+      }
+    }
+
     .destination-card {
-      background:var(--color-surface-navy); border-radius:var(--radius-lg);
-      padding:var(--space-6) var(--space-5); color:var(--color-text-inverse);
-      position:relative; overflow:hidden;
+      background: var(--color-surface-navy);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5) var(--space-4);
+      color: var(--color-text-inverse);
+      position: relative;
+      overflow: hidden;
     }
+    @media (min-width: 680px) { .destination-card { padding: var(--space-6) var(--space-5); } }
     .destination-card::before {
-      content:''; position:absolute; bottom:0; left:0; right:0;
-      height:2px; background:var(--color-gold);
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--color-gold);
     }
-    .destination-card__day    { font-size:var(--text-xs); letter-spacing:0.15em; text-transform:uppercase; color:var(--color-gold); margin-bottom:var(--space-2); }
-    .destination-card__name   { font-family:var(--font-display); font-size:var(--text-xl); font-weight:400; line-height:1.2; margin-bottom:var(--space-2); }
-    .destination-card__detail { font-size:var(--text-xs); color:rgba(253,249,242,0.6); line-height:1.5; }
+    .destination-card__day {
+      font-size: var(--text-xs); letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--color-gold); margin-bottom: var(--space-2);
+    }
+    .destination-card__name {
+      font-family: var(--font-display);
+      font-size: var(--text-xl); font-weight: 400; line-height: 1.2;
+      margin-bottom: var(--space-2);
+    }
+    .destination-card__detail {
+      font-size: var(--text-xs); color: rgba(253,249,242,0.6); line-height: 1.6;
+    }
 
-    /* Itinerary */
-    .itinerary-list { margin-top:var(--space-10); border:1px solid var(--color-divider); border-radius:var(--radius-lg); overflow:hidden; }
+    /* ── ITINERARY ── */
+    .itinerary-list {
+      margin-top: var(--space-8);
+      border: 1px solid var(--color-divider);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    @media (min-width: 680px) { .itinerary-list { margin-top: var(--space-10); } }
+
     .itinerary-item {
-      display:grid; grid-template-columns:100px 1fr; gap:var(--space-6);
-      padding:var(--space-5) var(--space-6); border-bottom:1px solid var(--color-divider);
-      background:var(--color-surface); align-items:center;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      padding: var(--space-4);
+      border-bottom: 1px solid var(--color-divider);
+      background: var(--color-surface);
     }
-    .itinerary-item:last-child { border-bottom:none; }
-    .itinerary-item:nth-child(even) { background:var(--color-surface-2); }
-    .itinerary-item__day   { font-size:var(--text-xs); letter-spacing:0.12em; text-transform:uppercase; color:var(--color-gold); font-weight:500; }
-    .itinerary-item__date  { font-size:var(--text-xs); color:var(--color-text-muted); margin-top:2px; }
-    .itinerary-item__port  { font-family:var(--font-display); font-size:var(--text-lg); font-weight:500; color:var(--color-text); line-height:1.2; }
-    .itinerary-item__times { font-size:var(--text-xs); color:var(--color-text-muted); margin-top:var(--space-1); }
-    .itinerary-item--sea .itinerary-item__port { color:var(--color-text-muted); font-style:italic; }
+    @media (min-width: 480px) {
+      .itinerary-item {
+        display: grid;
+        grid-template-columns: 90px 1fr;
+        gap: var(--space-4);
+        padding: var(--space-4) var(--space-5);
+        align-items: center;
+      }
+    }
+    @media (min-width: 680px) {
+      .itinerary-item {
+        grid-template-columns: 110px 1fr;
+        gap: var(--space-6);
+        padding: var(--space-5) var(--space-6);
+      }
+    }
+    .itinerary-item:last-child { border-bottom: none; }
+    .itinerary-item:nth-child(even) { background: var(--color-surface-2); }
 
-    /* Cabin / pricing */
-    .cabin-wrap { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-8); align-items:start; margin-top:var(--space-10); }
-    @media (max-width:680px) { .cabin-wrap { grid-template-columns:1fr; } }
+    .itinerary-item__day {
+      font-size: var(--text-xs); letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--color-gold); font-weight: 500;
+    }
+    .itinerary-item__date { font-size: var(--text-xs); color: var(--color-text-muted); margin-top: 2px; }
+    .itinerary-item__port {
+      font-family: var(--font-display);
+      font-size: var(--text-lg); font-weight: 500;
+      color: var(--color-text); line-height: 1.2;
+    }
+    .itinerary-item__times { font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-1); }
+    .itinerary-item--sea .itinerary-item__port { color: var(--color-text-muted); font-style: italic; }
+    .itinerary-item__badge {
+      display: inline-block;
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--color-accent-light); color: var(--color-gold);
+      border: 1px solid var(--color-accent-border);
+      border-radius: var(--radius-full);
+      padding: 2px 8px; margin-top: var(--space-2);
+    }
+
+    /* ── CABIN / PRICING — stacked tiers ── */
+    .cabin-tiers {
+      display: flex; flex-direction: column;
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+    }
+    @media (min-width: 680px) { .cabin-tiers { gap: var(--space-5); margin-top: var(--space-10); } }
+
+    .cabin-tier {
+      background: var(--color-surface-navy);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6) var(--space-5);
+      color: var(--color-text-inverse);
+      position: relative; overflow: hidden;
+    }
+    @media (min-width: 680px) { .cabin-tier { padding: var(--space-8); } }
+    .cabin-tier::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--color-gold);
+    }
+    .cabin-tier--featured::before {
+      background: linear-gradient(90deg, var(--color-accent-light), var(--color-gold));
+    }
+
+    /* Mobile: stack label/details on top, price below */
+    .cabin-tier__body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    @media (min-width: 580px) {
+      .cabin-tier__body {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: var(--space-6);
+      }
+    }
+
+    .cabin-tier__info { flex: 1; }
+    .cabin-tier__label {
+      font-size: var(--text-xs); letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--color-gold); margin-bottom: var(--space-2);
+    }
+    .cabin-tier__name {
+      font-family: var(--font-display); font-size: var(--text-xl); font-weight: 400;
+      line-height: 1.2; margin-bottom: var(--space-3);
+    }
+    .cabin-tier__details {
+      font-size: var(--text-xs); color: rgba(253,249,242,0.55); line-height: 2;
+    }
+    .cabin-tier__details span { display: block; }
+    .cabin-tier__scarcity {
+      display: inline-block;
+      font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase;
+      background: rgba(184,146,74,0.15); color: var(--color-gold);
+      border: 1px solid rgba(184,146,74,0.3);
+      border-radius: var(--radius-full); padding: 3px 10px; margin-top: var(--space-3);
+    }
+
+    .cabin-tier__price-col {
+      /* Full width on mobile, auto-size on larger screens */
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: var(--space-4);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    @media (min-width: 580px) {
+      .cabin-tier__price-col {
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-start;
+        padding-top: 0; border-top: none;
+        flex-shrink: 0;
+      }
+    }
+    .cabin-tier__price-main {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl); font-weight: 400;
+      color: var(--color-gold); line-height: 1;
+    }
+    .cabin-tier__price-sub {
+      font-size: var(--text-xs); color: rgba(253,249,242,0.5); margin-top: 4px;
+    }
+    .cabin-tier__nonrefund {
+      font-size: var(--text-xs); color: rgba(253,249,242,0.38); font-style: italic;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding-top: var(--space-4); margin-top: var(--space-5); line-height: 1.6;
+    }
+
+    /* ── PAYMENT CARD ── */
+    .cabin-wrap {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      align-items: start;
+      margin-top: var(--space-8);
+    }
+    @media (min-width: 680px) {
+      .cabin-wrap {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-8);
+        margin-top: var(--space-10);
+      }
+    }
 
     .cabin-card {
-      background:var(--color-surface-navy); border-radius:var(--radius-xl);
-      padding:var(--space-8); color:var(--color-text-inverse); position:relative; overflow:hidden;
+      background: var(--color-surface-navy); border-radius: var(--radius-xl);
+      padding: var(--space-6); color: var(--color-text-inverse);
+      position: relative; overflow: hidden;
     }
+    @media (min-width: 680px) { .cabin-card { padding: var(--space-8); } }
     .cabin-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--color-gold); }
     .cabin-card__label     { font-size:var(--text-xs); letter-spacing:0.2em; text-transform:uppercase; color:var(--color-gold); margin-bottom:var(--space-3); }
     .cabin-card__name      { font-family:var(--font-display); font-size:var(--text-xl); font-weight:400; margin-bottom:var(--space-4); line-height:1.2; }
@@ -297,122 +647,212 @@
     .cabin-card__nonrefund { font-size:var(--text-xs); color:rgba(253,249,242,0.5); line-height:1.6; margin-bottom:var(--space-6); font-style:italic; }
     .cabin-card__price-wrap{ border-top:1px solid rgba(255,255,255,0.1); padding-top:var(--space-5); }
     .cabin-card__price-main{ font-family:var(--font-display); font-size:var(--text-2xl); font-weight:400; color:var(--color-gold); line-height:1; }
-    .cabin-card__price-sub { font-size:var(--text-xs); color:rgba(253,249,242,0.5); margin-top:var(--space-1); letter-spacing:0.05em; }
+    .cabin-card__price-sub { font-size:var(--text-xs); color:rgba(253,249,242,0.5); margin-top:var(--space-1); }
     .cabin-card__price-pp  { font-size:var(--text-lg); color:rgba(253,249,242,0.8); font-family:var(--font-display); margin-top:var(--space-3); }
 
-    .payment-card { background:var(--color-surface); border:1px solid var(--color-divider); border-radius:var(--radius-xl); padding:var(--space-8); }
-    .payment-card__heading { font-family:var(--font-display); font-size:var(--text-xl); font-weight:400; color:var(--color-text); margin-bottom:var(--space-6); }
-    .payment-list { list-style:none; display:flex; flex-direction:column; gap:var(--space-4); }
-    .payment-list li { display:flex; flex-direction:column; gap:2px; padding-bottom:var(--space-4); border-bottom:1px solid var(--color-divider); }
-    .payment-list li:last-child { border-bottom:none; padding-bottom:0; }
-    .payment-list__label { font-size:var(--text-xs); letter-spacing:0.12em; text-transform:uppercase; color:var(--color-text-muted); }
-    .payment-list__value { font-family:var(--font-display); font-size:var(--text-lg); font-weight:500; color:var(--color-text); }
-    .payment-list__note  { font-size:var(--text-xs); color:var(--color-text-muted); }
+    .payment-card {
+      background: var(--color-surface); border: 1px solid var(--color-divider);
+      border-radius: var(--radius-xl); padding: var(--space-6);
+    }
+    @media (min-width: 680px) { .payment-card { padding: var(--space-8); } }
+    .payment-card__heading {
+      font-family: var(--font-display); font-size: var(--text-xl); font-weight: 400;
+      color: var(--color-text); margin-bottom: var(--space-6);
+    }
+    .payment-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-4); }
+    .payment-list li {
+      display: flex; flex-direction: column; gap: 2px;
+      padding-bottom: var(--space-4); border-bottom: 1px solid var(--color-divider);
+    }
+    .payment-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .payment-list__label { font-size: var(--text-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+    .payment-list__value { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 500; color: var(--color-text); }
+    .payment-list__note  { font-size: var(--text-xs); color: var(--color-text-muted); }
 
-    /* Included */
-    .included-grid { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-6); margin-top:var(--space-10); }
-    @media (max-width:580px) { .included-grid { grid-template-columns:1fr; } }
-    .included-card { background:var(--color-surface); border:1px solid var(--color-divider); border-radius:var(--radius-lg); padding:var(--space-6); }
-    .included-card__heading { font-size:var(--text-xs); letter-spacing:0.15em; text-transform:uppercase; font-weight:500; margin-bottom:var(--space-4); padding-bottom:var(--space-3); border-bottom:1px solid var(--color-divider); }
-    .included-card__heading--yes { color:var(--color-gold); }
-    .included-card__heading--no  { color:var(--color-text-muted); }
-    .included-card ul { list-style:none; display:flex; flex-direction:column; gap:var(--space-3); }
-    .included-card li { font-size:var(--text-sm); color:var(--color-text-muted); display:flex; align-items:flex-start; gap:var(--space-3); line-height:1.5; }
-    .included-card li::before { content:''; width:5px; height:5px; border-radius:50%; flex-shrink:0; margin-top:7px; }
-    .included-card--yes li::before { background:var(--color-gold); }
-    .included-card--no  li::before { background:var(--color-text-faint); }
+    /* ── INCLUDED ── */
+    .included-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+    }
+    @media (min-width: 580px) {
+      .included-grid { grid-template-columns: 1fr 1fr; gap: var(--space-6); margin-top: var(--space-10); }
+    }
 
-    /* Steps */
-    .steps-list { display:flex; flex-direction:column; gap:var(--space-6); margin-top:var(--space-10); counter-reset:steps; }
-    .step-item { display:flex; gap:var(--space-6); align-items:flex-start; counter-increment:steps; }
+    .included-card {
+      background: var(--color-surface); border: 1px solid var(--color-divider);
+      border-radius: var(--radius-lg); padding: var(--space-5);
+    }
+    @media (min-width: 680px) { .included-card { padding: var(--space-6); } }
+    .included-card__heading {
+      font-size: var(--text-xs); letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 500; margin-bottom: var(--space-4); padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--color-divider);
+    }
+    .included-card__heading--yes { color: var(--color-gold); }
+    .included-card__heading--no  { color: var(--color-text-muted); }
+    .included-card ul { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); }
+    .included-card li {
+      font-size: var(--text-sm); color: var(--color-text-muted);
+      display: flex; align-items: flex-start; gap: var(--space-3); line-height: 1.5;
+    }
+    .included-card li::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      flex-shrink: 0; margin-top: 8px;
+    }
+    .included-card--yes li::before { background: var(--color-gold); }
+    .included-card--no  li::before { background: var(--color-text-faint); }
+
+    /* ── FAQ ── */
+    .faq-list { display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-8); }
+    @media (min-width: 680px) { .faq-list { margin-top: var(--space-10); } }
+    .faq-item {
+      background: var(--color-surface); border: 1px solid var(--color-divider);
+      border-radius: var(--radius-lg); padding: var(--space-5);
+    }
+    @media (min-width: 680px) { .faq-item { padding: var(--space-6); } }
+    .faq-item__q {
+      font-family: var(--font-display); font-size: var(--text-lg); font-weight: 500;
+      color: var(--color-text); margin-bottom: var(--space-3);
+    }
+    .faq-item__a { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7; }
+
+    /* ── STEPS ── */
+    .steps-list {
+      display: flex; flex-direction: column;
+      gap: var(--space-5); margin-top: var(--space-8);
+    }
+    @media (min-width: 680px) { .steps-list { gap: var(--space-6); margin-top: var(--space-10); } }
+
+    .step-item { display: flex; gap: var(--space-4); align-items: flex-start; }
+    @media (min-width: 480px) { .step-item { gap: var(--space-5); } }
+    @media (min-width: 680px) { .step-item { gap: var(--space-6); } }
+
     .step-item__num {
-      width:44px; height:44px; min-width:44px; border-radius:50%;
-      background:var(--color-gold-light); border:1px solid var(--color-gold-border);
-      display:flex; align-items:center; justify-content:center;
-      font-family:var(--font-display); font-size:var(--text-lg); font-weight:500; color:var(--color-gold);
+      width: 40px; height: 40px; min-width: 40px; border-radius: 50%;
+      background: var(--color-gold-light); border: 1px solid var(--color-gold-border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: var(--text-lg);
+      font-weight: 500; color: var(--color-gold);
+      flex-shrink: 0;
     }
-    .step-item__body strong { display:block; font-size:var(--text-base); font-weight:500; color:var(--color-text); margin-bottom:var(--space-1); }
-    .step-item__body p { font-size:var(--text-sm); color:var(--color-text-muted); line-height:1.6; }
+    @media (min-width: 680px) { .step-item__num { width: 44px; height: 44px; min-width: 44px; } }
+    .step-item__body strong {
+      display: block; font-size: var(--text-base); font-weight: 500;
+      color: var(--color-text); margin-bottom: var(--space-1);
+    }
+    .step-item__body p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
 
-    /* Final CTA */
+    /* ── FINAL CTA ── */
     .cta-section {
-      background:var(--color-surface-navy); padding-block:var(--space-24);
-      text-align:center; position:relative; overflow:hidden;
+      background: var(--color-surface-navy);
+      padding-block: var(--space-16);
+      padding-inline: var(--space-5);
+      text-align: center;
+      position: relative; overflow: hidden;
     }
+    @media (min-width: 680px) { .cta-section { padding-block: var(--space-20); } }
+    @media (min-width: 920px) { .cta-section { padding-block: var(--space-24); } }
     .cta-section::before {
-      content:''; position:absolute; inset:0;
-      background:radial-gradient(ellipse at 50% 100%, rgba(184,146,74,0.15) 0%, transparent 65%);
-      pointer-events:none;
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(184,146,74,0.15) 0%, transparent 65%);
+      pointer-events: none;
     }
-    .cta-section__heading { font-family:var(--font-display); font-size:var(--text-2xl); font-weight:300; color:var(--color-text-inverse); margin-bottom:var(--space-4); line-height:1.2; }
-    .cta-section__heading em { font-style:italic; color:var(--color-gold); }
-    .cta-section__sub { font-size:var(--text-sm); color:rgba(253,249,242,0.6); margin-bottom:var(--space-10); letter-spacing:0.05em; }
+    .cta-section__heading {
+      font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 300;
+      color: var(--color-text-inverse); margin-bottom: var(--space-4); line-height: 1.2;
+    }
+    .cta-section__heading em { font-style: italic; color: var(--color-gold); }
+    .cta-section__sub {
+      font-size: var(--text-sm); color: rgba(253,249,242,0.6);
+      margin-bottom: var(--space-8); letter-spacing: 0.05em;
+    }
+    @media (min-width: 680px) { .cta-section__sub { margin-bottom: var(--space-10); } }
 
-    /* Form */
-    .form-wrap { max-width:680px; margin-inline:auto; }
-    .form-intro { text-align:center; margin-bottom:var(--space-8); }
-    .form-intro p { color:var(--color-text-muted); font-size:var(--text-sm); line-height:1.7; }
-    .form-intro p + p { margin-top:var(--space-3); }
-    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-5); }
-    @media (max-width:560px) { .form-grid { grid-template-columns:1fr; } }
-    .form-group { display:flex; flex-direction:column; gap:var(--space-2); }
-    .form-group--full { grid-column:1 / -1; }
-    label { font-size:var(--text-xs); letter-spacing:0.1em; text-transform:uppercase; color:var(--color-text-muted); font-weight:500; }
-    label .label-note { font-size:0.7rem; letter-spacing:0.04em; text-transform:none; color:var(--color-text-faint); font-weight:400; display:block; margin-top:2px; }
+    /* ── FORM ── */
+    .form-wrap { max-width: 680px; margin-inline: auto; }
+    .form-intro { text-align: center; margin-bottom: var(--space-6); }
+    @media (min-width: 680px) { .form-intro { margin-bottom: var(--space-8); } }
+    .form-intro p { color: var(--color-text-muted); font-size: var(--text-sm); line-height: 1.7; }
+    .form-intro p + p { margin-top: var(--space-3); }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    @media (min-width: 560px) {
+      .form-grid { grid-template-columns: 1fr 1fr; gap: var(--space-5); }
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: var(--space-2); }
+    .form-group--full { grid-column: 1 / -1; }
+
+    label {
+      font-size: var(--text-xs); letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--color-text-muted); font-weight: 500;
+    }
+    label .label-note {
+      font-size: 0.7rem; letter-spacing: 0.04em; text-transform: none;
+      color: var(--color-text-faint); font-weight: 400; display: block; margin-top: 2px;
+    }
+
+    /* Inputs — larger touch targets on mobile */
     input, select, textarea {
-      font-family:var(--font-body); font-size:var(--text-sm);
-      color:var(--color-text); background:var(--color-surface);
-      border:1px solid var(--color-border); border-radius:var(--radius-md);
-      padding:var(--space-4) var(--space-5); width:100%; outline:none;
-      transition:border-color var(--transition); appearance:none;
+      font-family: var(--font-body); font-size: 1rem; /* 1rem prevents iOS zoom */
+      color: var(--color-text); background: var(--color-surface);
+      border: 1px solid var(--color-border); border-radius: var(--radius-md);
+      padding: var(--space-4) var(--space-4);
+      width: 100%; outline: none;
+      transition: border-color var(--transition);
+      appearance: none; -webkit-appearance: none;
+      /* Minimum 44px touch target */
+      min-height: 48px;
     }
-    input:focus, select:focus, textarea:focus { border-color:var(--color-gold); box-shadow:0 0 0 3px rgba(184,146,74,0.1); }
-    textarea { min-height:120px; resize:vertical; line-height:1.6; }
+    @media (min-width: 680px) {
+      input, select, textarea { padding: var(--space-4) var(--space-5); font-size: var(--text-sm); }
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--color-gold);
+      box-shadow: 0 0 0 3px rgba(184,146,74,0.1);
+    }
+    textarea { min-height: 120px; resize: vertical; line-height: 1.6; }
     select {
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6257' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat:no-repeat; background-position:right var(--space-4) center;
-      padding-right:var(--space-10); cursor:pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6257' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--space-4) center;
+      padding-right: var(--space-10); cursor: pointer;
     }
-    .form-submit { grid-column:1/-1; display:flex; flex-direction:column; align-items:center; gap:var(--space-3); margin-top:var(--space-4); }
-    .form-submit p { font-size:var(--text-xs); color:var(--color-text-faint); text-align:center; }
 
-    /* Birthday field row */
-    .birthday-row { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-3); }
+    /* Birthday row */
+    .birthday-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
 
-    /* Footer */
+    .form-submit {
+      grid-column: 1 / -1;
+      display: flex; flex-direction: column; align-items: center;
+      gap: var(--space-3); margin-top: var(--space-4);
+    }
+    .form-submit p { font-size: var(--text-xs); color: var(--color-text-faint); text-align: center; }
+
+    /* ── FOOTER ── */
     .site-footer {
-      background:var(--color-surface-navy-2);
-      color:rgba(253,249,242,0.5);
-      text-align:center; padding-block:var(--space-8);
-      font-size:var(--text-xs); letter-spacing:0.05em;
+      background: var(--color-surface-navy-2);
+      color: rgba(253,249,242,0.5);
+      text-align: center; padding-block: var(--space-8);
+      font-size: var(--text-xs); letter-spacing: 0.05em;
     }
 
-    /* Reveal animation */
-    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity:1; transform:none; }
-
-    /* Responsive */
-    @media (max-width:680px) {
-      .container { padding-inline:var(--space-4); }
-      .site-header { padding-block:var(--space-4); }
-      .hero { min-height:420px; height:min(62vh, 520px); background-position:center top; }
-      .highlight-strip p { font-size:0.72rem; letter-spacing:0.1em; padding-inline:var(--space-4); }
-      .section { padding-block:var(--space-12); }
-      .overview-grid { grid-template-columns:1fr; gap:var(--space-4); }
-      .destinations-grid { grid-template-columns:1fr; }
-      .itinerary-item { grid-template-columns:1fr; gap:var(--space-2); padding:var(--space-4); }
-      .cabin-card, .payment-card, .included-card { padding:var(--space-6); }
-      .step-item { gap:var(--space-4); }
-      .step-item__num { width:40px; height:40px; min-width:40px; }
-      .btn-gold, .btn-outline { width:100%; justify-content:center; padding:var(--space-4) var(--space-5); }
-      .form-grid { grid-template-columns:1fr; }
-      .form-group--full { grid-column:auto; }
-      .birthday-row { grid-template-columns:1fr 1fr; }
+    /* ── REVEAL ANIMATION ── */
+    .reveal {
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    @media (max-width:420px) {
-      .hero { min-height:360px; height:min(56vh, 440px); }
-      .section { padding-block:var(--space-10); }
-      .cta-section { padding-block:var(--space-16); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
     }
   </style>
 </head>
@@ -422,11 +862,24 @@
 
   <!-- ============================================================
        HEADER
-       Replace [ADVISOR BUSINESS NAME] with advisor's brand name.
-       Replace [ADVISOR WEBSITE URL] with their homepage.
-       Replace [ADVISOR TAGLINE / PRESENTS TEXT] — e.g., "PRESENTS"
+       Option A — Logo image (preferred):
+         Set the src attribute on .site-header__logo
+         Leave .site-header__brand visible as fallback text
+       Option B — Text only:
+         Remove the <img> tag entirely
+       
+       Replace:
+         [ADVISOR LOGO IMAGE URL or filename]
+         [ADVISOR WEBSITE URL]
+         [ADVISOR BUSINESS NAME]
+         [ADVISOR TAGLINE / PRESENTS TEXT]
   ============================================================ -->
   <header class="site-header" role="banner">
+    <img
+      src="[ADVISOR LOGO IMAGE URL]"
+      alt="[ADVISOR BUSINESS NAME] logo"
+      class="site-header__logo"
+    >
     <a href="[ADVISOR WEBSITE URL]" class="site-header__brand" aria-label="[ADVISOR BUSINESS NAME] home">
       [ADVISOR BUSINESS NAME]<span>™</span>
     </a>
@@ -437,19 +890,24 @@
 
     <!-- ============================================================
          HERO
-         Replace [HERO IMAGE FILENAME] in the CSS above.
-         Use a high-res landscape image. Min recommended: 1600×900px.
+         Replace [HERO IMAGE FILENAME] in the CSS .hero rule.
+         Recommended: 1600×900px landscape, under 500KB.
+         The overlay gradient ensures text is always readable
+         whether there's a photo or not.
     ============================================================ -->
     <section class="hero" aria-label="[TRIP NAME] hero">
-      <h1 class="hero__title">[TRIP NAME LINE 1]<br><em>[TRIP NAME LINE 2 — optional italic second line]</em></h1>
-      <p class="hero__eyebrow">[CRUISE LINE] · [SHIP NAME]</p>
-      <p class="hero__subtitle">[TRAVEL DATES] · [DEPARTURE PORT]</p>
+      <div class="hero__content">
+        <p class="hero__eyebrow">[CRUISE LINE] · [SHIP NAME]</p>
+        <h1 class="hero__title">
+          [TRIP NAME LINE 1]<br>
+          <em>[TRIP NAME LINE 2 — optional]</em>
+        </h1>
+        <p class="hero__subtitle">[TRAVEL DATES] · [DEPARTURE PORT]</p>
+      </div>
     </section>
 
     <!-- ============================================================
          URGENCY STRIP
-         Replace [URGENCY MESSAGE] — e.g., "Cabins are limited and
-         secured on a first come, first served basis."
     ============================================================ -->
     <div class="highlight-strip" role="note">
       <p>[URGENCY MESSAGE]</p>
@@ -462,7 +920,7 @@
       <div class="container">
         <p class="section-label reveal" style="text-align:center;">The Trip</p>
         <h2 class="section__heading section__heading--center reveal" id="overview-heading">
-          [TRIP HEADLINE LINE 1]<br><em>[TRIP HEADLINE LINE 2 — italic emphasis]</em>
+          [TRIP HEADLINE LINE 1]<br><em>[TRIP HEADLINE LINE 2]</em>
         </h2>
         <div class="gold-rule gold-rule--center reveal"></div>
         <div class="overview-grid reveal">
@@ -539,7 +997,7 @@
             <p class="destination-card__detail">[PORT 4 DETAIL]<br>[PORT 4 HOURS]</p>
           </div>
 
-          <!-- Add more ports as needed -->
+          <!-- Add more destination cards as needed -->
 
         </div>
       </div>
@@ -558,7 +1016,7 @@
           <div class="itinerary-item">
             <div>
               <p class="itinerary-item__day">Day 1</p>
-              <p class="itinerary-item__date">[DAY 1 DATE — e.g., Sun, Feb 7]</p>
+              <p class="itinerary-item__date">[DAY 1 DATE — e.g., Fri, Jul 23]</p>
             </div>
             <div>
               <p class="itinerary-item__port">[DEPARTURE PORT]</p>
@@ -573,7 +1031,7 @@
             </div>
             <div>
               <p class="itinerary-item__port">Day at Sea</p>
-              <p class="itinerary-item__times">[SEA DAY NOTE — e.g., "Relax. Explore the ship. Set the tone."]</p>
+              <p class="itinerary-item__times">[SEA DAY NOTE]</p>
             </div>
           </div>
 
@@ -618,6 +1076,8 @@
             <div>
               <p class="itinerary-item__port">[PORT NAME]</p>
               <p class="itinerary-item__times">[ARRIVAL TIME] – [DEPARTURE TIME]</p>
+              <!-- Optional badge: <span class="itinerary-item__badge">Tender Port</span> -->
+              <!-- Optional badge: <span class="itinerary-item__badge">Extended Stay</span> -->
             </div>
           </div>
 
@@ -649,33 +1109,139 @@
 
     <!-- ============================================================
          CABIN & PRICING
+         
+         TWO LAYOUT OPTIONS — use whichever fits the trip:
+         
+         OPTION A: Multiple cabin tiers (tiered pricing)
+           Use .cabin-tiers + .cabin-tier blocks below.
+           Good for group trips with multiple cabin categories.
+         
+         OPTION B: Single cabin + payment details side by side
+           Use .cabin-wrap + .cabin-card + .payment-card below.
+           Good for trips with one cabin type.
+         
+         Delete whichever option you're not using.
     ============================================================ -->
+
+    <!-- ── OPTION A: CABIN TIERS ── -->
+    <section class="section section--warm" aria-labelledby="cabin-heading">
+      <div class="container">
+        <p class="section-label reveal" style="text-align:center;">What You Need to Know</p>
+        <h2 class="section__heading section__heading--center reveal" id="cabin-heading">Choose Your Cabin</h2>
+        <div class="gold-rule gold-rule--center reveal"></div>
+        <div class="cabin-tiers reveal">
+
+          <!-- Featured / most premium tier — add class="cabin-tier cabin-tier--featured" -->
+          <div class="cabin-tier cabin-tier--featured">
+            <div class="cabin-tier__body">
+              <div class="cabin-tier__info">
+                <p class="cabin-tier__label">[CABIN TYPE] · [CABIN CATEGORY]</p>
+                <p class="cabin-tier__name">[CABIN HEADLINE]</p>
+                <p class="cabin-tier__details">
+                  <span>[CABIN DETAIL 1 — size, occupancy]</span>
+                  <span>[CABIN DETAIL 2 — bed type, view]</span>
+                  <span>[CABIN DETAIL 3 — perks]</span>
+                </p>
+                <!-- Optional scarcity badge: -->
+                <!-- <span class="cabin-tier__scarcity">⚠ Only 2 Left</span> -->
+              </div>
+              <div class="cabin-tier__price-col">
+                <p class="cabin-tier__price-main">[PRICE]</p>
+                <p class="cabin-tier__price-sub">per person</p>
+              </div>
+            </div>
+            <p class="cabin-tier__nonrefund">$[DEPOSIT] per person deposit required at booking · Available until [DEADLINE] · All deposits are non-refundable.</p>
+          </div>
+
+          <div class="cabin-tier">
+            <div class="cabin-tier__body">
+              <div class="cabin-tier__info">
+                <p class="cabin-tier__label">[CABIN TYPE]</p>
+                <p class="cabin-tier__name">[CABIN HEADLINE]</p>
+                <p class="cabin-tier__details">
+                  <span>[CABIN DETAIL 1]</span>
+                  <span>[CABIN DETAIL 2]</span>
+                </p>
+              </div>
+              <div class="cabin-tier__price-col">
+                <p class="cabin-tier__price-main">[PRICE]</p>
+                <p class="cabin-tier__price-sub">per person</p>
+              </div>
+            </div>
+            <p class="cabin-tier__nonrefund">$[DEPOSIT] per person deposit required at booking · Available until [DEADLINE] · All deposits are non-refundable.</p>
+          </div>
+
+          <!-- Add more .cabin-tier blocks as needed -->
+
+        </div>
+
+        <!-- Payment details below the tiers -->
+        <div class="payment-card reveal" style="margin-top:var(--space-8);">
+          <p class="payment-card__heading">Payment Details</p>
+          <ul class="payment-list">
+            <li>
+              <span class="payment-list__label">Deposit to Secure</span>
+              <span class="payment-list__value">$[DEPOSIT AMOUNT] per person</span>
+              <span class="payment-list__note">Due at time of booking · All deposits are non-refundable.</span>
+            </li>
+            <li>
+              <span class="payment-list__label">Cabin Hold Deadline</span>
+              <span class="payment-list__value">[DEADLINE DATE]</span>
+              <span class="payment-list__note">Cabins not secured by this date will be released.</span>
+            </li>
+            <li>
+              <span class="payment-list__label">Final Payment Due</span>
+              <span class="payment-list__value">[FINAL PAYMENT DATE]</span>
+            </li>
+            <li>
+              <span class="payment-list__label">Payment Plans</span>
+              <span class="payment-list__value">[AVAILABILITY]</span>
+              <span class="payment-list__note">[PAYMENT PLAN NOTE]</span>
+            </li>
+            <li>
+              <span class="payment-list__label">Pricing</span>
+              <span class="payment-list__value">Per Person · Double Occupancy</span>
+              <span class="payment-list__note">Solo travelers or groups needing more than two per cabin — email before booking.</span>
+            </li>
+            <li>
+              <span class="payment-list__label">Price Disclaimer</span>
+              <span class="payment-list__value">Prices Subject to Change</span>
+              <span class="payment-list__note">Quoted pricing is not guaranteed until your full deposit is received and your cabin is confirmed.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!--
+    ── OPTION B: SINGLE CABIN + PAYMENT SIDE BY SIDE ──
+    Uncomment this block and delete Option A above if using a single cabin type.
+
     <section class="section section--warm" aria-labelledby="cabin-heading">
       <div class="container">
         <p class="section-label reveal" style="text-align:center;">What You Need to Know</p>
         <h2 class="section__heading section__heading--center reveal" id="cabin-heading">Pricing & Payment Details</h2>
         <div class="gold-rule gold-rule--center reveal"></div>
         <div class="cabin-wrap reveal">
-
           <div class="cabin-card">
             <p class="cabin-card__label">[CABIN TYPE] · [CABIN CATEGORY]</p>
             <p class="cabin-card__name">[CABIN HEADLINE LINE 1]<br>[CABIN HEADLINE LINE 2]</p>
-            <p class="cabin-card__desc">[CABIN DESCRIPTION — 1-2 sentences about the cabin experience. Include occupancy type.]</p>
-            <p class="cabin-card__nonrefund">Please note: All deposits are non-refundable. By submitting your booking request, you acknowledge and agree to this policy.</p>
+            <p class="cabin-card__desc">[CABIN DESCRIPTION]</p>
+            <p class="cabin-card__nonrefund">All deposits are non-refundable.</p>
             <div class="cabin-card__price-wrap">
-              <p class="cabin-card__price-main">[TOTAL CABIN PRICE — e.g., $2,886]</p>
-              <p class="cabin-card__price-sub">per cabin · [OCCUPANCY TYPE — e.g., double occupancy]</p>
-              <p class="cabin-card__price-pp">[PRICE PER PERSON — e.g., $1,443] per person</p>
+              <p class="cabin-card__price-main">[TOTAL CABIN PRICE]</p>
+              <p class="cabin-card__price-sub">per cabin · double occupancy</p>
+              <p class="cabin-card__price-pp">[PRICE PER PERSON] per person</p>
             </div>
           </div>
-
           <div class="payment-card">
             <p class="payment-card__heading">Payment Details</p>
             <ul class="payment-list">
               <li>
                 <span class="payment-list__label">Deposit to Secure</span>
                 <span class="payment-list__value">[DEPOSIT AMOUNT] per person</span>
-                <span class="payment-list__note">[DEPOSIT DEADLINE — e.g., "Due within 24 hours of booking request"] · Deposits are non-refundable.</span>
+                <span class="payment-list__note">[DEPOSIT DEADLINE] · Deposits are non-refundable.</span>
               </li>
               <li>
                 <span class="payment-list__label">Final Payment Due</span>
@@ -683,25 +1249,15 @@
               </li>
               <li>
                 <span class="payment-list__label">Payment Plans</span>
-                <span class="payment-list__value">[PAYMENT PLAN AVAILABILITY — e.g., Available]</span>
+                <span class="payment-list__value">[AVAILABILITY]</span>
                 <span class="payment-list__note">[PAYMENT PLAN NOTE]</span>
-              </li>
-              <li>
-                <span class="payment-list__label">Occupancy</span>
-                <span class="payment-list__value">Prices Based on Double Occupancy</span>
-                <span class="payment-list__note">Solo travelers and groups needing more than two per cabin — email us before booking to check availability and pricing for your situation.</span>
-              </li>
-              <li>
-                <span class="payment-list__label">Price Disclaimer</span>
-                <span class="payment-list__value">Prices Subject to Change</span>
-                <span class="payment-list__note">Quoted pricing is not guaranteed until your full deposit is received and your cabin is confirmed.</span>
               </li>
             </ul>
           </div>
-
         </div>
       </div>
     </section>
+    -->
 
     <!-- ============================================================
          WHAT'S INCLUDED / NOT INCLUDED
@@ -738,9 +1294,38 @@
     </section>
 
     <!-- ============================================================
+         FAQ — optional section, delete if not needed
+    ============================================================ -->
+    <section class="section section--warm" aria-labelledby="faq-heading">
+      <div class="container container--narrow">
+        <p class="section-label reveal" style="text-align:center;">Good Questions</p>
+        <h2 class="section__heading section__heading--center reveal" id="faq-heading">You Asked. Here's the Answer.</h2>
+        <div class="gold-rule gold-rule--center reveal"></div>
+        <div class="faq-list reveal">
+
+          <div class="faq-item">
+            <p class="faq-item__q">[FAQ QUESTION 1]</p>
+            <p class="faq-item__a">[FAQ ANSWER 1]</p>
+          </div>
+
+          <div class="faq-item">
+            <p class="faq-item__q">[FAQ QUESTION 2]</p>
+            <p class="faq-item__a">[FAQ ANSWER 2]</p>
+          </div>
+
+          <div class="faq-item">
+            <p class="faq-item__q">[FAQ QUESTION 3]</p>
+            <p class="faq-item__a">[FAQ ANSWER 3]</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
          HOW TO BOOK — STEPS
     ============================================================ -->
-    <section class="section section--warm" aria-labelledby="how-heading">
+    <section class="section section--cream" aria-labelledby="how-heading">
       <div class="container container--narrow">
         <p class="section-label reveal" style="text-align:center;">Secure Your Spot</p>
         <h2 class="section__heading section__heading--center reveal" id="how-heading">Here's How It Works</h2>
@@ -778,8 +1363,9 @@
     <!-- ============================================================
          INQUIRY FORM
          Replace [FORMSPREE FORM ID] with the advisor's Formspree ID.
+         The form submits via fetch — no page reload.
     ============================================================ -->
-    <section class="section section--cream" id="inquiry-form" aria-labelledby="form-heading">
+    <section class="section section--warm" id="inquiry-form" aria-labelledby="form-heading">
       <div class="container">
         <p class="section-label reveal" style="text-align:center;">Let's Get You Booked</p>
         <h2 class="section__heading section__heading--center reveal" id="form-heading">Start My Booking</h2>
@@ -836,22 +1422,14 @@
               <div class="form-group form-group--full">
                 <label>Birthday <span class="label-note">Month and day only — so we can celebrate you ✨</span></label>
                 <div class="birthday-row">
-                  <select id="birthday-month" name="birthday-month">
+                  <select id="birthday-month" name="birthday-month" aria-label="Birthday month">
                     <option value="">Month</option>
-                    <option>January</option>
-                    <option>February</option>
-                    <option>March</option>
-                    <option>April</option>
-                    <option>May</option>
-                    <option>June</option>
-                    <option>July</option>
-                    <option>August</option>
-                    <option>September</option>
-                    <option>October</option>
-                    <option>November</option>
-                    <option>December</option>
+                    <option>January</option><option>February</option><option>March</option>
+                    <option>April</option><option>May</option><option>June</option>
+                    <option>July</option><option>August</option><option>September</option>
+                    <option>October</option><option>November</option><option>December</option>
                   </select>
-                  <select id="birthday-day" name="birthday-day">
+                  <select id="birthday-day" name="birthday-day" aria-label="Birthday day">
                     <option value="">Day</option>
                     <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
                     <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
@@ -863,6 +1441,24 @@
                   </select>
                 </div>
               </div>
+
+              <!--
+                OPTIONAL: Cabin type selector
+                Great for trips with multiple cabin tiers.
+                Delete if using a single cabin type.
+              -->
+              <!--
+              <div class="form-group form-group--full">
+                <label for="cabin-type">Which cabin are you interested in?</label>
+                <select id="cabin-type" name="cabin-type" required>
+                  <option value="">Select a cabin type</option>
+                  <option>[CABIN OPTION 1 — e.g., Interior — $1,285/person]</option>
+                  <option>[CABIN OPTION 2]</option>
+                  <option>[CABIN OPTION 3]</option>
+                  <option>I'm not sure yet — help me decide</option>
+                </select>
+              </div>
+              -->
 
               <div class="form-group form-group--full">
                 <label for="contact-method">How would you like me to follow up?</label>
@@ -898,9 +1494,8 @@
               </div>
 
               <!--
-                OPTIONAL: Celebration field — great for themed trips.
-                Delete any options that don't fit. Remove entire block
-                if celebrations aren't relevant to the trip.
+                OPTIONAL: Celebration field — great for birthday / milestone trips.
+                Customize or remove options to fit the trip.
               -->
               <div class="form-group form-group--full">
                 <label for="celebration">What are you celebrating on this trip?</label>
@@ -932,12 +1527,12 @@
               </div>
 
               <div class="form-submit">
-                <button type="submit" class="btn-gold">Secure My Spot</button>
+                <button type="submit" class="btn-gold">Send Me More Information</button>
                 <p
                   id="form-success-message"
                   style="display:none; margin-top:12px; color:var(--color-text-muted); text-align:center;"
                 >
-                  [FORM SUCCESS MESSAGE — e.g., "Your request has been submitted ✨ [ADVISOR NAME] will follow up with next steps within 24 hours."]
+                  [FORM SUCCESS MESSAGE — e.g., "Your request has been submitted ✨ [ADVISOR NAME] will follow up within 24–48 hours."]
                 </p>
               </div>
 
@@ -948,16 +1543,23 @@
     </section>
 
     <!-- ============================================================
-         FINAL CTA SECTION
+         FINAL CTA
     ============================================================ -->
     <section class="cta-section" aria-labelledby="cta-heading">
       <div class="container container--narrow">
-        <p class="section-label reveal" style="color:var(--color-gold);">[CTA LABEL — e.g., "February 2027"]</p>
+        <p class="section-label reveal" style="color:var(--color-gold);">[CTA LABEL — e.g., "July 23–30, 2027"]</p>
         <h2 class="cta-section__heading reveal" id="cta-heading">
-          [CTA HEADLINE LINE 1]<br><em>[CTA HEADLINE LINE 2 — italic]</em>
+          [CTA HEADLINE LINE 1]<br><em>[CTA HEADLINE LINE 2]</em>
         </h2>
         <p class="cta-section__sub reveal">[TRIP NAME] · [CRUISE LINE] · [SHIP NAME]</p>
-        <div class="reveal">
+        <div class="reveal" style="display:flex; justify-content:center;">
+          <!--
+            Option A — Link to TravelJoy or external booking page:
+            <a href="[TRAVELJOY OR BOOKING LINK]" target="_blank" rel="noopener" class="btn-gold">Reserve My Cabin Now</a>
+            
+            Option B — Scroll to inquiry form:
+            <a href="#inquiry-form" class="btn-gold">Reserve Your Cabin</a>
+          -->
           <a href="#inquiry-form" class="btn-gold">Reserve Your Cabin</a>
         </div>
       </div>
@@ -966,7 +1568,7 @@
   </main>
 
   <!-- ============================================================
-       FOOTER — copyright only
+       FOOTER
   ============================================================ -->
   <footer class="site-footer" role="contentinfo">
     <p>&copy; [YEAR] [ADVISOR BUSINESS NAME]™ · All rights reserved</p>
@@ -974,24 +1576,27 @@
 
   <!-- ── SCRIPTS ── -->
   <script>
-    /* Scroll reveal */
+    /* Scroll reveal — respects prefers-reduced-motion via CSS */
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 
   <script>
-    /* Form submission handler */
+    /* Form submission — fetch, no page reload */
     document.addEventListener('DOMContentLoaded', function () {
       const form    = document.getElementById('inquiry');
       const success = document.getElementById('form-success-message');
-      if (!form || !success) return;
+      const btn     = form ? form.querySelector('button[type="submit"]') : null;
+      if (!form || !success || !btn) return;
 
       form.addEventListener('submit', async function (event) {
         event.preventDefault();
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
         try {
           const response = await fetch(form.action, {
             method: 'POST',
@@ -1002,10 +1607,15 @@
             form.reset();
             success.style.display = 'block';
             success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            btn.textContent = 'Sent ✓';
           } else {
+            btn.disabled = false;
+            btn.textContent = 'Send Me More Information';
             alert('Something went wrong. Please try again.');
           }
         } catch (error) {
+          btn.disabled = false;
+          btn.textContent = 'Send Me More Information';
           alert('Something went wrong. Please try again.');
         }
       });
