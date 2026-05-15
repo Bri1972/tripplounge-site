@@ -31,106 +31,176 @@
       --color-gold-hover:    var(--color-accent-hover);
       --color-gold-light:    var(--color-accent-light);
       --color-gold-border:   var(--color-accent-border);
+
       --radius-sm:.25rem; --radius-md:.5rem; --radius-lg:.75rem;
       --radius-xl:1rem; --radius-full:9999px;
       --transition:200ms cubic-bezier(0.16,1,0.3,1);
-      --text-xs:clamp(0.75rem,0.7rem + 0.25vw,0.875rem);
-      --text-sm:clamp(0.875rem,0.82rem + 0.28vw,1rem);
-      --text-base:clamp(1rem,0.96rem + 0.2vw,1.125rem);
-      --text-lg:clamp(1.125rem,1rem + 0.6vw,1.4rem);
-      --text-xl:clamp(1.5rem,1.2rem + 1.2vw,2.25rem);
-      --text-2xl:clamp(2rem,1.3rem + 2.5vw,3.5rem);
+
+      --text-xs:   clamp(0.72rem,  0.68rem + 0.2vw,  0.875rem);
+      --text-sm:   clamp(0.85rem,  0.8rem  + 0.25vw, 1rem);
+      --text-base: clamp(0.95rem,  0.9rem  + 0.25vw, 1.125rem);
+      --text-lg:   clamp(1.1rem,   1rem    + 0.5vw,  1.4rem);
+      --text-xl:   clamp(1.35rem,  1.1rem  + 1.25vw, 2.25rem);
+      --text-2xl:  clamp(1.75rem,  1.2rem  + 2.75vw, 3.5rem);
+      --text-hero: clamp(2.5rem,   2rem    + 4vw,    7rem);
+
       --space-1:2px;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;
       --space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;
       --space-12:3rem;--space-16:4rem;--space-20:5rem;--space-24:6rem;
+
       --font-display:'Cormorant Garamond',Georgia,serif;
       --font-body:'Jost','Helvetica Neue',sans-serif;
       --content-narrow:640px;--content-default:920px;--content-wide:1160px;
+
+      --section-py: var(--space-12);
     }
+    @media(min-width:680px){ :root{ --section-py:var(--space-16); } }
+    @media(min-width:920px){ :root{ --section-py:var(--space-20); } }
+
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
-    body{font-family:var(--font-body);background:var(--color-bg);color:var(--color-text);font-size:var(--text-base);line-height:1.7;-webkit-font-smoothing:antialiased;}
-    .container{width:100%;max-width:var(--content-default);margin-inline:auto;padding-inline:var(--space-6);}
+    body{font-family:var(--font-body);background:var(--color-bg);color:var(--color-text);font-size:var(--text-base);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+    /* ── CONTAINERS ── */
+    .container{width:100%;max-width:var(--content-default);margin-inline:auto;padding-inline:var(--space-4);}
+    @media(min-width:480px){.container{padding-inline:var(--space-5);}}
+    @media(min-width:680px){.container{padding-inline:var(--space-6);}}
+    @media(min-width:920px){.container{padding-inline:var(--space-8);}}
     .container--narrow{max-width:var(--content-narrow);}
+
     .skip-link{position:absolute;top:-100%;left:var(--space-4);background:var(--color-gold);color:#fff;padding:var(--space-2) var(--space-4);border-radius:var(--radius-md);font-size:var(--text-sm);text-decoration:none;z-index:9999;}
     .skip-link:focus{top:var(--space-4);}
 
-    /* HEADER */
-    .site-header{background:none;border-bottom:1px solid var(--color-divider);padding-block:var(--space-6);text-align:center;}
-    .site-header__brand{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:400;letter-spacing:0.08em;color:var(--color-text);text-decoration:none;display:block;}
+    /* ── HEADER ── */
+    .site-header{background:none;border-bottom:1px solid var(--color-divider);padding-block:var(--space-4);text-align:center;}
+    @media(min-width:680px){.site-header{padding-block:var(--space-6);}}
+
+    .site-header__logo{display:block;max-height:64px;max-width:240px;width:auto;margin-inline:auto;margin-bottom:var(--space-2);object-fit:contain;}
+    @media(min-width:680px){.site-header__logo{max-height:80px;max-width:300px;}}
+    .site-header__logo:not([src]),.site-header__logo[src=""]{display:none;}
+
+    .site-header__brand{font-family:var(--font-display);font-size:clamp(1.4rem,1.2rem + 1vw,var(--text-2xl));font-weight:400;letter-spacing:0.08em;color:var(--color-text);text-decoration:none;display:block;}
     .site-header__brand span{color:var(--color-gold);font-weight:300;}
     .site-header__tagline{font-size:var(--text-xs);letter-spacing:0.2em;text-transform:uppercase;color:var(--color-text-muted);margin-top:var(--space-1);}
 
-    .gold-rule{width:48px;height:1px;background:var(--color-gold);margin-block:var(--space-6);}
+    /* ── UTILITIES ── */
+    .gold-rule{width:40px;height:1px;background:var(--color-gold);margin-block:var(--space-5);}
+    @media(min-width:680px){.gold-rule{width:48px;margin-block:var(--space-6);}}
     .gold-rule--center{margin-inline:auto;}
     .section-label{font-size:var(--text-xs);letter-spacing:0.2em;text-transform:uppercase;color:var(--color-gold);font-weight:500;margin-bottom:var(--space-3);}
 
-    .btn-gold{display:inline-flex;align-items:center;gap:var(--space-2);background:var(--color-gold);color:#fff;font-family:var(--font-body);font-size:var(--text-sm);font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:var(--space-4) var(--space-8);border-radius:var(--radius-full);border:none;cursor:pointer;transition:background var(--transition),transform var(--transition);}
+    /* ── BUTTONS ── */
+    .btn-gold{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);background:var(--color-gold);color:#fff;font-family:var(--font-body);font-size:var(--text-sm);font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;width:100%;padding:var(--space-4) var(--space-6);border-radius:var(--radius-full);border:none;cursor:pointer;transition:background var(--transition),transform var(--transition);-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+    @media(min-width:480px){.btn-gold{width:auto;padding:var(--space-4) var(--space-8);}}
     .btn-gold:hover{background:var(--color-gold-hover);transform:translateY(-1px);}
+    .btn-gold:active{transform:translateY(0);}
 
-    .section{padding-block:var(--space-20);}
+    /* ── SECTIONS ── */
+    .section{padding-block:var(--section-py);}
     .section--cream{background:var(--color-bg);}
     .section--warm{background:var(--color-surface-2);}
-    .section__heading{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:400;line-height:1.2;color:var(--color-text);margin-bottom:var(--space-6);}
+
+    .section__heading{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:400;line-height:1.15;color:var(--color-text);margin-bottom:var(--space-5);}
+    @media(min-width:680px){.section__heading{margin-bottom:var(--space-6);}}
     .section__heading--center{text-align:center;}
     .section__heading em{font-style:italic;color:var(--color-gold);}
 
-    /* HERO */
-    .hero{background:url('') center/cover no-repeat;min-height:600px;height:min(82vh,600px);background-color:var(--color-surface-navy);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--space-8);position:relative;overflow:hidden;}
-    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 110%,rgba(123,45,139,0.35) 0%,transparent 65%);pointer-events:none;}
-    .hero__title{font-family:var(--font-display);font-size:clamp(3.5rem,8vw,7rem);font-weight:300;color:#fff;line-height:1.05;letter-spacing:0.04em;position:relative;margin-bottom:var(--space-5);}
+    /* ── HERO ── */
+    .hero{background:url('') center/cover no-repeat;background-color:var(--color-surface-navy);min-height:420px;height:min(75vh,520px);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:var(--space-8) var(--space-5) var(--space-10);text-align:center;position:relative;overflow:hidden;}
+    @media(min-width:480px){.hero{height:min(78vh,560px);justify-content:center;padding:var(--space-8);}}
+    @media(min-width:680px){.hero{min-height:560px;height:min(82vh,640px);padding:var(--space-12);}}
+    @media(min-width:920px){.hero{min-height:600px;height:min(82vh,700px);}}
+
+    .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(20,4,30,0.8) 0%,rgba(20,4,30,0.4) 50%,rgba(20,4,30,0.15) 100%);pointer-events:none;}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 110%,rgba(123,45,139,0.35) 0%,transparent 65%);pointer-events:none;z-index:1;}
+
+    .hero__content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:var(--space-3);}
+
+    .hero__eyebrow{font-size:var(--text-xs);letter-spacing:0.25em;text-transform:uppercase;color:#c87ddf;font-weight:500;}
+    @media(min-width:480px){.hero__eyebrow{font-size:var(--text-sm);}}
+
+    .hero__title{font-family:var(--font-display);font-size:var(--text-hero);font-weight:300;color:#fff;line-height:1.05;letter-spacing:0.03em;}
     .hero__title em{font-style:italic;color:#c87ddf;}
-    .hero__eyebrow{font-size:var(--text-xs);letter-spacing:0.25em;text-transform:uppercase;color:#c87ddf;font-weight:500;margin-bottom:var(--space-4);position:relative;}
-    .hero__subtitle{font-size:var(--text-sm);color:rgba(253,248,255,0.6);letter-spacing:0.12em;text-transform:uppercase;position:relative;}
 
-    .highlight-strip{background:var(--color-gold);padding-block:var(--space-5);text-align:center;}
-    .highlight-strip p{font-size:var(--text-sm);letter-spacing:0.15em;text-transform:uppercase;color:#fff;font-weight:500;}
+    .hero__subtitle{font-size:var(--text-xs);color:rgba(253,248,255,0.65);letter-spacing:0.15em;text-transform:uppercase;}
+    @media(min-width:480px){.hero__subtitle{font-size:var(--text-sm);}}
 
-    /* OVERVIEW */
-    .overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-6);margin-top:var(--space-10);}
-    .overview-card{background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-lg);padding:var(--space-6);text-align:center;}
-    .overview-card__icon{font-size:1.5rem;margin-bottom:var(--space-3);display:block;}
-    .overview-card__label{font-size:var(--text-xs);letter-spacing:0.15em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:var(--space-2);}
-    .overview-card__value{font-family:var(--font-display);font-size:var(--text-lg);font-weight:500;color:var(--color-text);line-height:1.3;}
+    /* ── HIGHLIGHT STRIP ── */
+    .highlight-strip{background:var(--color-gold);padding-block:var(--space-4);padding-inline:var(--space-4);text-align:center;}
+    .highlight-strip p{font-size:var(--text-xs);letter-spacing:0.1em;text-transform:uppercase;color:#fff;font-weight:500;line-height:1.6;}
+    @media(min-width:480px){.highlight-strip p{font-size:var(--text-sm);letter-spacing:0.15em;}}
 
-    /* DESTINATIONS */
-    .destinations-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--space-4);margin-top:var(--space-10);}
-    .destination-card{background:var(--color-surface-navy);border-radius:var(--radius-lg);padding:var(--space-6) var(--space-5);color:var(--color-text-inverse);position:relative;overflow:hidden;}
+    /* ── OVERVIEW ── */
+    .overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);margin-top:var(--space-8);}
+    @media(min-width:480px){.overview-grid{gap:var(--space-4);}}
+    @media(min-width:680px){.overview-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--space-5);margin-top:var(--space-10);}}
+
+    .overview-card{background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-lg);padding:var(--space-4) var(--space-3);text-align:center;}
+    @media(min-width:480px){.overview-card{padding:var(--space-5);}}
+    @media(min-width:680px){.overview-card{padding:var(--space-6);}}
+
+    .overview-card__icon{font-size:1.25rem;margin-bottom:var(--space-2);display:block;}
+    @media(min-width:680px){.overview-card__icon{font-size:1.5rem;margin-bottom:var(--space-3);}}
+    .overview-card__label{font-size:var(--text-xs);letter-spacing:0.12em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:var(--space-1);}
+    .overview-card__value{font-family:var(--font-display);font-size:clamp(1rem,0.9rem + 0.5vw,var(--text-lg));font-weight:500;color:var(--color-text);line-height:1.3;}
+
+    /* ── DESTINATIONS ── */
+    .destinations-grid{display:grid;grid-template-columns:1fr;gap:var(--space-3);margin-top:var(--space-8);}
+    @media(min-width:480px){.destinations-grid{grid-template-columns:1fr 1fr;gap:var(--space-4);}}
+    @media(min-width:680px){.destinations-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--space-4);margin-top:var(--space-10);}}
+
+    .destination-card{background:var(--color-surface-navy);border-radius:var(--radius-lg);padding:var(--space-5) var(--space-4);color:var(--color-text-inverse);position:relative;overflow:hidden;}
+    @media(min-width:680px){.destination-card{padding:var(--space-6) var(--space-5);}}
     .destination-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--color-gold);}
     .destination-card__day{font-size:var(--text-xs);letter-spacing:0.15em;text-transform:uppercase;color:#c87ddf;margin-bottom:var(--space-2);}
     .destination-card__name{font-family:var(--font-display);font-size:var(--text-xl);font-weight:400;line-height:1.2;margin-bottom:var(--space-2);}
     .destination-card__detail{font-size:var(--text-xs);color:rgba(253,248,255,0.6);line-height:1.6;}
 
-    /* ITINERARY */
-    .itinerary-list{margin-top:var(--space-10);border:1px solid var(--color-divider);border-radius:var(--radius-lg);overflow:hidden;}
-    .itinerary-item{display:grid;grid-template-columns:110px 1fr;gap:var(--space-6);padding:var(--space-5) var(--space-6);border-bottom:1px solid var(--color-divider);background:var(--color-surface);align-items:center;}
+    /* ── ITINERARY ── */
+    .itinerary-list{margin-top:var(--space-8);border:1px solid var(--color-divider);border-radius:var(--radius-lg);overflow:hidden;}
+    @media(min-width:680px){.itinerary-list{margin-top:var(--space-10);}}
+
+    .itinerary-item{display:flex;flex-direction:column;gap:var(--space-1);padding:var(--space-4);border-bottom:1px solid var(--color-divider);background:var(--color-surface);}
+    @media(min-width:480px){.itinerary-item{display:grid;grid-template-columns:90px 1fr;gap:var(--space-4);padding:var(--space-4) var(--space-5);align-items:center;}}
+    @media(min-width:680px){.itinerary-item{grid-template-columns:110px 1fr;gap:var(--space-6);padding:var(--space-5) var(--space-6);}}
     .itinerary-item:last-child{border-bottom:none;}
     .itinerary-item:nth-child(even){background:var(--color-surface-2);}
+    .itinerary-item--sea .itinerary-item__port{color:var(--color-text-muted);font-style:italic;}
+
     .itinerary-item__day{font-size:var(--text-xs);letter-spacing:0.12em;text-transform:uppercase;color:var(--color-gold);font-weight:500;}
     .itinerary-item__date{font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;}
     .itinerary-item__port{font-family:var(--font-display);font-size:var(--text-lg);font-weight:500;color:var(--color-text);line-height:1.2;}
     .itinerary-item__times{font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-1);}
-    .itinerary-item--sea .itinerary-item__port{color:var(--color-text-muted);font-style:italic;}
     .itinerary-item__badge{display:inline-block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;background:var(--color-accent-light);color:var(--color-gold);border:1px solid var(--color-accent-border);border-radius:var(--radius-full);padding:2px 8px;margin-top:var(--space-2);}
 
-    /* CABIN TIERS */
-    .cabin-tiers{display:flex;flex-direction:column;gap:var(--space-5);margin-top:var(--space-10);}
-    .cabin-tier{background:var(--color-surface-navy);border-radius:var(--radius-xl);padding:var(--space-8);color:var(--color-text-inverse);position:relative;overflow:hidden;display:grid;grid-template-columns:1fr auto;gap:var(--space-6);align-items:start;}
+    /* ── CABIN TIERS ── */
+    .cabin-tiers{display:flex;flex-direction:column;gap:var(--space-4);margin-top:var(--space-8);}
+    @media(min-width:680px){.cabin-tiers{gap:var(--space-5);margin-top:var(--space-10);}}
+
+    .cabin-tier{background:var(--color-surface-navy);border-radius:var(--radius-xl);padding:var(--space-6) var(--space-5);color:var(--color-text-inverse);position:relative;overflow:hidden;}
+    @media(min-width:680px){.cabin-tier{padding:var(--space-8);}}
     .cabin-tier::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--color-gold);}
     .cabin-tier--featured::before{background:linear-gradient(90deg,#c87ddf,var(--color-gold));}
+
+    .cabin-tier__body{display:flex;flex-direction:column;gap:var(--space-4);}
+    @media(min-width:580px){.cabin-tier__body{flex-direction:row;align-items:flex-start;justify-content:space-between;gap:var(--space-6);}}
+
+    .cabin-tier__info{flex:1;}
     .cabin-tier__label{font-size:var(--text-xs);letter-spacing:0.2em;text-transform:uppercase;color:#c87ddf;margin-bottom:var(--space-2);}
     .cabin-tier__name{font-family:var(--font-display);font-size:var(--text-xl);font-weight:400;line-height:1.2;margin-bottom:var(--space-3);}
     .cabin-tier__details{font-size:var(--text-xs);color:rgba(253,248,255,0.55);line-height:2;}
     .cabin-tier__details span{display:block;}
-    .cabin-tier__price-col{text-align:right;flex-shrink:0;}
-    .cabin-tier__price-main{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:400;color:#c87ddf;line-height:1;}
-    .cabin-tier__price-sub{font-size:var(--text-xs);color:rgba(253,248,255,0.5);margin-top:var(--space-1);}
     .cabin-tier__scarcity{display:inline-block;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;background:rgba(200,125,223,0.15);color:#c87ddf;border:1px solid rgba(200,125,223,0.3);border-radius:var(--radius-full);padding:3px 10px;margin-top:var(--space-3);}
-    .cabin-tier__nonrefund{grid-column:1/-1;font-size:var(--text-xs);color:rgba(253,248,255,0.38);font-style:italic;border-top:1px solid rgba(255,255,255,0.07);padding-top:var(--space-4);margin-top:var(--space-2);line-height:1.6;}
-    @media(max-width:580px){.cabin-tier{grid-template-columns:1fr;}.cabin-tier__price-col{text-align:left;}}
 
-    /* PAYMENT */
-    .payment-card{background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-xl);padding:var(--space-8);margin-top:var(--space-8);}
+    .cabin-tier__price-col{display:flex;align-items:center;justify-content:space-between;padding-top:var(--space-4);border-top:1px solid rgba(255,255,255,0.08);}
+    @media(min-width:580px){.cabin-tier__price-col{flex-direction:column;align-items:flex-end;justify-content:flex-start;padding-top:0;border-top:none;flex-shrink:0;}}
+    .cabin-tier__price-main{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:400;color:#c87ddf;line-height:1;}
+    .cabin-tier__price-sub{font-size:var(--text-xs);color:rgba(253,248,255,0.5);margin-top:4px;}
+    .cabin-tier__nonrefund{font-size:var(--text-xs);color:rgba(253,248,255,0.38);font-style:italic;border-top:1px solid rgba(255,255,255,0.07);padding-top:var(--space-4);margin-top:var(--space-5);line-height:1.6;}
+
+    /* ── PAYMENT CARD ── */
+    .payment-card{background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-xl);padding:var(--space-6);margin-top:var(--space-6);}
+    @media(min-width:680px){.payment-card{padding:var(--space-8);margin-top:var(--space-8);}}
     .payment-card__heading{font-family:var(--font-display);font-size:var(--text-xl);font-weight:400;color:var(--color-text);margin-bottom:var(--space-6);}
     .payment-list{list-style:none;display:flex;flex-direction:column;gap:var(--space-4);}
     .payment-list li{display:flex;flex-direction:column;gap:2px;padding-bottom:var(--space-4);border-bottom:1px solid var(--color-divider);}
@@ -139,85 +209,81 @@
     .payment-list__value{font-family:var(--font-display);font-size:var(--text-lg);font-weight:500;color:var(--color-text);}
     .payment-list__note{font-size:var(--text-xs);color:var(--color-text-muted);}
 
-    /* INCLUDED */
-    .included-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);margin-top:var(--space-10);}
-    @media(max-width:580px){.included-grid{grid-template-columns:1fr;}}
-    .included-card{background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-lg);padding:var(--space-6);}
+    /* ── INCLUDED ── */
+    .included-grid{display:grid;grid-template-columns:1fr;gap:var(--space-4);margin-top:var(--space-8);}
+    @media(min-width:580px){.included-grid{grid-template-columns:1fr 1fr;gap:var(--space-6);margin-top:var(--space-10);}}
+
+    .included-card{background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-lg);padding:var(--space-5);}
+    @media(min-width:680px){.included-card{padding:var(--space-6);}}
     .included-card__heading{font-size:var(--text-xs);letter-spacing:0.15em;text-transform:uppercase;font-weight:500;margin-bottom:var(--space-4);padding-bottom:var(--space-3);border-bottom:1px solid var(--color-divider);}
     .included-card__heading--yes{color:var(--color-gold);}
     .included-card__heading--no{color:var(--color-text-muted);}
     .included-card ul{list-style:none;display:flex;flex-direction:column;gap:var(--space-3);}
     .included-card li{font-size:var(--text-sm);color:var(--color-text-muted);display:flex;align-items:flex-start;gap:var(--space-3);line-height:1.5;}
-    .included-card li::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:7px;}
+    .included-card li::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:8px;}
     .included-card--yes li::before{background:var(--color-gold);}
     .included-card--no li::before{background:var(--color-text-faint);}
 
-    /* FAQ */
-    .faq-list{display:flex;flex-direction:column;gap:var(--space-4);margin-top:var(--space-10);}
-    .faq-item{background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-lg);padding:var(--space-6);}
+    /* ── FAQ ── */
+    .faq-list{display:flex;flex-direction:column;gap:var(--space-4);margin-top:var(--space-8);}
+    @media(min-width:680px){.faq-list{margin-top:var(--space-10);}}
+    .faq-item{background:var(--color-surface);border:1px solid var(--color-divider);border-radius:var(--radius-lg);padding:var(--space-5);}
+    @media(min-width:680px){.faq-item{padding:var(--space-6);}}
     .faq-item__q{font-family:var(--font-display);font-size:var(--text-lg);font-weight:500;color:var(--color-text);margin-bottom:var(--space-3);}
     .faq-item__a{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.7;}
 
-    /* STEPS */
-    .steps-list{display:flex;flex-direction:column;gap:var(--space-6);margin-top:var(--space-10);}
-    .step-item{display:flex;gap:var(--space-6);align-items:flex-start;}
-    .step-item__num{width:44px;height:44px;min-width:44px;border-radius:50%;background:var(--color-gold-light);border:1px solid var(--color-gold-border);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:var(--text-lg);font-weight:500;color:var(--color-gold);}
+    /* ── STEPS ── */
+    .steps-list{display:flex;flex-direction:column;gap:var(--space-5);margin-top:var(--space-8);}
+    @media(min-width:680px){.steps-list{gap:var(--space-6);margin-top:var(--space-10);}}
+    .step-item{display:flex;gap:var(--space-4);align-items:flex-start;}
+    @media(min-width:680px){.step-item{gap:var(--space-6);}}
+    .step-item__num{width:40px;height:40px;min-width:40px;border-radius:50%;background:var(--color-gold-light);border:1px solid var(--color-gold-border);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:var(--text-lg);font-weight:500;color:var(--color-gold);flex-shrink:0;}
+    @media(min-width:680px){.step-item__num{width:44px;height:44px;min-width:44px;}}
     .step-item__body strong{display:block;font-size:var(--text-base);font-weight:500;color:var(--color-text);margin-bottom:var(--space-1);}
     .step-item__body p{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;}
 
-    /* CTA */
-    .cta-section{background:var(--color-surface-navy);padding-block:var(--space-24);text-align:center;position:relative;overflow:hidden;}
+    /* ── CTA ── */
+    .cta-section{background:var(--color-surface-navy);padding-block:var(--space-16);padding-inline:var(--space-5);text-align:center;position:relative;overflow:hidden;}
+    @media(min-width:680px){.cta-section{padding-block:var(--space-20);}}
+    @media(min-width:920px){.cta-section{padding-block:var(--space-24);}}
     .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(123,45,139,0.25) 0%,transparent 65%);pointer-events:none;}
     .cta-section__heading{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:300;color:var(--color-text-inverse);margin-bottom:var(--space-4);line-height:1.2;}
     .cta-section__heading em{font-style:italic;color:#c87ddf;}
-    .cta-section__sub{font-size:var(--text-sm);color:rgba(253,248,255,0.6);margin-bottom:var(--space-10);letter-spacing:0.05em;}
+    .cta-section__sub{font-size:var(--text-sm);color:rgba(253,248,255,0.6);margin-bottom:var(--space-8);letter-spacing:0.05em;}
+    @media(min-width:680px){.cta-section__sub{margin-bottom:var(--space-10);}}
 
-    /* FORM */
+    /* ── FORM ── */
     .form-wrap{max-width:680px;margin-inline:auto;}
-    .form-intro{text-align:center;margin-bottom:var(--space-8);}
+    .form-intro{text-align:center;margin-bottom:var(--space-6);}
+    @media(min-width:680px){.form-intro{margin-bottom:var(--space-8);}}
     .form-intro p{color:var(--color-text-muted);font-size:var(--text-sm);line-height:1.7;}
     .form-intro p+p{margin-top:var(--space-3);}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);}
-    @media(max-width:560px){.form-grid{grid-template-columns:1fr;}}
+
+    .form-grid{display:grid;grid-template-columns:1fr;gap:var(--space-4);}
+    @media(min-width:560px){.form-grid{grid-template-columns:1fr 1fr;gap:var(--space-5);}}
+
     .form-group{display:flex;flex-direction:column;gap:var(--space-2);}
     .form-group--full{grid-column:1/-1;}
+
     label{font-size:var(--text-xs);letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-muted);font-weight:500;}
     label .label-note{font-size:0.7rem;letter-spacing:0.04em;text-transform:none;color:var(--color-text-faint);font-weight:400;display:block;margin-top:2px;}
-    input,select,textarea{font-family:var(--font-body);font-size:var(--text-sm);color:var(--color-text);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--space-4) var(--space-5);width:100%;outline:none;transition:border-color var(--transition);appearance:none;}
+
+    input,select,textarea{font-family:var(--font-body);font-size:1rem;color:var(--color-text);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--space-4);width:100%;outline:none;transition:border-color var(--transition);appearance:none;-webkit-appearance:none;min-height:48px;}
+    @media(min-width:680px){input,select,textarea{padding:var(--space-4) var(--space-5);font-size:var(--text-sm);}}
     input:focus,select:focus,textarea:focus{border-color:var(--color-gold);box-shadow:0 0 0 3px rgba(123,45,139,0.1);}
     textarea{min-height:120px;resize:vertical;line-height:1.6;}
     select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b5a72' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right var(--space-4) center;padding-right:var(--space-10);cursor:pointer;}
-    .form-submit{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:var(--space-3);margin-top:var(--space-4);}
-    .birthday-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);}
 
+    .birthday-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);}
+    .form-submit{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:var(--space-3);margin-top:var(--space-4);}
+
+    /* ── FOOTER ── */
     .site-footer{background:var(--color-surface-navy-2);color:rgba(253,248,255,0.5);text-align:center;padding-block:var(--space-8);font-size:var(--text-xs);letter-spacing:0.05em;}
 
-    .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+    /* ── REVEAL ── */
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease;}
     .reveal.visible{opacity:1;transform:none;}
-
-    @media(max-width:680px){
-      .container{padding-inline:var(--space-4);}
-      .site-header{padding-block:var(--space-4);}
-      .hero{min-height:420px;height:min(62vh,520px);}
-      .highlight-strip p{font-size:0.72rem;letter-spacing:0.1em;padding-inline:var(--space-4);}
-      .section{padding-block:var(--space-12);}
-      .overview-grid{grid-template-columns:1fr 1fr;gap:var(--space-4);}
-      .destinations-grid{grid-template-columns:1fr;}
-      .itinerary-item{grid-template-columns:1fr;gap:var(--space-2);padding:var(--space-4);}
-      .cabin-tier{padding:var(--space-6);}
-      .payment-card,.included-card{padding:var(--space-6);}
-      .step-item{gap:var(--space-4);}
-      .step-item__num{width:40px;height:40px;min-width:40px;}
-      .btn-gold{width:100%;justify-content:center;padding:var(--space-4) var(--space-5);}
-      .form-grid{grid-template-columns:1fr;}
-      .form-group--full{grid-column:auto;}
-    }
-    @media(max-width:420px){
-      .hero{min-height:360px;height:min(56vh,440px);}
-      .section{padding-block:var(--space-10);}
-      .cta-section{padding-block:var(--space-16);}
-      .overview-grid{grid-template-columns:1fr;}
-    }
+    @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
   </style>
 </head>
 <body>
@@ -225,18 +291,19 @@
   <a href="#inquiry-form" class="skip-link">Skip to booking form</a>
 
   <header class="site-header" role="banner">
-    <a href="#" class="site-header__brand" aria-label="Unique World Travel LLC home">
-      Unique World Travel<span>™</span>
-    </a>
+    <img src="Unique's Logo 2.png" alt="Unique World Travel LLC logo" class="site-header__logo">
     <p class="site-header__tagline">Presents</p>
   </header>
 
   <main id="main-content">
 
+    <!-- HERO — add hero image src to background:url() in CSS when ready -->
     <section class="hero" aria-label="Tre's 50th Birthday Cruise hero">
-      <h1 class="hero__title">Tre's 50th<br><em>Birthday Cruise</em></h1>
-      <p class="hero__eyebrow">Royal Caribbean · Rhapsody of the Seas</p>
-      <p class="hero__subtitle">July 23–30, 2027 · Athens (Piraeus), Greece</p>
+      <div class="hero__content">
+        <p class="hero__eyebrow">Royal Caribbean · Rhapsody of the Seas</p>
+        <h1 class="hero__title">Tre's 50th<br><em>Birthday Cruise</em></h1>
+        <p class="hero__subtitle">July 23–30, 2027 · Athens (Piraeus), Greece</p>
+      </div>
     </section>
 
     <div class="highlight-strip" role="note">
@@ -430,84 +497,94 @@
         <div class="cabin-tiers reveal">
 
           <div class="cabin-tier cabin-tier--featured">
-            <div>
-              <p class="cabin-tier__label">Grand Suite · 1 Bedroom</p>
-              <p class="cabin-tier__name">The Full Experience</p>
-              <p class="cabin-tier__details">
-                <span>349 sq. ft. stateroom + 104 sq. ft. private balcony · Up to 5 guests</span>
-                <span>Royal King bed + double sofa bed · Ocean view · Tub & double sink</span>
-                <span>Priority check-in & departure lounge · Concierge Service</span>
-                <span>Priority tender tickets · Luggage valet · Spa bathrobes</span>
-              </p>
-              <span class="cabin-tier__scarcity">⚠ Only 2 Left</span>
-            </div>
-            <div class="cabin-tier__price-col">
-              <p class="cabin-tier__price-main">$3,406</p>
-              <p class="cabin-tier__price-sub">per person</p>
-            </div>
-            <p class="cabin-tier__nonrefund">$500 per person deposit required at booking · Available until November 14, 2026 · All deposits are non-refundable.</p>
-          </div>
-
-          <div class="cabin-tier">
-            <div>
-              <p class="cabin-tier__label">Sunset Junior Suite</p>
-              <p class="cabin-tier__name">Dramatic Aft Views</p>
-              <p class="cabin-tier__details">
-                <span>243–247 sq. ft. + 64 sq. ft. aft-facing private balcony · Up to 4 guests</span>
-                <span>Royal King bed + double sofa bed · Ocean view</span>
-              </p>
-            </div>
-            <div class="cabin-tier__price-col">
-              <p class="cabin-tier__price-main">$2,860</p>
-              <p class="cabin-tier__price-sub">per person</p>
+            <div class="cabin-tier__body">
+              <div class="cabin-tier__info">
+                <p class="cabin-tier__label">Grand Suite · 1 Bedroom</p>
+                <p class="cabin-tier__name">The Full Experience</p>
+                <p class="cabin-tier__details">
+                  <span>349 sq. ft. stateroom + 104 sq. ft. private balcony · Up to 5 guests</span>
+                  <span>Royal King bed + double sofa bed · Ocean view · Tub & double sink</span>
+                  <span>Priority check-in & departure lounge · Concierge Service</span>
+                  <span>Priority tender tickets · Luggage valet · Spa bathrobes</span>
+                </p>
+                <span class="cabin-tier__scarcity">⚠ Only 2 Left</span>
+              </div>
+              <div class="cabin-tier__price-col">
+                <p class="cabin-tier__price-main">$3,406</p>
+                <p class="cabin-tier__price-sub">per person</p>
+              </div>
             </div>
             <p class="cabin-tier__nonrefund">$500 per person deposit required at booking · Available until November 14, 2026 · All deposits are non-refundable.</p>
           </div>
 
           <div class="cabin-tier">
-            <div>
-              <p class="cabin-tier__label">Junior Suite</p>
-              <p class="cabin-tier__name">Intimate Suite with Ocean Views</p>
-              <p class="cabin-tier__details">
-                <span>243 sq. ft. + 64 sq. ft. balcony · Up to 4 guests</span>
-                <span>Royal King bed + double sofa bed · Ocean view</span>
-              </p>
-            </div>
-            <div class="cabin-tier__price-col">
-              <p class="cabin-tier__price-main">$2,578</p>
-              <p class="cabin-tier__price-sub">per person</p>
-            </div>
-            <p class="cabin-tier__nonrefund">$500 per person deposit required at booking · Available until November 14, 2026 · All deposits are non-refundable.</p>
-          </div>
-
-          <div class="cabin-tier">
-            <div>
-              <p class="cabin-tier__label">Ocean View</p>
-              <p class="cabin-tier__name">Views from Your Room</p>
-              <p class="cabin-tier__details">
-                <span>126 sq. ft. · Up to 4 guests</span>
-                <span>Royal King bed + 2 Pullman beds · Ocean view window or porthole</span>
-              </p>
-            </div>
-            <div class="cabin-tier__price-col">
-              <p class="cabin-tier__price-main">$1,475</p>
-              <p class="cabin-tier__price-sub">per person</p>
+            <div class="cabin-tier__body">
+              <div class="cabin-tier__info">
+                <p class="cabin-tier__label">Sunset Junior Suite</p>
+                <p class="cabin-tier__name">Dramatic Aft Views</p>
+                <p class="cabin-tier__details">
+                  <span>243–247 sq. ft. + 64 sq. ft. aft-facing private balcony · Up to 4 guests</span>
+                  <span>Royal King bed + double sofa bed · Ocean view</span>
+                </p>
+              </div>
+              <div class="cabin-tier__price-col">
+                <p class="cabin-tier__price-main">$2,860</p>
+                <p class="cabin-tier__price-sub">per person</p>
+              </div>
             </div>
             <p class="cabin-tier__nonrefund">$500 per person deposit required at booking · Available until November 14, 2026 · All deposits are non-refundable.</p>
           </div>
 
           <div class="cabin-tier">
-            <div>
-              <p class="cabin-tier__label">Interior · Most Popular</p>
-              <p class="cabin-tier__name">Starting Price</p>
-              <p class="cabin-tier__details">
-                <span>136 sq. ft. · Up to 4 guests</span>
-                <span>Royal King bed + 2 Pullman beds · All the comfort you need</span>
-              </p>
+            <div class="cabin-tier__body">
+              <div class="cabin-tier__info">
+                <p class="cabin-tier__label">Junior Suite</p>
+                <p class="cabin-tier__name">Intimate Suite with Ocean Views</p>
+                <p class="cabin-tier__details">
+                  <span>243 sq. ft. + 64 sq. ft. balcony · Up to 4 guests</span>
+                  <span>Royal King bed + double sofa bed · Ocean view</span>
+                </p>
+              </div>
+              <div class="cabin-tier__price-col">
+                <p class="cabin-tier__price-main">$2,578</p>
+                <p class="cabin-tier__price-sub">per person</p>
+              </div>
             </div>
-            <div class="cabin-tier__price-col">
-              <p class="cabin-tier__price-main">$1,285</p>
-              <p class="cabin-tier__price-sub">per person</p>
+            <p class="cabin-tier__nonrefund">$500 per person deposit required at booking · Available until November 14, 2026 · All deposits are non-refundable.</p>
+          </div>
+
+          <div class="cabin-tier">
+            <div class="cabin-tier__body">
+              <div class="cabin-tier__info">
+                <p class="cabin-tier__label">Ocean View</p>
+                <p class="cabin-tier__name">Views from Your Room</p>
+                <p class="cabin-tier__details">
+                  <span>126 sq. ft. · Up to 4 guests</span>
+                  <span>Royal King bed + 2 Pullman beds · Ocean view window or porthole</span>
+                </p>
+              </div>
+              <div class="cabin-tier__price-col">
+                <p class="cabin-tier__price-main">$1,475</p>
+                <p class="cabin-tier__price-sub">per person</p>
+              </div>
+            </div>
+            <p class="cabin-tier__nonrefund">$500 per person deposit required at booking · Available until November 14, 2026 · All deposits are non-refundable.</p>
+          </div>
+
+          <div class="cabin-tier">
+            <div class="cabin-tier__body">
+              <div class="cabin-tier__info">
+                <p class="cabin-tier__label">Interior · Most Popular</p>
+                <p class="cabin-tier__name">Starting Price</p>
+                <p class="cabin-tier__details">
+                  <span>136 sq. ft. · Up to 4 guests</span>
+                  <span>Royal King bed + 2 Pullman beds · All the comfort you need</span>
+                </p>
+              </div>
+              <div class="cabin-tier__price-col">
+                <p class="cabin-tier__price-main">$1,285</p>
+                <p class="cabin-tier__price-sub">per person</p>
+              </div>
             </div>
             <p class="cabin-tier__nonrefund">$500 per person deposit required at booking · Available until November 14, 2026 · All deposits are non-refundable.</p>
           </div>
@@ -686,14 +763,14 @@
               <div class="form-group form-group--full">
                 <label>Birthday <span class="label-note">Month and day only — so we can celebrate you ✨</span></label>
                 <div class="birthday-row">
-                  <select id="birthday-month" name="birthday-month">
+                  <select id="birthday-month" name="birthday-month" aria-label="Birthday month">
                     <option value="">Month</option>
                     <option>January</option><option>February</option><option>March</option>
                     <option>April</option><option>May</option><option>June</option>
                     <option>July</option><option>August</option><option>September</option>
                     <option>October</option><option>November</option><option>December</option>
                   </select>
-                  <select id="birthday-day" name="birthday-day">
+                  <select id="birthday-day" name="birthday-day" aria-label="Birthday day">
                     <option value="">Day</option>
                     <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
                     <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
@@ -801,7 +878,7 @@
           This is the one you'll<br><em>talk about forever.</em>
         </h2>
         <p class="cta-section__sub reveal">Tre's 50th Birthday Cruise · Royal Caribbean · Rhapsody of the Seas</p>
-        <div class="reveal">
+        <div class="reveal" style="display:flex;justify-content:center;">
           <a href="https://traveljoy.com/bookings/Rtp34MAdU5uANuM7Em1K8sNo" target="_blank" rel="noopener" class="btn-gold">Reserve My Cabin Now</a>
         </div>
       </div>
@@ -816,21 +893,37 @@
   <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);} });
-    }, {threshold:0.1});
+    }, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const form = document.getElementById('inquiry');
       const success = document.getElementById('form-success-message');
-      if(!form || !success) return;
+      const btn = form ? form.querySelector('button[type="submit"]') : null;
+      if(!form || !success || !btn) return;
       form.addEventListener('submit', async function(event) {
         event.preventDefault();
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
         try {
           const response = await fetch(form.action, {method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
-          if(response.ok) { form.reset(); success.style.display='block'; success.scrollIntoView({behavior:'smooth',block:'center'}); }
-          else { alert('Something went wrong. Please try again.'); }
-        } catch(error) { alert('Something went wrong. Please try again.'); }
+          if(response.ok) {
+            form.reset();
+            success.style.display = 'block';
+            success.scrollIntoView({behavior:'smooth',block:'center'});
+            btn.textContent = 'Sent ✓';
+          } else {
+            btn.disabled = false;
+            btn.textContent = 'Send Me More Information';
+            alert('Something went wrong. Please try again.');
+          }
+        } catch(error) {
+          btn.disabled = false;
+          btn.textContent = 'Send Me More Information';
+          alert('Something went wrong. Please try again.');
+        }
       });
     });
   </script>
